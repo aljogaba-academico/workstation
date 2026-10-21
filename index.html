@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#05030a" />
-  <meta name="description" content="ALJOGABA OS · Research Workstation. Portal de entrada al ecosistema científico de Alberto Jorge Galindo Barboza." />
+  <meta name="description" content="ALJOGABA OS · Research Workstation. Estación de mando para navegar el ecosistema científico de Alberto Jorge Galindo Barboza." />
   <title>ALJOGABA OS · Research Workstation</title>
   <link rel="stylesheet" href="assets/css/styles.css" />
   <link rel="stylesheet" href="assets/css/neon.css" />
@@ -15,7 +15,7 @@
       startOnLoad: false,
       securityLevel: "loose",
       theme: "base",
-      flowchart: { curve: "basis", htmlLabels: true },
+      flowchart: { curve: "basis", htmlLabels: true, useMaxWidth: false },
       themeVariables: {
         fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
         primaryColor: "#161020",
@@ -37,21 +37,18 @@
   <section id="boot" class="boot-screen" aria-label="Secuencia de arranque">
     <div class="boot-terminal">
       <div class="boot-header">
-        <strong>ALJOGABA BIOS v3.0</strong>
+        <strong>ALJOGABA BIOS v4.0</strong>
         <span>RESEARCH VESSEL // NODE-01</span>
       </div>
 
-      <div id="bootLog" class="boot-log" aria-live="polite">
-        <p class="visible boot-dim">Cold start detected. Waking research vessel...</p>
-        <p class="visible">&gt; INITIALIZE ALJOGABA_OS <span class="boot-cursor blink">█</span></p>
-      </div>
+      <div id="bootLog" class="boot-log" aria-live="polite"></div>
 
       <div class="boot-progress-area">
         <div class="boot-progress-meta">
           <span id="bootStatus">INITIALIZING CORE SYSTEMS</span>
           <span id="bootPercent">00%</span>
         </div>
-        <div class="boot-progress-track" role="progressbar" aria-label="Carga de ALJOGABA OS" aria-valuemin="0" aria-valuemax="100">
+        <div class="boot-progress-track" role="progressbar" aria-label="Carga de ALJOGABA OS" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
           <div id="bootProgress" class="boot-progress-fill"></div>
         </div>
       </div>
@@ -91,14 +88,23 @@
     <aside id="startMenu" class="start-menu is-hidden" aria-label="Menú de inicio">
       <div class="start-menu-rail">ALJOGABA <strong>OS</strong></div>
       <div class="start-menu-body">
-        <p class="start-caption">PROGRAMS</p>
+        <p class="start-caption">COMMAND DECK</p>
         <button data-launch="mission">▶ Mission Control</button>
         <button data-launch="map">◇ System Map</button>
         <button data-launch="toolbox">◆ Toolbox</button>
         <div class="start-separator"></div>
-        <p class="start-caption">SYSTEMS</p>
+        <p class="start-caption">SYSTEM INTELLIGENCE</p>
+        <button data-launch="identity">⌘ Identity Matrix</button>
+        <button data-launch="engine">⚙ Engine Room</button>
+        <button data-launch="outputs">▤ Output Bay</button>
+        <button data-launch="ops">&gt;_ Local Ops</button>
+        <button data-launch="sidequests">✦ Side Quests</button>
+        <div class="start-separator"></div>
+        <p class="start-caption">CORE SYSTEMS</p>
         <div id="startSystems"></div>
         <div class="start-separator"></div>
+        <p class="start-caption">SYSTEM</p>
+        <button data-launch="reboot">↻ Restart ALJOGABA OS</button>
         <button data-launch="about">ⓘ About Workstation</button>
       </div>
     </aside>
