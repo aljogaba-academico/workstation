@@ -1,4 +1,24 @@
 (() => {
+  let auditedInfrastructure = null;
+  const infrastructureReady = fetch("data/infrastructure.json", { cache: "no-store" })
+    .then(response => {
+      if (!response.ok) throw new Error(`Infrastructure registry ${response.status}`);
+      return response.json();
+    })
+    .then(data => {
+      auditedInfrastructure = data;
+      if (state?.meta) state.meta.infrastructure = data;
+      return data;
+    })
+    .catch(error => {
+      console.warn("Audited infrastructure registry unavailable; using workstation fallback.", error);
+      return state?.meta?.infrastructure || {};
+    });
+
+  function infrastructureData() {
+    return auditedInfrastructure || state?.meta?.infrastructure || {};
+  }
+
   function missionMermaid(mission) {
     const lines = ["flowchart TD"];
     mission.route.forEach((step, index) => {
@@ -49,7 +69,7 @@
   };
 
   function moduleItems(filter = null) {
-    const items = state.meta.infrastructure?.moduleInfrastructure || [];
+    const items = infrastructureData().moduleInfrastructure || [];
     return items.filter(item => !filter || item.system === filter);
   }
 
@@ -65,8 +85,10 @@
     (item.nodes || []).forEach(node => {
       lines.push(`  ${node.id}[\"${mermaidEscape(node.label)}${accountLabel(node.account)}\"]`);
     });
-    (item.edges || []).forEach(([from, to, label]) => {
-      lines.push(`  ${from} -->|${mermaidEscape(label || "")}| ${to}`);
+    (item.edges || []).forEach(edge => {
+      const [from, to, label, mode] = edge;
+      if (mode === "planned") lines.push(`  ${from} -.->|${mermaidEscape(label || "PLANNED")}| ${to}`);
+      else lines.push(`  ${from} -->|${mermaidEscape(label || "")}| ${to}`);
     });
     lines.push("  classDef module fill:#24102e,color:#ffffff,stroke:#ff3fb4,stroke-width:3px;");
     lines.push("  classDef source fill:#161020,color:#eee9f7,stroke:#8b5cf6,stroke-width:2px;");
@@ -75,6 +97,7 @@
     lines.push("  classDef domain fill:#0b241e,color:#e8fff7,stroke:#65f5a3,stroke-width:2px;");
     lines.push("  classDef service fill:#2a1024,color:#ffe5f5,stroke:#ff79c9,stroke-width:2px;");
     lines.push("  classDef data fill:#171b28,color:#eefcff,stroke:#91a7ff,stroke-width:2px;");
+    lines.push("  classDef planned fill:#111318,color:#c0c6d4,stroke:#6f7787,stroke-width:2px,stroke-dasharray:6 4;");
     const groups = {};
     (item.nodes || []).forEach(node => (groups[node.type || "source"] ||= []).push(node.id));
     Object.entries(groups).forEach(([type, ids]) => lines.push(`  class ${ids.join(",")} ${type};`));
@@ -92,7 +115,7 @@
   }
 
   function accessDirectoryHtml() {
-    const registry = state.meta.infrastructure?.accessRegistry || [];
+    const registry = infrastructureData().accessRegistry || [];
     return registry.map(provider => `
       <section class="access-provider">
         <h3>${escapeHtml(provider.provider)}</h3>
@@ -123,7 +146,7 @@
           ${navigation}
           <details class="access-directory">
             <summary>ACCESS DIRECTORY</summary>
-            <p class="access-directory-note">Identidad conceptual en mayúsculas; handle técnico en minúsculas.</p>
+            <p class="access-directory-note">Identidad conceptual en mayúsculas; handles, correos y método de acceso debajo. Los correos son identificadores de cuenta, no credenciales.</p>
             ${accessDirectoryHtml()}
           </details>
         </aside>
@@ -150,7 +173,8 @@
     renderModuleMermaid($(".module-infrastructure-map", detail), item);
   }
 
-  openIdentityMatrix = function(filter = null) {
+  openIdentityMatrix = async function(filter = null) {
+    await infrastructureReady;
     const system = state.systems.find(s => s.id === filter);
     createWindow({
       id: filter ? `identity-${filter}` : "identity-matrix",
