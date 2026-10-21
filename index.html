@@ -3,10 +3,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#102010" />
+  <meta name="theme-color" content="#05030a" />
   <meta name="description" content="ALJOGABA OS · Research Workstation. Portal de entrada al ecosistema científico de Alberto Jorge Galindo Barboza." />
   <title>ALJOGABA OS · Research Workstation</title>
   <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/neon.css" />
   <script type="module">
     import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
     window.mermaid = mermaid;
@@ -17,12 +18,15 @@
       flowchart: { curve: "basis", htmlLabels: true },
       themeVariables: {
         fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
-        primaryColor: "#dce8d5",
-        primaryTextColor: "#10140f",
-        primaryBorderColor: "#10140f",
-        lineColor: "#62765a",
-        secondaryColor: "#f5f7f2",
-        tertiaryColor: "#c3d6b7"
+        primaryColor: "#161020",
+        primaryTextColor: "#eee9f7",
+        primaryBorderColor: "#33e6ff",
+        lineColor: "#8e77aa",
+        secondaryColor: "#21152e",
+        tertiaryColor: "#0d0914",
+        clusterBkg: "#0d0914",
+        clusterBorder: "#624779",
+        edgeLabelBackground: "#08050d"
       }
     });
   </script>
@@ -32,14 +36,30 @@
 
   <section id="boot" class="boot-screen" aria-label="Secuencia de arranque">
     <div class="boot-terminal">
-      <p class="boot-logo">ALJOGABA BIOS v2.0</p>
-      <p>Memory check ...................... <strong>OK</strong></p>
-      <p>Research environment ............. <strong>ONLINE</strong></p>
-      <p>Knowledge systems ................ <strong>CONNECTED</strong></p>
-      <p>Scientific tools ................. <strong>READY</strong></p>
-      <p>Project routes ................... <strong>READY</strong></p>
-      <p class="boot-load">Loading ALJOGABA OS <span class="blink">█</span></p>
-      <button id="skipBoot" class="terminal-button">ENTER WORKSTATION</button>
+      <div class="boot-header">
+        <strong>ALJOGABA BIOS v3.0</strong>
+        <span>RESEARCH VESSEL // NODE-01</span>
+      </div>
+
+      <div id="bootLog" class="boot-log" aria-live="polite">
+        <p class="visible boot-dim">Cold start detected. Waking research vessel...</p>
+        <p class="visible">&gt; INITIALIZE ALJOGABA_OS <span class="boot-cursor blink">█</span></p>
+      </div>
+
+      <div class="boot-progress-area">
+        <div class="boot-progress-meta">
+          <span id="bootStatus">INITIALIZING CORE SYSTEMS</span>
+          <span id="bootPercent">00%</span>
+        </div>
+        <div class="boot-progress-track" role="progressbar" aria-label="Carga de ALJOGABA OS" aria-valuemin="0" aria-valuemax="100">
+          <div id="bootProgress" class="boot-progress-fill"></div>
+        </div>
+      </div>
+
+      <div class="boot-footer">
+        <span>DEEP WORK SECTOR // SCIENTIFIC OPERATIONS // AUTHORIZED USER</span>
+        <button id="skipBoot" class="terminal-button">SKIP BOOT [ESC]</button>
+      </div>
     </div>
   </section>
 
@@ -48,11 +68,11 @@
       <div class="menubar-left">
         <span class="brand-mark">A&gt;</span>
         <strong>ALJOGABA OS</strong>
-        <span class="menubar-path">WORKSTATION / DESKTOP</span>
+        <span class="menubar-path">WORKSTATION / DEEP WORK SECTOR</span>
       </div>
       <div class="menubar-right">
         <span class="status-dot" aria-hidden="true"></span>
-        <span>SYSTEM ONLINE</span>
+        <span>VESSEL ONLINE</span>
         <span id="topClock">--:--</span>
       </div>
     </header>
@@ -97,5 +117,6 @@
   </div>
 
   <script src="assets/js/app.js"></script>
+  <script src="assets/js/boot.js"></script>
 </body>
 </html>
