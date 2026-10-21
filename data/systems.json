@@ -1,126 +1,63 @@
 [
   {
-    "id": "episuis",
-    "code": "EPISUIS",
-    "name": "EPISUIS",
-    "status": "public",
-    "description": "Ecosistema técnico para producción porcina que integra epidemiología, análisis de datos y herramientas propias para convertir información sanitaria y productiva en decisiones útiles.",
-    "modules": [
-      {
-        "name": "Web",
-        "description": "Presentación institucional y acceso público."
-      },
-      {
-        "name": "Vigilancia",
-        "description": "Diseño activo, captura, envío y análisis de vigilancia."
-      },
-      {
-        "name": "Producción",
-        "description": "Libreta productiva y benchmarking."
-      },
-      {
-        "name": "Marco metodológico",
-        "description": "Problema → sistema → evidencia → integración → interpretación → decisión → reevaluación."
-      }
-    ],
-    "links": [
-      {
-        "label": "WEB",
-        "url": "https://episuis.com.mx"
-      }
-    ]
-  },
-  {
     "id": "perfil",
     "code": "PROFILE",
     "name": "Perfil profesional",
     "status": "public",
-    "description": "Sistema para mantener una fuente profesional canónica y derivar una presencia pública curada, herramientas y productos académicos.",
+    "description": "Sistema para mantener una fuente profesional canónica y derivar una presencia pública curada, notas técnicas y herramientas técnico-científicas.",
     "modules": [
-      {
-        "name": "Web",
-        "description": "Perfil profesional público y curado."
-      },
-      {
-        "name": "Tools",
-        "description": "Herramientas como DIMU-Porcino, SIPRO-Porcino y EPI."
-      },
-      {
-        "name": "Gestión curricular",
-        "description": "CV, publicaciones, proyectos, docencia, ponencias y productos."
-      }
+      {"name": "Web profesional", "description": "Sitio público curado: investigación, publicaciones, ponencias, docencia, campo y recursos profesionales."},
+      {"name": "Herramientas", "description": "Punto de acceso a las aplicaciones propias del perfil profesional."},
+      {"name": "CV canónico", "description": "Fuente estructurada privada que alimenta CV, semblanzas y presencia pública."},
+      {"name": "Notas técnicas", "description": "Cartera organizada de conocimiento técnico, diagnóstico, epidemiología y biología molecular."}
     ],
     "links": [
-      {
-        "label": "WEB PROFESIONAL",
-        "url": "https://aljogaba.github.io"
-      },
-      {
-        "label": "DIMU-PORCINO",
-        "url": "https://aljogaba.github.io/dimu-porcino/"
-      }
+      {"label": "WEB PROFESIONAL", "url": "https://aljogaba.github.io"}
+    ]
+  },
+  {
+    "id": "episuis",
+    "code": "EPISUIS",
+    "name": "EPISUIS",
+    "status": "hybrid",
+    "description": "Ecosistema técnico para vigilancia, producción y toma de decisiones en sistemas porcinos.",
+    "modules": [
+      {"name": "Web EPISUIS", "description": "Sitio institucional y puerta pública de entrada al ecosistema."},
+      {"name": "Vigilancia EPISUIS", "description": "Diseño, operación, captura, diagnóstico, estandarización, análisis e informes de vigilancia epidemiológica."},
+      {"name": "EPISUIS Producción", "description": "Plataforma comercial para registro, seguimiento y gestión productiva; planes Esencial, Gestión e Integral."}
+    ],
+    "links": [
+      {"label": "WEB EPISUIS", "url": "https://episuis.com.mx"}
     ]
   },
   {
     "id": "diseasesmapmx",
     "code": "DMX",
     "name": "DiseasesMapMx",
-    "status": "development",
-    "description": "Plataforma molecular para curación, trazabilidad, análisis, visualización y comunicación de información de agentes de importancia sanitaria.",
+    "status": "hybrid",
+    "critical": true,
+    "description": "Plataforma molecular para consulta pública, exploración, análisis de secuencias, curación del catálogo y servicios de colaboración.",
     "modules": [
-      {
-        "name": "Portal público",
-        "description": "Overview, datasets y novedades."
-      },
-      {
-        "name": "Dashboard",
-        "description": "Exploración y visualización de información molecular."
-      },
-      {
-        "name": "Análisis de secuencias",
-        "description": "QC, tipificación, filogenia y anotación."
-      },
-      {
-        "name": "Admin / catálogo",
-        "description": "Registro maestro, roles biológicos, datasets y trazabilidad."
-      }
+      {"name": "Portal público", "description": "Información, contexto y consulta pública de PRRSV y PCV2."},
+      {"name": "Dashboard", "description": "Exploración epidemiológica, molecular, temporal y geográfica del catálogo."},
+      {"name": "Sequence Analysis", "description": "Referencia cercana, comparación molecular, aminoácidos y comparadores vacunales/referenciales."},
+      {"name": "Catálogo molecular y curación", "description": "Registro maestro, QC, anotación, roles, repositorio canónico y construcción de datasets."},
+      {"name": "Portal de colaboradores", "description": "Flujo para laboratorios y organizaciones: casos, secuencias, procesamiento y entrega de resultados."}
     ],
     "links": [
-      {
-        "label": "PORTAL",
-        "url": null
-      }
+      {"label": "WEB / PRODUCTION", "url": "https://diseasesmapmx-web.diseasesmapmx.workers.dev"}
     ]
   },
   {
     "id": "proyectos",
     "code": "PROJECTS",
-    "name": "Sistema de gestión de proyectos",
-    "status": "development",
-    "description": "Arquitectura docs-as-code para construir, documentar, relacionar y comunicar proyectos desde una fuente canónica reproducible.",
+    "name": "Gestión de proyectos científicos",
+    "status": "private",
+    "description": "Arquitectura docs-as-code para formular, organizar, tejer y derivar proyectos territoriales y de investigación desde fuentes canónicas versionadas.",
     "modules": [
-      {
-        "name": "Territorial",
-        "description": "Programas y proyectos con lógica territorial."
-      },
-      {
-        "name": "Investigación",
-        "description": "Protocolos, convocatorias y proyectos financiables."
-      },
-      {
-        "name": "Ejes estratégicos",
-        "description": "Nivel rector para organizar líneas y prioridades."
-      },
-      {
-        "name": "Constructor de propuestas",
-        "description": "Tejido de propuestas, entregables y presentaciones desde información canónica."
-      }
+      {"name": "Proyectos territoriales", "description": "Marco rector, programas territoriales, subproyectos, paquetes de trabajo, evidencia y productos."},
+      {"name": "Investigación académica", "description": "Entidades, conocimiento, referencias, propuestas, perfiles, tejido documental y productos académicos."}
     ],
-    "links": [
-      {
-        "label": "PORTAL",
-        "url": null
-      }
-    ]
+    "links": []
   }
 ]
