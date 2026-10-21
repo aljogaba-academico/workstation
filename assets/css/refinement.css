@@ -168,6 +168,16 @@
   opacity: .82;
 }
 
+/* The anomaly stays part of the same console grammar: no oversized pasted-on line. */
+.boot-log .boot-alert {
+  color: var(--magenta-soft);
+  font-size: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  margin: .33rem 0;
+  text-shadow: 0 0 8px rgba(255,63,180,.35);
+}
+
 @media (max-width: 780px) {
   .module-infrastructure-shell {
     grid-template-columns: 1fr;
