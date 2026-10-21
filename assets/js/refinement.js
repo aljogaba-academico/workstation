@@ -1,5 +1,6 @@
 (() => {
   let auditedInfrastructure = null;
+  const EMPTY_INFRASTRUCTURE = { accessRegistry: [], moduleInfrastructure: [] };
   const infrastructureReady = fetch("data/infrastructure.json", { cache: "no-store" })
     .then(response => {
       if (!response.ok) throw new Error(`Infrastructure registry ${response.status}`);
@@ -11,12 +12,13 @@
       return data;
     })
     .catch(error => {
-      console.warn("Audited infrastructure registry unavailable; using workstation fallback.", error);
-      return state?.meta?.infrastructure || {};
+      console.warn("Audited infrastructure registry unavailable; Module Infrastructure disabled.", error);
+      auditedInfrastructure = EMPTY_INFRASTRUCTURE;
+      return EMPTY_INFRASTRUCTURE;
     });
 
   function infrastructureData() {
-    return auditedInfrastructure || state?.meta?.infrastructure || {};
+    return auditedInfrastructure || EMPTY_INFRASTRUCTURE;
   }
 
   function missionMermaid(mission) {
@@ -87,7 +89,7 @@
     });
     (item.edges || []).forEach(edge => {
       const [from, to, label, mode] = edge;
-      if (mode === "planned") lines.push(`  ${from} -.->|${mermaidEscape(label || "PLANNED")}| ${to}`);
+      if (mode === "planned") lines.push(`  ${from} -.-> ${to}`);
       else lines.push(`  ${from} -->|${mermaidEscape(label || "")}| ${to}`);
     });
     lines.push("  classDef module fill:#24102e,color:#ffffff,stroke:#ff3fb4,stroke-width:3px;");
