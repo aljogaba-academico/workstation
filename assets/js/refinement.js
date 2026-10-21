@@ -66,7 +66,7 @@
       lines.push(`  ${node.id}[\"${mermaidEscape(node.label)}${accountLabel(node.account)}\"]`);
     });
     (item.edges || []).forEach(([from, to, label]) => {
-      lines.push(`  ${from} -->|${mermaidEscape(label || "")} | ${to}`);
+      lines.push(`  ${from} -->|${mermaidEscape(label || "")}| ${to}`);
     });
     lines.push("  classDef module fill:#24102e,color:#ffffff,stroke:#ff3fb4,stroke-width:3px;");
     lines.push("  classDef source fill:#161020,color:#eee9f7,stroke:#8b5cf6,stroke-width:2px;");
@@ -167,6 +167,11 @@
         }));
       }
     });
+  };
+
+  const originalWelcomeHtml = welcomeHtml;
+  welcomeHtml = function() {
+    return originalWelcomeHtml().replace("IDENTITY MATRIX", "MODULE INFRASTRUCTURE");
   };
 
   document.addEventListener("DOMContentLoaded", () => {
