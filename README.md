@@ -13,14 +13,14 @@ ALJOGABA OS existe para responder con rapidez:
 1. **¿Qué puedo hacer dentro de mi ecosistema?**
 2. **¿Qué sistema, módulo o herramienta debo usar?**
 3. **¿Dónde vive cada componente técnico?**
-4. **¿Con qué identidad administrativa entro a cada proveedor?**
+4. **¿Con qué identidad/cuenta entro a cada proveedor?**
 5. **¿Qué piezas dependen de una infraestructura crítica antes de tocarla?**
 
 La workstation no sustituye a EPISUIS, DiseasesMapMx, el Perfil profesional ni la Gestión de proyectos científicos. Funciona como **capa de orientación, navegación y memoria operativa**.
 
 ## v0.4 — Command Deck / Infrastructure Map
 
-Esta versión consolida la taxonomía real del ecosistema y añade la capa de infraestructura e identidades.
+Esta versión consolida la taxonomía real del ecosistema y añade la capa auditada de infraestructura por módulo.
 
 ### Inventario canónico actual
 
@@ -52,33 +52,28 @@ GitHub, Mermaid, QGIS, Python, Quarto, Supabase y tecnologías equivalentes pert
 
 ## Componentes del escritorio
 
-- **Mission Control** — 29 rutas agrupadas por Identidad científica, Epidemiología y vigilancia, Producción, Inteligencia molecular, Desarrollo de proyectos y Comunicación/visualización.
+- **Mission Control** — 29 rutas agrupadas por Identidad científica, Epidemiología y vigilancia, Producción, Inteligencia molecular, Desarrollo de proyectos y Comunicación/visualización. Las rutas se muestran con Mermaid.
 - **System Map / Long Range Scanner** — radar interactivo para los cuatro sistemas y mapa de arquitectura con zoom/scroll.
 - **Toolbox** — las tres Tools científicas; GitHub se conserva únicamente como shortcut de infraestructura.
-- **Identity Matrix** — registro público-safe de identidades, proveedores, repositorios, despliegues y dependencias.
+- **Module Infrastructure** — diagramas Mermaid por módulo con fuente, deploy, backend/servicios y cuenta de acceso confirmada.
 - **Engine Room / Tech Core** — tecnologías incrustadas en el ecosistema, sin tratarlas como accesos directos.
 - **Output Bay** — salidas derivadas que puede producir el ecosistema.
 - **Local Ops** — comandos locales seguros y reutilizables; no almacena secretos ni direcciones internas.
 - **Side Quests** — acceso separado a Smoke Lab y Entre libros y letras sin convertirlos en Core Systems.
 
-## Identity Matrix
+## Module Infrastructure
 
-La matriz distingue explícitamente:
+La vista distingue explícitamente:
 
-- **Identity** — identidad administrativa utilizada para entrar.
-- **Provider / platform** — GitHub, Cloudflare, Supabase, Hostinger, Resend, etc.
-- **Account / workspace / organization** — cuenta concreta dentro del proveedor.
-- **Resource** — repositorio, proyecto, deployment, dominio o backend.
-- **System** — ecosistema al que sirve el recurso.
+- **System / module** — componente funcional que se está documentando.
+- **Source** — repositorio o fuente canónica.
+- **Deployment** — GitHub Pages, Cloudflare o Render cuando aplica.
+- **Backend / data** — Supabase y recursos persistentes cuando aplica.
+- **Service** — Resend, motor analítico u otros servicios auxiliares confirmados.
+- **Account** — identidad, correo/handle y método de acceso cuando han sido verificados.
+- **PLANNED** — relaciones futuras, dibujadas con línea discontinua y nunca mezcladas con infraestructura activa.
 
-También diferencia relaciones como:
-
-- `AUTHENTICATED VIA`
-- `SOURCE`
-- `DEPLOYMENT`
-- `BACKEND / DATA`
-- `DOMAIN / DNS`
-- `TRANSACTIONAL EMAIL`
+Los correos se muestran únicamente como **identificadores de cuenta**. Nunca se almacenan credenciales.
 
 ### Infraestructura crítica documentada
 
@@ -86,8 +81,10 @@ También diferencia relaciones como:
 
 - Código canónico: organización GitHub `DiseasesMapMx` (`web`, `analysis-engine`).
 - Web de producción: Cloudflare Worker `diseasesmapmx-web`.
+- Backend científico de Sequence Analysis: Render, servicio `diseasesmapmx-analysis-engine`.
 - Backend y catálogo molecular canónico: Supabase `DiseasesMapMx Production`.
-- La capa de Administración/Curación depende de ese backend.
+- Dashboard actual: archivos aislados del repo `web`; migración a datasets generados desde Production marcada como `PLANNED`.
+- Portal de colaboradores: Supabase Auth + Edge Functions + analysis-engine + staging/curación.
 - `aljogaba/DiseasesMapMx` se considera **LEGACY** y no forma parte de la infraestructura activa.
 
 **EPISUIS**
@@ -95,18 +92,19 @@ También diferencia relaciones como:
 - Organización GitHub `episuis`: `web`, `vigilancia-episuis`, `produccion`.
 - Web principal: GitHub Pages + dominio `episuis.com.mx`.
 - Dominio/DNS: Hostinger.
-- Vigilancia: Cloudflare Pages + Supabase `vigilancia-episuis`.
+- Vigilancia: Cloudflare Pages + Supabase `vigilancia-episuis` + Resend.
 - Producción: Cloudflare Worker `episuis-produccion` + Supabase `produccion`.
-- Correo transaccional de Vigilancia: Resend, workspace `aljogaba`, dominio `episuis.com.mx`.
+- Cloudflare EPISUIS se accede directamente con la cuenta ALJOGABA; Supabase EPISUIS se accede mediante GitHub `aljogaba`.
 
 ## Boot / reboot
 
 La secuencia de arranque se extiende a aproximadamente 20 segundos para funcionar como experiencia demostrativa. Incluye:
 
 - mensajes escalonados y legibles;
-- pausas dramáticas;
+- pausa de progreso durante la anomalía;
 - mensajes de humor ficticio del sistema;
-- `Jorge... tenemos un problema.` como anomalía aislada;
+- `Jorge... tenemos un problema.` integrado en la misma gramática tipográfica;
+- señal electrónica breve cuando el navegador permite audio;
 - `SKIP BOOT [ESC]`;
 - cierre con `ACCESS GRANTED`;
 - soporte de `prefers-reduced-motion`.
@@ -115,7 +113,7 @@ La secuencia de arranque se extiende a aproximadamente 20 segundos para funciona
 
 ## Ventanas
 
-Las ventanas se limitan dinámicamente al área disponible entre menubar y taskbar. El contenido excedente hace scroll **dentro de la ventana**. Esto evita que Mission Control, System Map, Toolbox o Identity Matrix queden fuera del navegador.
+Las ventanas se limitan dinámicamente al área disponible entre menubar y taskbar. El contenido excedente hace scroll **dentro de la ventana**. Esto evita que Mission Control, System Map, Toolbox o Module Infrastructure queden fuera del navegador.
 
 ## Flujo conceptual
 
@@ -123,15 +121,22 @@ Las ventanas se limitan dinámicamente al área disponible entre menubar y taskb
 
 Se presenta como telemetría/proceso, no como botones.
 
-## Fuente de datos
+## Fuentes de datos
 
 ```text
 data/
-├── systems.json       # systems y modules
-├── missions.json      # mission routes
-├── tools.json         # Tools propias
-└── workstation.json   # tecnologías, outputs, Local Ops, Side Quests e infraestructura
+├── systems.json          # Systems y Modules
+├── missions.json         # Mission Routes
+├── tools.json            # Tools propias
+├── workstation.json      # tecnologías, outputs, Local Ops, Side Quests y fallback histórico
+└── infrastructure.json   # relaciones auditadas por módulo y directorio de accesos
 ```
+
+**Regla:** `data/infrastructure.json` es la fuente canónica de **Module Infrastructure**.
+
+La auditoría humana que explica y justifica esas relaciones vive en:
+
+`docs/INFRASTRUCTURE_RELATIONSHIP_AUDIT.md`
 
 ## Arquitectura
 
@@ -143,22 +148,26 @@ workstation/
 ├── assets/
 │   ├── css/
 │   │   ├── styles.css
-│   │   └── neon.css
+│   │   ├── neon.css
+│   │   └── refinement.css
 │   └── js/
 │       ├── app.js
+│       ├── refinement.js
 │       └── boot.js
 ├── data/
 │   ├── systems.json
 │   ├── missions.json
 │   ├── tools.json
-│   └── workstation.json
+│   ├── workstation.json
+│   └── infrastructure.json
 └── docs/
-    └── github-pages.md
+    ├── github-pages.md
+    └── INFRASTRUCTURE_RELATIONSHIP_AUDIT.md
 ```
 
 ## Regla de seguridad
 
-GitHub Pages es público. ALJOGABA OS puede registrar **nombres operativos y relaciones administrativas**, pero nunca debe almacenar:
+GitHub Pages es público. ALJOGABA OS puede registrar **nombres operativos, correos usados como identificadores de cuenta y relaciones administrativas**, pero nunca debe almacenar:
 
 - contraseñas;
 - tokens;
@@ -166,7 +175,8 @@ GitHub Pages es público. ALJOGABA OS puede registrar **nombres operativos y rel
 - MFA / recovery codes;
 - archivos `.env`;
 - secretos de backend;
-- rutas administrativas sensibles.
+- claves service-role/secret de Supabase;
+- enlaces administrativos sensibles que concedan acceso.
 
 Los repositorios privados pueden representarse por nombre cuando es útil para orientación, sin convertir la workstation en un almacén de credenciales.
 
