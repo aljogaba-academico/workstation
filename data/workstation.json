@@ -1,0 +1,345 @@
+{
+  "technologies": [
+    {
+      "group": "Código y versionado",
+      "items": [
+        "Git",
+        "GitHub",
+        "Visual Studio Code"
+      ]
+    },
+    {
+      "group": "Documentación reproducible",
+      "items": [
+        "Quarto",
+        "Markdown / QMD",
+        "YAML",
+        "Pandoc",
+        "LaTeX / MiKTeX"
+      ]
+    },
+    {
+      "group": "Programación y análisis",
+      "items": [
+        "Python",
+        "R",
+        "JavaScript",
+        "HTML",
+        "CSS"
+      ]
+    },
+    {
+      "group": "Datos e infraestructura",
+      "items": [
+        "Supabase",
+        "PostgreSQL",
+        "Cloudflare",
+        "GitHub Pages",
+        "Hostinger",
+        "Resend"
+      ]
+    },
+    {
+      "group": "Visualización y ciencia",
+      "items": [
+        "QGIS",
+        "Power BI",
+        "Mermaid",
+        "iTOL",
+        "MEGA"
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "group": "Datos y análisis",
+      "items": [
+        "Bases canónicas",
+        "Datasets reproducibles",
+        "Análisis epidemiológicos",
+        "Análisis moleculares",
+        "Indicadores productivos"
+      ]
+    },
+    {
+      "group": "Visuales",
+      "items": [
+        "Mapas",
+        "Esquemas",
+        "Dashboards",
+        "Figuras científicas",
+        "Árboles y anotaciones"
+      ]
+    },
+    {
+      "group": "Documentos",
+      "items": [
+        "Informes por granja",
+        "Informes técnicos",
+        "Reportes de secuencias",
+        "Propuestas",
+        "DOCX",
+        "PDF",
+        "HTML"
+      ]
+    },
+    {
+      "group": "Comunicación",
+      "items": [
+        "Webs",
+        "Presentaciones",
+        "Publicaciones científicas",
+        "Materiales de transferencia"
+      ]
+    }
+  ],
+  "operations": [
+    {
+      "system": "Investigación académica",
+      "label": "Construir portal",
+      "command": "python scripts/build_portal.py",
+      "note": "Ejecutar desde la raíz del repositorio investigacion-academica."
+    },
+    {
+      "system": "Investigación académica",
+      "label": "Previsualizar con Quarto",
+      "command": "quarto preview",
+      "note": "Levanta la vista local del proyecto Quarto configurado."
+    },
+    {
+      "system": "Proyectos territoriales",
+      "label": "Previsualizar con Quarto",
+      "command": "quarto preview",
+      "note": "Ejecutar en el repositorio territorial cuando se requiera revisar HTML derivado."
+    },
+    {
+      "system": "Cualquier repositorio",
+      "label": "Ver estado Git",
+      "command": "git status",
+      "note": "Comprobación segura antes de commit, pull o cambios estructurales."
+    }
+  ],
+  "sidequests": [
+    {
+      "id": "smokelab",
+      "name": "Smoke Lab",
+      "subtitle": "Barbecue · ciencia · fuego lento",
+      "status": "ACTIVE",
+      "url": "https://aljogaba.github.io/SmokeLab/",
+      "repo": "https://github.com/aljogaba/SmokeLab"
+    },
+    {
+      "id": "books",
+      "name": "Entre libros y letras",
+      "subtitle": "Club de lectura · cultura · memoria",
+      "status": "ACTIVE",
+      "url": "https://aljogaba.github.io/entre-libros-y-letras/",
+      "repo": "https://github.com/aljogaba/entre-libros-y-letras"
+    }
+  ],
+  "infrastructure": {
+    "identities": [
+      {
+        "id": "aljogaba",
+        "label": "ALJOGABA",
+        "detail": "Identidad personal / profesional"
+      },
+      {
+        "id": "academic",
+        "label": "ALJOGABA ACADEMIC",
+        "detail": "Identidad académica / investigación"
+      },
+      {
+        "id": "episuis",
+        "label": "EPISUIS",
+        "detail": "Identidad operativa EPISUIS"
+      },
+      {
+        "id": "inifap",
+        "label": "INIFAP / JORGE",
+        "detail": "Identidad registrada; sin servicios mapeados en esta pasada"
+      },
+      {
+        "id": "books",
+        "label": "ENTRE LIBROS Y LETRAS",
+        "detail": "Identidad cultural registrada"
+      }
+    ],
+    "maps": [
+      {
+        "title": "Perfil profesional",
+        "system": "perfil",
+        "critical": false,
+        "chains": [
+          [
+            "ALJOGABA",
+            "GitHub / aljogaba",
+            "aljogaba.github.io",
+            "GitHub Pages / Web profesional"
+          ],
+          [
+            "ALJOGABA",
+            "GitHub / aljogaba",
+            "perfil-profesional-source [PRIVATE]",
+            "CV canónico"
+          ],
+          [
+            "ALJOGABA",
+            "GitHub / aljogaba",
+            "notas-tecnicas",
+            "Notas técnicas"
+          ],
+          [
+            "ALJOGABA",
+            "GitHub / aljogaba",
+            "sipro-porcino · epi-2x2 · dimu-porcino",
+            "Tools"
+          ]
+        ],
+        "note": "aljogaba/DiseasesMapMx es LEGACY y no forma parte de la infraestructura activa."
+      },
+      {
+        "title": "EPISUIS",
+        "system": "episuis",
+        "critical": true,
+        "chains": [
+          [
+            "EPISUIS",
+            "GitHub / episuis-admin",
+            "Organization / episuis",
+            "web · vigilancia-episuis · produccion"
+          ],
+          [
+            "EPISUIS",
+            "Hostinger",
+            "episuis.com.mx",
+            "Registro / DNS de dominio"
+          ],
+          [
+            "ALJOGABA ACADEMIC",
+            "Cloudflare",
+            "vigilancia-episuis",
+            "Cloudflare Pages"
+          ],
+          [
+            "ALJOGABA ACADEMIC",
+            "Cloudflare",
+            "episuis-produccion",
+            "Cloudflare Worker"
+          ],
+          [
+            "ALJOGABA ACADEMIC",
+            "GitHub authentication",
+            "Supabase / EPISUIS",
+            "vigilancia-episuis · produccion"
+          ],
+          [
+            "ALJOGABA",
+            "GitHub / aljogaba",
+            "Resend / workspace aljogaba",
+            "episuis.com.mx · correo transaccional de Vigilancia"
+          ]
+        ],
+        "note": "Web principal: GitHub Pages + dominio episuis.com.mx. Resend usa el mismo dominio para correo, no para hosting web."
+      },
+      {
+        "title": "DiseasesMapMx",
+        "system": "diseasesmapmx",
+        "critical": true,
+        "chains": [
+          [
+            "ALJOGABA ACADEMIC",
+            "GitHub / aljogaba-academico",
+            "Organization / DiseasesMapMx",
+            "web [PRIVATE] · analysis-engine [PRIVATE]"
+          ],
+          [
+            "ALJOGABA ACADEMIC",
+            "Cloudflare / DiseasesMapMx",
+            "Worker / diseasesmapmx-web",
+            "Production web"
+          ],
+          [
+            "ALJOGABA ACADEMIC",
+            "GitHub authentication",
+            "Supabase / DiseasesMapMx Production",
+            "Backend + canonical molecular data"
+          ],
+          [
+            "DiseasesMapMx Admin / Curation",
+            "Supabase / DiseasesMapMx Production",
+            "Master catalog",
+            "Datasets · dashboard · analysis · reports"
+          ]
+        ],
+        "note": "CRITICAL: la capa de curación y catálogo depende de DiseasesMapMx Production. No confundir con el repositorio público legacy de aljogaba."
+      },
+      {
+        "title": "Gestión de proyectos científicos",
+        "system": "proyectos",
+        "critical": false,
+        "chains": [
+          [
+            "ALJOGABA ACADEMIC",
+            "GitHub / aljogaba-academico",
+            "investigacion-academica [PRIVATE]",
+            "Investigación académica"
+          ],
+          [
+            "ALJOGABA ACADEMIC",
+            "GitHub / aljogaba-academico",
+            "sanidad-porcina-investigacion [PRIVATE]",
+            "Proyectos territoriales"
+          ],
+          [
+            "ALJOGABA ACADEMIC",
+            "GitHub / aljogaba-academico",
+            "workstation [PUBLIC]",
+            "ALJOGABA OS / GitHub Pages"
+          ]
+        ],
+        "note": "Los repositorios privados se representan por nombre; ALJOGABA OS no almacena credenciales ni rutas administrativas sensibles."
+      }
+    ],
+    "accessRegistry": [
+      {
+        "provider": "GitHub",
+        "accounts": [
+          "aljogaba",
+          "aljogaba-academico",
+          "episuis-admin"
+        ],
+        "note": "Tres cuentas operativas confirmadas."
+      },
+      {
+        "provider": "Cloudflare",
+        "accounts": [
+          "ALJOGABA",
+          "ALJOGABA ACADEMIC"
+        ],
+        "note": "Los recursos mapeados en esta pasada están bajo ALJOGABA ACADEMIC; la cuenta ALJOGABA existe pero no tiene recursos asignados en el inventario."
+      },
+      {
+        "provider": "Supabase",
+        "accounts": [
+          "ALJOGABA ACADEMIC via GitHub"
+        ],
+        "note": "Acceso confirmado mediante autenticación GitHub; contiene DiseasesMapMx Production y el workspace EPISUIS."
+      },
+      {
+        "provider": "Hostinger",
+        "accounts": [
+          "EPISUIS"
+        ],
+        "note": "Mantiene el dominio episuis.com.mx."
+      },
+      {
+        "provider": "Resend",
+        "accounts": [
+          "ALJOGABA via GitHub"
+        ],
+        "note": "Workspace aljogaba; dominio episuis.com.mx verificado para correo transaccional de Vigilancia EPISUIS."
+      }
+    ]
+  }
+}
