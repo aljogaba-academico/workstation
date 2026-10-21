@@ -2,74 +2,136 @@
 
 **ALJOGABA OS · Research Workstation**
 
-Research workstation and navigation hub for the scientific ecosystem: projects, platforms, tools, workflows, and knowledge resources.
+Estación de mando y navegación para el ecosistema científico y profesional de Alberto Jorge Galindo Barboza.
 
 **Live:** https://aljogaba-academico.github.io/workstation/
 
 ## Propósito
 
-La workstation responde dos preguntas operativas:
+ALJOGABA OS existe para responder con rapidez:
 
-1. **¿Qué sistema o herramienta debo usar?**
-2. **¿Cuál es la ruta correcta para llegar desde una necesidad hasta un producto?**
+1. **¿Qué puedo hacer dentro de mi ecosistema?**
+2. **¿Qué sistema, módulo o herramienta debo usar?**
+3. **¿Dónde vive cada componente técnico?**
+4. **¿Con qué identidad administrativa entro a cada proveedor?**
+5. **¿Qué piezas dependen de una infraestructura crítica antes de tocarla?**
 
-No sustituye a EPISUIS, DiseasesMapMx, el Perfil profesional ni al sistema de gestión de proyectos. Funciona como **capa de navegación** entre ellos.
+La workstation no sustituye a EPISUIS, DiseasesMapMx, el Perfil profesional ni la Gestión de proyectos científicos. Funciona como **capa de orientación, navegación y memoria operativa**.
 
-## v0.3 — Research Vessel / Neon Arcade
+## v0.4 — Command Deck / Infrastructure Map
 
-La identidad visual se separa deliberadamente de las plataformas científicas del ecosistema. `workstation` adopta una estética propia de **estación de investigación retrofuturista**, con referencias a terminales, arcade oscuro y ciencia ficción.
+Esta versión consolida la taxonomía real del ecosistema y añade la capa de infraestructura e identidades.
 
-Cambios principales:
+### Inventario canónico actual
 
-- paleta oscura independiente de las plataformas existentes;
-- cian, magenta, violeta y ámbar como acentos de sistema;
-- escritorio y ventanas con tratamiento retro-sci-fi;
-- mapas Mermaid adaptados a la nueva estética;
-- arranque cinematográfico de aproximadamente seis segundos;
-- barra de progreso animada con porcentaje;
-- mensajes de inicialización escalonados;
-- mensajes humorísticos ficticios del sistema;
-- opción `SKIP BOOT [ESC]`;
-- respeto a `prefers-reduced-motion`.
+- **4 Systems**
+- **14 Modules**
+- **3 Tools**
+- **29 Mission Routes**
 
-La capa visual adicional vive en:
+Los contadores se derivan de los archivos de datos; no se mantienen manualmente en la interfaz.
 
-```text
-assets/css/neon.css
-```
+### Systems
 
-y la experiencia de arranque en:
+1. **Perfil profesional** — 4 módulos: Web profesional, Herramientas, CV canónico y Notas técnicas.
+2. **EPISUIS** — 3 módulos: Web EPISUIS, Vigilancia EPISUIS y EPISUIS Producción.
+3. **DiseasesMapMx** — 5 módulos: Portal público, Dashboard, Sequence Analysis, Catálogo molecular y curación, Portal de colaboradores.
+4. **Gestión de proyectos científicos** — 2 módulos: Proyectos territoriales e Investigación académica.
 
-```text
-assets/js/boot.js
-```
+El marco metodológico EPISUIS se mantiene como capa metodológica transversal y no se cuenta como módulo operativo.
 
-Esto permite modificar la estética sin alterar la arquitectura funcional principal.
+### Tools
 
-## Funciones del escritorio
+Solo se cuentan aplicaciones propias que se abren para ejecutar una tarea:
 
-- Escritorio con iconos para los sistemas principales.
-- Ventanas flotantes, arrastrables, minimizables y maximizables.
-- Barra de tareas y menú `START`.
-- **Mission Control** para seleccionar una tarea y obtener una ruta sugerida.
-- **System Map** con mapas Mermaid interactivos `ECOSYSTEM` y `ARCHITECTURE`.
-- **Toolbox** para accesos especializados.
-- Fichas independientes para EPISUIS, Perfil profesional, DiseasesMapMx y Sistema de gestión de proyectos.
+- **SIPRO-Porcino — Simulador Integral de Producción Porcina**
+- **Epi 2×2 — Calculadora epidemiológica para tablas de contingencia**
+- **DIMUPorcino — Diseño Integral de Muestreo Porcino**
+
+GitHub, Mermaid, QGIS, Python, Quarto, Supabase y tecnologías equivalentes pertenecen a infraestructura o al **Engine Room**, no al contador de Tools.
+
+## Componentes del escritorio
+
+- **Mission Control** — 29 rutas agrupadas por Identidad científica, Epidemiología y vigilancia, Producción, Inteligencia molecular, Desarrollo de proyectos y Comunicación/visualización.
+- **System Map / Long Range Scanner** — radar interactivo para los cuatro sistemas y mapa de arquitectura con zoom/scroll.
+- **Toolbox** — las tres Tools científicas; GitHub se conserva únicamente como shortcut de infraestructura.
+- **Identity Matrix** — registro público-safe de identidades, proveedores, repositorios, despliegues y dependencias.
+- **Engine Room / Tech Core** — tecnologías incrustadas en el ecosistema, sin tratarlas como accesos directos.
+- **Output Bay** — salidas derivadas que puede producir el ecosistema.
+- **Local Ops** — comandos locales seguros y reutilizables; no almacena secretos ni direcciones internas.
+- **Side Quests** — acceso separado a Smoke Lab y Entre libros y letras sin convertirlos en Core Systems.
+
+## Identity Matrix
+
+La matriz distingue explícitamente:
+
+- **Identity** — identidad administrativa utilizada para entrar.
+- **Provider / platform** — GitHub, Cloudflare, Supabase, Hostinger, Resend, etc.
+- **Account / workspace / organization** — cuenta concreta dentro del proveedor.
+- **Resource** — repositorio, proyecto, deployment, dominio o backend.
+- **System** — ecosistema al que sirve el recurso.
+
+También diferencia relaciones como:
+
+- `AUTHENTICATED VIA`
+- `SOURCE`
+- `DEPLOYMENT`
+- `BACKEND / DATA`
+- `DOMAIN / DNS`
+- `TRANSACTIONAL EMAIL`
+
+### Infraestructura crítica documentada
+
+**DiseasesMapMx**
+
+- Código canónico: organización GitHub `DiseasesMapMx` (`web`, `analysis-engine`).
+- Web de producción: Cloudflare Worker `diseasesmapmx-web`.
+- Backend y catálogo molecular canónico: Supabase `DiseasesMapMx Production`.
+- La capa de Administración/Curación depende de ese backend.
+- `aljogaba/DiseasesMapMx` se considera **LEGACY** y no forma parte de la infraestructura activa.
+
+**EPISUIS**
+
+- Organización GitHub `episuis`: `web`, `vigilancia-episuis`, `produccion`.
+- Web principal: GitHub Pages + dominio `episuis.com.mx`.
+- Dominio/DNS: Hostinger.
+- Vigilancia: Cloudflare Pages + Supabase `vigilancia-episuis`.
+- Producción: Cloudflare Worker `episuis-produccion` + Supabase `produccion`.
+- Correo transaccional de Vigilancia: Resend, workspace `aljogaba`, dominio `episuis.com.mx`.
+
+## Boot / reboot
+
+La secuencia de arranque se extiende a aproximadamente 20 segundos para funcionar como experiencia demostrativa. Incluye:
+
+- mensajes escalonados y legibles;
+- pausas dramáticas;
+- mensajes de humor ficticio del sistema;
+- `Jorge... tenemos un problema.` como anomalía aislada;
+- `SKIP BOOT [ESC]`;
+- cierre con `ACCESS GRANTED`;
+- soporte de `prefers-reduced-motion`.
+
+`START → Restart ALJOGABA OS` restablece ventanas y reproduce la secuencia completa sin requerir `Ctrl+F5`.
+
+## Ventanas
+
+Las ventanas se limitan dinámicamente al área disponible entre menubar y taskbar. El contenido excedente hace scroll **dentro de la ventana**. Esto evita que Mission Control, System Map, Toolbox o Identity Matrix queden fuera del navegador.
+
+## Flujo conceptual
+
+`CAPTURAR → ORGANIZAR → ANALIZAR → INTERPRETAR → GESTIONAR → COMUNICAR`
+
+Se presenta como telemetría/proceso, no como botones.
 
 ## Fuente de datos
 
-El contenido de catálogo no se mantiene directamente en `index.html`.
-
 ```text
 data/
-├── systems.json
-├── missions.json
-└── tools.json
+├── systems.json       # systems y modules
+├── missions.json      # mission routes
+├── tools.json         # Tools propias
+└── workstation.json   # tecnologías, outputs, Local Ops, Side Quests e infraestructura
 ```
-
-- `systems.json`: sistemas, módulos, estados y enlaces.
-- `missions.json`: rutas guiadas según la tarea.
-- `tools.json`: herramientas especializadas.
 
 ## Arquitectura
 
@@ -82,48 +144,36 @@ workstation/
 │   ├── css/
 │   │   ├── styles.css
 │   │   └── neon.css
-│   ├── js/
-│   │   ├── app.js
-│   │   └── boot.js
-│   └── reference/
+│   └── js/
+│       ├── app.js
+│       └── boot.js
 ├── data/
 │   ├── systems.json
 │   ├── missions.json
-│   └── tools.json
+│   ├── tools.json
+│   └── workstation.json
 └── docs/
     └── github-pages.md
 ```
 
-## GitHub Pages
-
-- Repository: `aljogaba-academico/workstation`
-- Branch: `main`
-- Folder: `/ (root)`
-- URL: `https://aljogaba-academico.github.io/workstation/`
-
 ## Regla de seguridad
 
-GitHub Pages es público. No deben incorporarse tokens, claves, credenciales, archivos `.env`, URLs administrativas sensibles, datos reservados ni documentación privada.
+GitHub Pages es público. ALJOGABA OS puede registrar **nombres operativos y relaciones administrativas**, pero nunca debe almacenar:
 
-Un sistema privado puede aparecer en el mapa como parte del ecosistema sin exponer su ubicación ni credenciales.
+- contraseñas;
+- tokens;
+- API keys;
+- MFA / recovery codes;
+- archivos `.env`;
+- secretos de backend;
+- rutas administrativas sensibles.
+
+Los repositorios privados pueden representarse por nombre cuando es útil para orientación, sin convertir la workstation en un almacén de credenciales.
 
 ## Principio rector
 
-> La workstation no es la fuente de verdad de los proyectos. Es la puerta de entrada al ecosistema.
-
-Las fuentes canónicas permanecen en los sistemas y repositorios correspondientes; `workstation` mantiene solamente la información necesaria para **encontrarlos, entenderlos y elegir una ruta de trabajo**.
-
-## Próximas mejoras
-
-- iconografía pixel-art propia;
-- pequeños eventos/easter eggs de sistema;
-- buscador global;
-- árbol tecnológico de capacidades;
-- rutas más detalladas por misión;
-- changelog visible desde el escritorio;
-- PWA instalable;
-- panel de estado para servicios públicos.
+> **ALJOGABA OS no es la fuente de verdad de los proyectos. Es el mapa de mando para encontrar las fuentes de verdad, entender sus dependencias y elegir la ruta correcta.**
 
 ---
 
-**ALJOGABA OS · Research Workstation · v0.3**
+**ALJOGABA OS · Research Workstation · v0.4**
