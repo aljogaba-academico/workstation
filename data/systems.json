@@ -1,0 +1,126 @@
+[
+  {
+    "id": "episuis",
+    "code": "EPISUIS",
+    "name": "EPISUIS",
+    "status": "public",
+    "description": "Ecosistema técnico para producción porcina que integra epidemiología, análisis de datos y herramientas propias para convertir información sanitaria y productiva en decisiones útiles.",
+    "modules": [
+      {
+        "name": "Web",
+        "description": "Presentación institucional y acceso público."
+      },
+      {
+        "name": "Vigilancia",
+        "description": "Diseño activo, captura, envío y análisis de vigilancia."
+      },
+      {
+        "name": "Producción",
+        "description": "Libreta productiva y benchmarking."
+      },
+      {
+        "name": "Marco metodológico",
+        "description": "Problema → sistema → evidencia → integración → interpretación → decisión → reevaluación."
+      }
+    ],
+    "links": [
+      {
+        "label": "WEB",
+        "url": "https://episuis.com.mx"
+      }
+    ]
+  },
+  {
+    "id": "perfil",
+    "code": "PROFILE",
+    "name": "Perfil profesional",
+    "status": "public",
+    "description": "Sistema para mantener una fuente profesional canónica y derivar una presencia pública curada, herramientas y productos académicos.",
+    "modules": [
+      {
+        "name": "Web",
+        "description": "Perfil profesional público y curado."
+      },
+      {
+        "name": "Tools",
+        "description": "Herramientas como DIMU-Porcino, SIPRO-Porcino y EPI."
+      },
+      {
+        "name": "Gestión curricular",
+        "description": "CV, publicaciones, proyectos, docencia, ponencias y productos."
+      }
+    ],
+    "links": [
+      {
+        "label": "WEB PROFESIONAL",
+        "url": "https://aljogaba.github.io"
+      },
+      {
+        "label": "DIMU-PORCINO",
+        "url": "https://aljogaba.github.io/dimu-porcino/"
+      }
+    ]
+  },
+  {
+    "id": "diseasesmapmx",
+    "code": "DMX",
+    "name": "DiseasesMapMx",
+    "status": "development",
+    "description": "Plataforma molecular para curación, trazabilidad, análisis, visualización y comunicación de información de agentes de importancia sanitaria.",
+    "modules": [
+      {
+        "name": "Portal público",
+        "description": "Overview, datasets y novedades."
+      },
+      {
+        "name": "Dashboard",
+        "description": "Exploración y visualización de información molecular."
+      },
+      {
+        "name": "Análisis de secuencias",
+        "description": "QC, tipificación, filogenia y anotación."
+      },
+      {
+        "name": "Admin / catálogo",
+        "description": "Registro maestro, roles biológicos, datasets y trazabilidad."
+      }
+    ],
+    "links": [
+      {
+        "label": "PORTAL",
+        "url": null
+      }
+    ]
+  },
+  {
+    "id": "proyectos",
+    "code": "PROJECTS",
+    "name": "Sistema de gestión de proyectos",
+    "status": "development",
+    "description": "Arquitectura docs-as-code para construir, documentar, relacionar y comunicar proyectos desde una fuente canónica reproducible.",
+    "modules": [
+      {
+        "name": "Territorial",
+        "description": "Programas y proyectos con lógica territorial."
+      },
+      {
+        "name": "Investigación",
+        "description": "Protocolos, convocatorias y proyectos financiables."
+      },
+      {
+        "name": "Ejes estratégicos",
+        "description": "Nivel rector para organizar líneas y prioridades."
+      },
+      {
+        "name": "Constructor de propuestas",
+        "description": "Tejido de propuestas, entregables y presentaciones desde información canónica."
+      }
+    ],
+    "links": [
+      {
+        "label": "PORTAL",
+        "url": null
+      }
+    ]
+  }
+]

@@ -1,0 +1,44 @@
+[
+  {
+    "name": "DIMU-Porcino",
+    "category": "MUESTREO",
+    "status": "public",
+    "description": "Calculadora para diseño muestral porcino por estado, región, municipio o granja.",
+    "url": "https://aljogaba.github.io/dimu-porcino/"
+  },
+  {
+    "name": "SIPRO-Porcino",
+    "category": "PRODUCCIÓN",
+    "status": "development",
+    "description": "Herramienta del ecosistema porcino para apoyo a procesos productivos.",
+    "url": null
+  },
+  {
+    "name": "EPI",
+    "category": "EPIDEMIOLOGÍA",
+    "status": "development",
+    "description": "Herramienta epidemiológica dentro del conjunto de tools del perfil profesional.",
+    "url": null
+  },
+  {
+    "name": "Mermaid",
+    "category": "VISUALIZACIÓN",
+    "status": "public",
+    "description": "Diagramas reproducibles para arquitectura, procesos, cronologías y relaciones.",
+    "url": "https://mermaid.js.org/"
+  },
+  {
+    "name": "QGIS",
+    "category": "GEOGRAFÍA",
+    "status": "public",
+    "description": "Cartografía y análisis geoespacial para proyectos territoriales y moleculares.",
+    "url": "https://qgis.org/"
+  },
+  {
+    "name": "Git / GitHub",
+    "category": "INFRAESTRUCTURA",
+    "status": "public",
+    "description": "Versionado, repositorios, trazabilidad y despliegue de salidas web.",
+    "url": "https://github.com/aljogaba"
+  }
+]

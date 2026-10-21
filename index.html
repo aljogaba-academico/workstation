@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#10140f" />
+  <meta name="description" content="ALJOGABA OS · Research Workstation. Portal de entrada al ecosistema de trabajo." />
+  <title>ALJOGABA OS · Research Workstation</title>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+    window.mermaid = mermaid;
+    mermaid.initialize({
+      startOnLoad: false,
+      securityLevel: "loose",
+      theme: "base",
+      flowchart: { curve: "basis", htmlLabels: true },
+      themeVariables: {
+        fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+        primaryColor: "#d9e6ce",
+        primaryTextColor: "#10140f",
+        primaryBorderColor: "#10140f",
+        lineColor: "#5f7656",
+        secondaryColor: "#f2f5ee",
+        tertiaryColor: "#c6d8bb"
+      }
+    });
+  </script>
+</head>
+
+<body>
+  <div class="crt-overlay" aria-hidden="true"></div>
+
+  <section id="boot" class="boot-screen" aria-label="Secuencia de arranque">
+    <div class="boot-terminal">
+      <p>ALJOGABA BIOS v1.0</p>
+      <p>Research Environment Check ........ <strong>OK</strong></p>
+      <p>Knowledge Systems ................. <strong>ONLINE</strong></p>
+      <p>Project Routes .................... <strong>READY</strong></p>
+      <p>Scientific Tools .................. <strong>READY</strong></p>
+      <p class="boot-load">Loading ALJOGABA OS <span class="blink">█</span></p>
+      <button id="skipBoot" class="terminal-button">ENTER WORKSTATION</button>
+    </div>
+  </section>
+
+  <div id="app" class="app-shell is-hidden">
+    <header class="topbar">
+      <div>
+        <span class="brand-mark">A&gt;</span>
+        <strong>ALJOGABA OS</strong>
+        <span class="muted">Research Workstation</span>
+      </div>
+      <div class="statusline">
+        <span class="status-dot"></span>
+        <span>SYSTEM ONLINE</span>
+        <span id="clock">--:--</span>
+      </div>
+    </header>
+
+    <main class="desktop">
+      <section class="hero panel">
+        <div>
+          <p class="eyebrow">WORKSTATION / HOME</p>
+          <h1>¿Qué quieres hacer hoy?</h1>
+          <p class="lead">
+            Tu punto de entrada para localizar sistemas, herramientas y rutas de trabajo
+            sin tener que recordar dónde vive cada cosa.
+          </p>
+        </div>
+        <div class="hero-stats" id="stats" aria-label="Resumen del ecosistema"></div>
+      </section>
+
+      <section class="panel mission-console" aria-labelledby="mission-title">
+        <div class="panel-titlebar">
+          <span id="mission-title">MISSION SELECT</span>
+          <span>Ruta guiada</span>
+        </div>
+        <div class="mission-layout">
+          <nav id="missionList" class="mission-list" aria-label="Misiones frecuentes"></nav>
+          <article id="missionDetail" class="mission-detail">
+            <p class="terminal-prompt">&gt; SELECT A MISSION</p>
+            <h2>Elige una tarea</h2>
+            <p>La workstation te mostrará qué sistema usar y en qué orden.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="systems-title">
+        <div class="panel-titlebar">
+          <span id="systems-title">SYSTEMS</span>
+          <span>4 dominios principales</span>
+        </div>
+        <div id="systemGrid" class="system-grid"></div>
+      </section>
+
+      <section class="panel" aria-labelledby="map-title">
+        <div class="panel-titlebar">
+          <span id="map-title">SYSTEM MAP</span>
+          <span>Mapa interactivo del ecosistema</span>
+        </div>
+        <div class="diagram-toolbar">
+          <button class="mini-button active" data-map="ecosystem">ECOSYSTEM</button>
+          <button class="mini-button" data-map="architecture">ARCHITECTURE</button>
+          <span class="muted">Haz clic en un nodo para abrir su ficha.</span>
+        </div>
+        <div id="diagram" class="diagram-wrap" aria-live="polite"></div>
+      </section>
+
+      <section class="panel" aria-labelledby="toolbox-title">
+        <div class="panel-titlebar">
+          <span id="toolbox-title">TOOLBOX</span>
+          <span>Accesos especializados</span>
+        </div>
+        <div id="toolGrid" class="tool-grid"></div>
+      </section>
+
+      <section class="panel impact-panel">
+        <div class="panel-titlebar">
+          <span>DEL DATO AL IMPACTO</span>
+          <span>Flujo rector</span>
+        </div>
+        <div class="impact-flow" aria-label="Flujo del dato al impacto">
+          <span>CAPTURAR</span><b>→</b>
+          <span>ORGANIZAR</span><b>→</b>
+          <span>ANALIZAR</span><b>→</b>
+          <span>INTERPRETAR</span><b>→</b>
+          <span>GESTIONAR</span><b>→</b>
+          <span>COMUNICAR</span>
+        </div>
+        <p>Conocimiento aplicado para la salud animal, la investigación y el desarrollo territorial.</p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>ALJOGABA OS · v0.1</span>
+      <span>GitHub Pages / Static build</span>
+      <span><a href="#" id="homeLink">HOME</a></span>
+    </footer>
+  </div>
+
+  <dialog id="systemDialog" class="system-dialog">
+    <form method="dialog">
+      <button class="dialog-close" aria-label="Cerrar">×</button>
+    </form>
+    <div id="systemDialogContent"></div>
+  </dialog>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

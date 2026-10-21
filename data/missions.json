@@ -1,0 +1,113 @@
+[
+  {
+    "id": "sequences",
+    "name": "Analizar secuencias",
+    "description": "Ruta para pasar de archivos de secuencia y metadatos a resultados moleculares trazables y comunicables.",
+    "primarySystem": "diseasesmapmx",
+    "route": [
+      "Datos / FASTA",
+      "DiseasesMapMx",
+      "QC",
+      "Tipificación / filogenia",
+      "Visualización",
+      "Informe / paper"
+    ]
+  },
+  {
+    "id": "project",
+    "name": "Crear un proyecto",
+    "description": "Ruta para convertir una necesidad o pregunta en un proyecto estructurado y versionado.",
+    "primarySystem": "proyectos",
+    "route": [
+      "Problema / oportunidad",
+      "Eje estratégico",
+      "Territorial o Investigación",
+      "Fuente canónica",
+      "Propuesta",
+      "Entregables"
+    ]
+  },
+  {
+    "id": "proposal",
+    "name": "Preparar una propuesta",
+    "description": "Usa el sistema de proyectos para tejer antecedentes, objetivos, metodología, cronograma, presupuesto y productos.",
+    "primarySystem": "proyectos",
+    "route": [
+      "Convocatoria",
+      "Campos requeridos",
+      "Contenido canónico",
+      "Validación",
+      "Documento / sistema",
+      "Presentación"
+    ]
+  },
+  {
+    "id": "cv",
+    "name": "Actualizar CV o perfil",
+    "description": "La información profesional se mantiene en la fuente canónica y la web consume una selección curada.",
+    "primarySystem": "perfil",
+    "route": [
+      "Hecho profesional",
+      "Fuente canónica",
+      "Validación",
+      "Selección pública",
+      "Web / CV / semblanza"
+    ]
+  },
+  {
+    "id": "surveillance",
+    "name": "Diseñar vigilancia epidemiológica",
+    "description": "Ruta para diseñar un esquema de seguimiento con unidades, evidencia y decisiones explícitas.",
+    "primarySystem": "episuis",
+    "route": [
+      "Pregunta",
+      "Sistema / unidades",
+      "Diseño de vigilancia",
+      "Captura",
+      "Análisis",
+      "Interpretación / decisión"
+    ]
+  },
+  {
+    "id": "presentation",
+    "name": "Preparar una presentación",
+    "description": "Identifica primero la fuente del contenido y genera la presentación como una salida derivada, no como una fuente aislada.",
+    "primarySystem": "perfil",
+    "route": [
+      "Sistema fuente",
+      "Contenido canónico",
+      "Hilo rector",
+      "Visuales / Mermaid",
+      "HTML / PPT",
+      "Exposición"
+    ]
+  },
+  {
+    "id": "maps",
+    "name": "Generar mapas o esquemas",
+    "description": "Selecciona la fuente de datos y usa la herramienta de visualización adecuada sin duplicar la información base.",
+    "primarySystem": "diseasesmapmx",
+    "route": [
+      "Dataset",
+      "Geografía / relaciones",
+      "QGIS / Mermaid / Python",
+      "Validación",
+      "Figura",
+      "Publicación / presentación"
+    ]
+  },
+  {
+    "id": "publish",
+    "name": "Publicar o comunicar resultados",
+    "description": "Convierte resultados ya validados en el producto adecuado para cada audiencia.",
+    "primarySystem": "perfil",
+    "route": [
+      "Resultado validado",
+      "Audiencia",
+      "Producto",
+      "Curaduría",
+      "Web / informe / paper / charla",
+      "Archivo / trazabilidad"
+    ]
+  }
+]
