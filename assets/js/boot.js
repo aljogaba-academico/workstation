@@ -1,6 +1,8 @@
 (() => {
   const BOOT_DURATION = 19800;
   const RELEASE_DELAY = 650;
+  const ANOMALY_PAUSE_START = 15900;
+  const ANOMALY_PAUSE_END = 17500;
   const steps = [
     { at: 900, text: "Power core handshake .................... OK", cls: "boot-ok", status: "POWER CORE" },
     { at: 2300, text: "Mounting research environment ........... ONLINE", cls: "boot-ok", status: "MOUNTING RESEARCH ENVIRONMENT" },
@@ -12,7 +14,7 @@
     { at: 11600, text: "World domination module ................. DISABLED BY ETHICS SUBSYSTEM", cls: "boot-weird", status: "CHECKING ETHICS SUBSYSTEM" },
     { at: 13200, text: "Coffee dependency ....................... CRITICAL", cls: "boot-warn", status: "RESTORING HUMAN OPERABILITY" },
     { at: 14600, text: "Unknown signal from sector 13 ........... IGNORED", cls: "boot-weird", status: "SCANNING DEEP WORK SECTOR" },
-    { at: 15900, text: "Jorge... tenemos un problema.", cls: "boot-alert", status: "ANOMALY DETECTED" },
+    { at: 15900, text: "Jorge... tenemos un problema.", cls: "boot-alert", status: "ANOMALY DETECTED", beep: true },
     { at: 18100, text: "ALJOGABA OS kernel ....................... READY", cls: "boot-ok", status: "FINALIZING WORKSTATION" },
     { at: 19050, text: "Research vessel command deck ............ ONLINE", cls: "boot-ok", status: "OPENING COMMAND DECK" }
   ];
@@ -22,8 +24,39 @@
   let startTime = 0;
   let raf = null;
   let timers = [];
+  let audioContext = null;
 
   const $ = id => document.getElementById(id);
+
+  function armAudio() {
+    try {
+      if (!audioContext) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (AudioContext) audioContext = new AudioContext();
+      }
+      if (audioContext?.state === "suspended") audioContext.resume().catch(() => {});
+    } catch (_) {}
+  }
+
+  function anomalyBeep() {
+    try {
+      armAudio();
+      if (!audioContext || audioContext.state !== "running") return;
+      const now = audioContext.currentTime;
+      const oscillator = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+      oscillator.type = "square";
+      oscillator.frequency.setValueAtTime(880, now);
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.exponentialRampToValueAtTime(0.055, now + 0.025);
+      gain.gain.setValueAtTime(0.055, now + 0.58);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.82);
+      oscillator.connect(gain);
+      gain.connect(audioContext.destination);
+      oscillator.start(now);
+      oscillator.stop(now + 0.84);
+    } catch (_) {}
+  }
 
   function clearTimers() {
     timers.forEach(clearTimeout);
@@ -60,17 +93,31 @@
     log.appendChild(p);
     requestAnimationFrame(() => p.classList.add("visible"));
     if ($("bootStatus")) $("bootStatus").textContent = step.status || "INITIALIZING";
+    if (step.beep) anomalyBeep();
     log.scrollTop = log.scrollHeight;
+  }
+
+  function stagedProgress(raw) {
+    return raw < .72
+      ? Math.pow(raw / .72, .88) * .75
+      : .75 + Math.pow((raw - .72) / .28, 1.4) * .25;
+  }
+
+  function progressForElapsed(elapsed) {
+    const pauseStartRaw = ANOMALY_PAUSE_START / BOOT_DURATION;
+    const hold = stagedProgress(pauseStartRaw);
+    if (elapsed < ANOMALY_PAUSE_START) return stagedProgress(elapsed / BOOT_DURATION);
+    if (elapsed <= ANOMALY_PAUSE_END) return hold;
+    const remaining = BOOT_DURATION - ANOMALY_PAUSE_END;
+    const after = Math.min(1, (elapsed - ANOMALY_PAUSE_END) / remaining);
+    return hold + (1 - hold) * Math.pow(after, 1.15);
   }
 
   function updateProgress(now) {
     if (completed) return;
     const elapsed = now - startTime;
-    const raw = Math.min(1, elapsed / BOOT_DURATION);
-    const staged = raw < .72
-      ? Math.pow(raw / .72, .88) * .75
-      : .75 + Math.pow((raw - .72) / .28, 1.4) * .25;
-    const percent = Math.min(100, Math.floor(staged * 100));
+    const progress = Math.min(1, progressForElapsed(elapsed));
+    const percent = Math.min(100, Math.floor(progress * 100));
     const fill = $("bootProgress");
     const label = $("bootPercent");
     const track = document.querySelector(".boot-progress-track");
@@ -78,7 +125,7 @@
     if (label) label.textContent = `${String(percent).padStart(2, "0")}%`;
     if (track) track.setAttribute("aria-valuenow", String(percent));
 
-    if (raw < 1) raf = requestAnimationFrame(updateProgress);
+    if (elapsed < BOOT_DURATION) raf = requestAnimationFrame(updateProgress);
     else finishBoot(false);
   }
 
@@ -140,6 +187,7 @@
   }
 
   function reboot() {
+    armAudio();
     clearTimers();
     started = false;
     completed = false;
@@ -166,6 +214,8 @@
         finishBoot(true);
       });
     }
+    document.addEventListener("pointerdown", armAudio, { once: true, capture: true });
+    document.addEventListener("keydown", armAudio, { once: true, capture: true });
     document.addEventListener("keydown", event => {
       if (event.key === "Escape" && !completed && !$("boot")?.classList.contains("is-hidden")) finishBoot(true);
     });
