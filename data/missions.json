@@ -1,113 +1,36 @@
 [
-  {
-    "id": "sequences",
-    "name": "Analizar secuencias",
-    "description": "Ruta para pasar de archivos de secuencia y metadatos a resultados moleculares trazables y comunicables.",
-    "primarySystem": "diseasesmapmx",
-    "route": [
-      "Datos / FASTA",
-      "DiseasesMapMx",
-      "QC",
-      "Tipificación / filogenia",
-      "Visualización",
-      "Informe / paper"
-    ]
-  },
-  {
-    "id": "project",
-    "name": "Crear un proyecto",
-    "description": "Ruta para convertir una necesidad o pregunta en un proyecto estructurado y versionado.",
-    "primarySystem": "proyectos",
-    "route": [
-      "Problema / oportunidad",
-      "Eje estratégico",
-      "Territorial o Investigación",
-      "Fuente canónica",
-      "Propuesta",
-      "Entregables"
-    ]
-  },
-  {
-    "id": "proposal",
-    "name": "Preparar una propuesta",
-    "description": "Usa el sistema de proyectos para tejer antecedentes, objetivos, metodología, cronograma, presupuesto y productos.",
-    "primarySystem": "proyectos",
-    "route": [
-      "Convocatoria",
-      "Campos requeridos",
-      "Contenido canónico",
-      "Validación",
-      "Documento / sistema",
-      "Presentación"
-    ]
-  },
-  {
-    "id": "cv",
-    "name": "Actualizar CV o perfil",
-    "description": "La información profesional se mantiene en la fuente canónica y la web consume una selección curada.",
-    "primarySystem": "perfil",
-    "route": [
-      "Hecho profesional",
-      "Fuente canónica",
-      "Validación",
-      "Selección pública",
-      "Web / CV / semblanza"
-    ]
-  },
-  {
-    "id": "surveillance",
-    "name": "Diseñar vigilancia epidemiológica",
-    "description": "Ruta para diseñar un esquema de seguimiento con unidades, evidencia y decisiones explícitas.",
-    "primarySystem": "episuis",
-    "route": [
-      "Pregunta",
-      "Sistema / unidades",
-      "Diseño de vigilancia",
-      "Captura",
-      "Análisis",
-      "Interpretación / decisión"
-    ]
-  },
-  {
-    "id": "presentation",
-    "name": "Preparar una presentación",
-    "description": "Identifica primero la fuente del contenido y genera la presentación como una salida derivada, no como una fuente aislada.",
-    "primarySystem": "perfil",
-    "route": [
-      "Sistema fuente",
-      "Contenido canónico",
-      "Hilo rector",
-      "Visuales / Mermaid",
-      "HTML / PPT",
-      "Exposición"
-    ]
-  },
-  {
-    "id": "maps",
-    "name": "Generar mapas o esquemas",
-    "description": "Selecciona la fuente de datos y usa la herramienta de visualización adecuada sin duplicar la información base.",
-    "primarySystem": "diseasesmapmx",
-    "route": [
-      "Dataset",
-      "Geografía / relaciones",
-      "QGIS / Mermaid / Python",
-      "Validación",
-      "Figura",
-      "Publicación / presentación"
-    ]
-  },
-  {
-    "id": "publish",
-    "name": "Publicar o comunicar resultados",
-    "description": "Convierte resultados ya validados en el producto adecuado para cada audiencia.",
-    "primarySystem": "perfil",
-    "route": [
-      "Resultado validado",
-      "Audiencia",
-      "Producto",
-      "Curaduría",
-      "Web / informe / paper / charla",
-      "Archivo / trazabilidad"
-    ]
-  }
+  {"id":"update-profile","category":"Identidad científica","name":"Actualizar perfil o CV","description":"Registrar el hecho profesional en la fuente canónica y derivarlo a la salida correspondiente.","primarySystem":"perfil","route":["Hecho profesional","CV canónico","Validación","Selección pública","Web / CV / semblanza"]},
+  {"id":"prepare-bio","category":"Identidad científica","name":"Preparar una semblanza","description":"Construir una semblanza desde hechos profesionales ya consolidados, no desde una copia aislada.","primarySystem":"perfil","route":["CV canónico","Selección por audiencia","Síntesis","Revisión","Semblanza"]},
+  {"id":"technical-note","category":"Identidad científica","name":"Consultar o desarrollar una nota técnica","description":"Ubicar conocimiento técnico consolidado y, si procede, fortalecer la nota canónica correspondiente.","primarySystem":"perfil","route":["Pregunta técnica","Notas técnicas","Evidencia","Síntesis","Uso / transferencia"]},
+
+  {"id":"sampling-design","category":"Epidemiología y vigilancia","name":"Diseñar un muestreo","description":"Calcular y estructurar un diseño muestral sanitario con la herramienta especializada.","primarySystem":"perfil","primaryTool":"dimu-porcino","route":["Población objetivo","Nivel de muestreo","Parámetros","DIMUPorcino","Diseño muestral"]},
+  {"id":"epi-2x2","category":"Epidemiología y vigilancia","name":"Analizar una tabla 2×2","description":"Calcular medidas de asociación, incertidumbre y pruebas de independencia.","primarySystem":"perfil","primaryTool":"epi-2x2","route":["Tabla 2×2","Epi 2×2","RR / OR / RA","IC / χ²","Interpretación"]},
+  {"id":"surveillance-design","category":"Epidemiología y vigilancia","name":"Diseñar vigilancia epidemiológica","description":"Definir pregunta, unidades, evidencia, operación y decisiones del esquema de vigilancia.","primarySystem":"episuis","route":["Pregunta","Sistema / unidades","Diseño","Captura","Análisis","Decisión"]},
+  {"id":"field-operation","category":"Epidemiología y vigilancia","name":"Operar un muestreo de campo","description":"Llevar el diseño a ejecución con trazabilidad de unidades, muestras y eventos.","primarySystem":"episuis","route":["Diseño aprobado","Unidades","Muestreo","Trazabilidad","Recepción de datos"]},
+  {"id":"survey","category":"Epidemiología y vigilancia","name":"Levantar una encuesta","description":"Capturar información estandarizada asociada a las unidades participantes.","primarySystem":"episuis","route":["Instrumento","Participantes","Captura","Control de calidad","Base estandarizada"]},
+  {"id":"diagnostic-request","category":"Epidemiología y vigilancia","name":"Gestionar solicitudes diagnósticas","description":"Relacionar muestras, solicitudes, resultados y seguimiento dentro del flujo de vigilancia.","primarySystem":"episuis","route":["Caso / muestra","Solicitud","Diagnóstico","Resultado","Integración"]},
+  {"id":"surveillance-base","category":"Epidemiología y vigilancia","name":"Construir base canónica de vigilancia","description":"Consolidar captura, encuesta y diagnóstico en una estructura formal para análisis estadístico.","primarySystem":"episuis","route":["Captura","Estandarización","Validación","Base canónica","Análisis"]},
+  {"id":"epi-analysis","category":"Epidemiología y vigilancia","name":"Analizar datos epidemiológicos","description":"Partir de datos estandarizados para generar análisis estadístico reproducible e interpretación.","primarySystem":"episuis","route":["Base canónica","Control de calidad","Análisis","Interpretación","Salida"]},
+  {"id":"farm-report","category":"Epidemiología y vigilancia","name":"Generar informe de granja","description":"Integrar resultados sanitarios y epidemiológicos en una salida útil para cada unidad participante.","primarySystem":"episuis","route":["Resultados","Integración","Interpretación","Informe individual","Entrega"]},
+
+  {"id":"production-simulation","category":"Producción","name":"Simular producción porcina","description":"Explorar flujo, inventarios, costos y escenarios técnico-económicos.","primarySystem":"perfil","primaryTool":"sipro-porcino","route":["Parámetros productivos","SIPRO-Porcino","Flujo / inventarios","Economía","Escenarios"]},
+  {"id":"production-management","category":"Producción","name":"Gestionar operación productiva","description":"Registrar y dar seguimiento a reproducción, línea productiva y eficiencia según la licencia activa.","primarySystem":"episuis","route":["EPISUIS Producción","Registro","Seguimiento","Indicadores","Decisión"]},
+
+  {"id":"molecular-explore","category":"Inteligencia molecular","name":"Explorar datos moleculares","description":"Consultar distribuciones, diversidad y patrones del catálogo molecular.","primarySystem":"diseasesmapmx","route":["Catálogo","Dashboard","Filtros","Visualización","Interpretación"]},
+  {"id":"sequence-analysis","category":"Inteligencia molecular","name":"Analizar una secuencia","description":"Pasar de una secuencia y sus metadatos a una interpretación molecular trazable.","primarySystem":"diseasesmapmx","route":["Secuencia / FASTA","Sequence Analysis","QC","Referencia cercana","Interpretación"]},
+  {"id":"sequence-compare","category":"Inteligencia molecular","name":"Comparar secuencia con referencias o vacunas","description":"Examinar identidad, traducción y diferencias relevantes frente a comparadores definidos.","primarySystem":"diseasesmapmx","route":["Secuencia","Comparadores","Nucleótidos / aminoácidos","Diferencias","Reporte"]},
+  {"id":"sequence-submit","category":"Inteligencia molecular","name":"Enviar secuencia para incorporación","description":"Someter una secuencia candidata para revisión, curación y eventual incorporación al catálogo.","primarySystem":"diseasesmapmx","route":["Secuencia","Metadatos","Envío","Revisión","Curación / catálogo"]},
+  {"id":"sequence-curate","category":"Inteligencia molecular","name":"Curar una secuencia","description":"Revisar QC, identidad, metadatos, interpretación y roles dentro del registro maestro.","primarySystem":"diseasesmapmx","route":["Admin / curación","QC","Anotación","Roles / referencias","Registro maestro"]},
+  {"id":"molecular-dataset","category":"Inteligencia molecular","name":"Construir un dataset molecular","description":"Derivar un conjunto reproducible desde el catálogo canónico con criterios explícitos.","primarySystem":"diseasesmapmx","route":["Catálogo canónico","Criterios","Selección","Congelamiento","Dataset"]},
+  {"id":"collaborator-case","category":"Inteligencia molecular","name":"Procesar un caso de colaborador","description":"Seguir el flujo de convenio desde la recepción del caso hasta la entrega de resultados.","primarySystem":"diseasesmapmx","route":["Portal de colaboradores","Caso / lote","QC / procesamiento","Informes","Entrega"]},
+
+  {"id":"territorial-project","category":"Desarrollo de proyectos","name":"Formular un proyecto territorial","description":"Construir un proyecto aplicado desde el marco rector y su lógica territorial.","primarySystem":"proyectos","route":["Problema territorial","Marco rector","Programa","Subproyecto","Productos"]},
+  {"id":"subproject","category":"Desarrollo de proyectos","name":"Estructurar un subproyecto","description":"Definir paquetes de trabajo, evidencia, responsabilidades y entregables dentro de un programa territorial.","primarySystem":"proyectos","route":["Programa","Pregunta / objetivo","Paquetes de trabajo","Evidencia","Entregables"]},
+  {"id":"research-proposal","category":"Desarrollo de proyectos","name":"Preparar una propuesta de investigación","description":"Tejer convocatoria, antecedentes, objetivos, metodología y productos desde información canónica.","primarySystem":"proyectos","route":["Convocatoria","Contenido canónico","Assembly","Validación","Propuesta"]},
+  {"id":"document-weaving","category":"Desarrollo de proyectos","name":"Tejer un documento","description":"Ensamblar información canónica con perfiles y plantillas para producir un derivado reproducible.","primarySystem":"proyectos","route":["Fuentes canónicas","Perfil / assembly","Tejido documental","Validación","Documento"]},
+
+  {"id":"maps","category":"Comunicación y visualización","name":"Generar mapas o esquemas","description":"Misión transversal: primero define qué quieres representar y después el sistema y motor adecuados.","primarySystem":null,"route":["Pregunta visual","Sistema fuente","Datos / relaciones","QGIS / Mermaid / Python","Figura validada"]},
+  {"id":"presentation","category":"Comunicación y visualización","name":"Preparar una presentación","description":"Derivar una narrativa visual desde contenido ya consolidado y una audiencia definida.","primarySystem":"perfil","route":["Sistema fuente","Contenido canónico","Hilo rector","Visuales","Presentación"]},
+  {"id":"derived-document","category":"Comunicación y visualización","name":"Generar Word, PDF o HTML","description":"Producir una salida derivada desde la fuente canónica sin convertir el archivo final en fuente de verdad.","primarySystem":"proyectos","route":["Fuente canónica","Build","Validación","DOCX / PDF / HTML","Archivo"]},
+  {"id":"publish-results","category":"Comunicación y visualización","name":"Publicar o comunicar resultados","description":"Transformar resultados validados en el producto adecuado para cada audiencia.","primarySystem":"perfil","route":["Resultado validado","Audiencia","Producto","Curaduría","Publicación / comunicación"]}
 ]
