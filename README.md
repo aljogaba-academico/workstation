@@ -2,54 +2,111 @@
 
 **ALJOGABA OS · Research Workstation**
 
-Portal estático de entrada al ecosistema de trabajo. Su objetivo es responder:
+Research workstation and navigation hub for the scientific ecosystem: projects, platforms, tools, workflows, and knowledge resources.
+
+**Live:** https://aljogaba-academico.github.io/workstation/
+
+## Propósito
+
+La workstation responde dos preguntas operativas:
 
 1. **¿Qué sistema o herramienta debo usar?**
 2. **¿Cuál es la ruta correcta para llegar desde una necesidad hasta un producto?**
 
-## v0.1
+No pretende sustituir a EPISUIS, DiseasesMapMx, el Perfil profesional ni al sistema de gestión de proyectos. Funciona como **capa de navegación** entre ellos.
 
-- Arranque estilo computadora retro.
-- Cuatro dominios principales: EPISUIS, Perfil profesional, DiseasesMapMx y Gestión de proyectos.
-- Selector de **misiones** para rutas frecuentes.
-- Mapas Mermaid `ECOSYSTEM` y `ARCHITECTURE`.
-- Catálogo de herramientas.
-- Fichas modales de cada sistema.
-- Compatible con GitHub Pages.
+## v0.2 — Retro desktop
 
-## Publicar
-
-1. Crea `aljogaba/workstation`.
-2. Copia todo el contenido de esta carpeta a la raíz.
-3. `commit` y `push` a `main`.
-4. GitHub → `Settings → Pages`.
-5. `Deploy from a branch`.
-6. Branch `main`, folder `/ (root)`.
-
-La URL normalmente será:
-
-`https://aljogaba.github.io/workstation/`
+- Secuencia de arranque estilo computadora retro.
+- Escritorio con iconos para los sistemas principales.
+- Ventanas flotantes, arrastrables, minimizables y maximizables.
+- Barra de tareas y menú `START`.
+- **Mission Control** para seleccionar una tarea y obtener una ruta sugerida.
+- **System Map** con dos mapas Mermaid interactivos:
+  - `ECOSYSTEM`
+  - `ARCHITECTURE`
+- **Toolbox** para accesos especializados.
+- Fichas independientes para:
+  - EPISUIS
+  - Perfil profesional
+  - DiseasesMapMx
+  - Sistema de gestión de proyectos
+- Diseño responsivo para escritorio y móvil.
 
 ## Fuente de datos
 
-No edites las tarjetas directamente en `index.html`.
+El contenido de catálogo no se mantiene directamente en `index.html`.
 
-- `data/systems.json`
-- `data/missions.json`
-- `data/tools.json`
+```text
+data/
+├── systems.json
+├── missions.json
+└── tools.json
+```
+
+- `systems.json`: sistemas, módulos, estados y enlaces.
+- `missions.json`: rutas guiadas según la tarea.
+- `tools.json`: herramientas especializadas.
+
+La interfaz se genera desde estos archivos.
+
+## Arquitectura
+
+```text
+workstation/
+├── index.html
+├── .nojekyll
+├── README.md
+├── assets/
+│   ├── css/styles.css
+│   ├── js/app.js
+│   └── reference/
+├── data/
+│   ├── systems.json
+│   ├── missions.json
+│   └── tools.json
+└── docs/
+    └── github-pages.md
+```
+
+## GitHub Pages
+
+El sitio se publica desde:
+
+- Repository: `aljogaba-academico/workstation`
+- Branch: `main`
+- Folder: `/ (root)`
+- URL: `https://aljogaba-academico.github.io/workstation/`
 
 ## Regla de seguridad
 
-GitHub Pages es público. No agregues tokens, credenciales, URLs administrativas privadas, `.env` ni secretos. La workstation puede indicar que un sistema existe sin revelar su ubicación.
+GitHub Pages es público. No deben incorporarse:
+
+- tokens o claves;
+- credenciales;
+- archivos `.env`;
+- URLs administrativas sensibles;
+- datos reservados;
+- documentación privada.
+
+Un sistema privado puede aparecer en el mapa como parte del ecosistema sin exponer su ubicación ni credenciales.
+
+## Principio rector
+
+> La workstation no es la fuente de verdad de los proyectos. Es la puerta de entrada al ecosistema.
+
+Las fuentes canónicas permanecen en los sistemas y repositorios correspondientes; `workstation` mantiene solamente la información necesaria para **encontrarlos, entenderlos y elegir una ruta de trabajo**.
 
 ## Próximas mejoras
 
-- Ventanas arrastrables.
-- Sonido opcional.
-- Íconos pixel-art.
+- Iconografía pixel-art propia.
 - Buscador global.
 - Árbol tecnológico de capacidades.
-- Mission Control ampliado.
+- Rutas más detalladas por misión.
+- Changelog visible desde el escritorio.
 - PWA instalable.
+- Panel de estado para servicios públicos.
 
-**Versión:** 0.1
+---
+
+**ALJOGABA OS · Research Workstation · v0.2**
