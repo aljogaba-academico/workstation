@@ -1,0 +1,183 @@
+.mission-route-map,
+.module-infrastructure-map {
+  margin: 18px 0;
+  min-height: 250px;
+  overflow: auto;
+  border: 1px solid rgba(51, 230, 255, .28);
+  background:
+    linear-gradient(rgba(51,230,255,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(51,230,255,.035) 1px, transparent 1px),
+    rgba(5, 3, 10, .62);
+  background-size: 26px 26px;
+  box-shadow: inset 0 0 30px rgba(51, 230, 255, .04);
+}
+
+.mission-mermaid-stage,
+.module-mermaid-stage {
+  min-width: 620px;
+  padding: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.mission-mermaid-stage svg,
+.module-mermaid-stage svg {
+  max-width: none !important;
+  height: auto !important;
+}
+
+.module-infrastructure-shell {
+  height: 100%;
+  min-height: 500px;
+  display: grid;
+  grid-template-columns: minmax(220px, 270px) minmax(0, 1fr);
+  gap: 14px;
+}
+
+.module-infrastructure-nav {
+  min-height: 0;
+  overflow: auto;
+  padding-right: 10px;
+  border-right: 1px solid rgba(139, 92, 246, .32);
+}
+
+.module-nav-group {
+  margin-bottom: 16px;
+}
+
+.module-nav-group > p {
+  margin: 0 0 6px;
+  color: #a995c7;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.module-nav-button {
+  width: 100%;
+  margin: 0 0 5px;
+  padding: 8px 10px;
+  text-align: left;
+  border: 1px solid rgba(139, 92, 246, .28);
+  background: rgba(20, 12, 31, .74);
+  color: #eee9f7;
+  font: inherit;
+  cursor: pointer;
+}
+
+.module-nav-button:hover,
+.module-nav-button.active {
+  border-color: #33e6ff;
+  background: rgba(12, 31, 43, .86);
+  color: #fff;
+  box-shadow: inset 3px 0 0 #ff3fb4;
+}
+
+.module-infrastructure-detail {
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+  padding: 2px 6px 12px;
+}
+
+.module-detail-head h2 {
+  margin: 4px 0 8px;
+}
+
+.module-detail-head p:last-child {
+  max-width: 780px;
+  color: #cfc4dd;
+}
+
+.module-infrastructure-note {
+  margin: 12px 0 0;
+  padding: 10px 12px;
+  border-left: 3px solid #ffbd3f;
+  background: rgba(255, 189, 63, .07);
+  color: #f4dfac;
+  font-size: .8rem;
+}
+
+.access-directory {
+  margin-top: 20px;
+  padding-top: 12px;
+  border-top: 1px dashed rgba(139, 92, 246, .3);
+}
+
+.access-directory summary {
+  cursor: pointer;
+  color: #33e6ff;
+  font-size: .75rem;
+  letter-spacing: .07em;
+}
+
+.access-directory-note {
+  color: #8f80a5;
+  font-size: .68rem;
+  line-height: 1.45;
+}
+
+.access-provider {
+  margin: 10px 0 14px;
+}
+
+.access-provider h3 {
+  margin: 0 0 6px;
+  color: #ff79c9;
+  font-size: .78rem;
+}
+
+.access-entry {
+  display: grid;
+  gap: 2px;
+  margin-bottom: 8px;
+  padding: 7px 8px;
+  border: 1px solid rgba(98, 71, 121, .34);
+  background: rgba(13, 9, 20, .62);
+}
+
+.access-entry strong {
+  color: #fff;
+  font-size: .7rem;
+  letter-spacing: .05em;
+}
+
+.access-entry code {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  color: #33e6ff;
+  font-size: .68rem;
+}
+
+.access-entry small {
+  color: #9f91b4;
+  line-height: 1.35;
+}
+
+.node-account,
+.node-access {
+  font-size: 11px;
+}
+
+.node-account {
+  font-weight: 700;
+}
+
+.node-access {
+  opacity: .82;
+}
+
+@media (max-width: 780px) {
+  .module-infrastructure-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .module-infrastructure-nav {
+    max-height: 210px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(139, 92, 246, .32);
+    padding-right: 0;
+    padding-bottom: 10px;
+  }
+}
