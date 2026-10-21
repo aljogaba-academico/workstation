@@ -1,26 +1,55 @@
 (() => {
-  const BOOT_DURATION = 6200;
+  const BOOT_DURATION = 19800;
+  const RELEASE_DELAY = 650;
   const steps = [
-    { at: 250,  text: "Power core handshake .................... OK", cls: "boot-ok", status: "POWER CORE" },
-    { at: 760,  text: "Mounting research environment ........... ONLINE", cls: "boot-ok", status: "MOUNTING RESEARCH ENVIRONMENT" },
-    { at: 1320, text: "Knowledge systems ....................... CONNECTED", cls: "boot-ok", status: "CONNECTING KNOWLEDGE SYSTEMS" },
-    { at: 1880, text: "Scientific tools ......................... READY", cls: "boot-ok", status: "LOADING SCIENTIFIC TOOLS" },
-    { at: 2480, text: "Project routes ........................... READY", cls: "boot-ok", status: "INDEXING PROJECT ROUTES" },
-    { at: 3080, text: "Sequence analysis bay .................... STANDBY", cls: "boot-dim", status: "CALIBRATING ANALYTICAL BAY" },
-    { at: 3650, text: "Containment protocols .................... PROBABLY FINE", cls: "boot-warn", status: "VERIFYING CONTAINMENT" },
-    { at: 4210, text: "World domination module ................. DISABLED BY ETHICS SUBSYSTEM", cls: "boot-weird", status: "CHECKING ETHICS SUBSYSTEM" },
-    { at: 4780, text: "Coffee dependency ....................... CRITICAL", cls: "boot-warn", status: "RESTORING HUMAN OPERABILITY" },
-    { at: 5320, text: "Unknown signal from sector 13 ........... IGNORED", cls: "boot-weird", status: "SCANNING DEEP WORK SECTOR" },
-    { at: 5740, text: "ALJOGABA OS kernel ....................... READY", cls: "boot-ok", status: "FINALIZING WORKSTATION" }
+    { at: 900, text: "Power core handshake .................... OK", cls: "boot-ok", status: "POWER CORE" },
+    { at: 2300, text: "Mounting research environment ........... ONLINE", cls: "boot-ok", status: "MOUNTING RESEARCH ENVIRONMENT" },
+    { at: 3800, text: "Knowledge systems ....................... CONNECTED", cls: "boot-ok", status: "CONNECTING KNOWLEDGE SYSTEMS" },
+    { at: 5300, text: "Scientific tools ......................... READY", cls: "boot-ok", status: "LOADING SCIENTIFIC TOOLS" },
+    { at: 6800, text: "Project routes ........................... READY", cls: "boot-ok", status: "INDEXING PROJECT ROUTES" },
+    { at: 8350, text: "Sequence analysis bay .................... STANDBY", cls: "boot-dim", status: "CALIBRATING ANALYTICAL BAY" },
+    { at: 9950, text: "Containment protocols .................... PROBABLY FINE", cls: "boot-warn", status: "VERIFYING CONTAINMENT" },
+    { at: 11600, text: "World domination module ................. DISABLED BY ETHICS SUBSYSTEM", cls: "boot-weird", status: "CHECKING ETHICS SUBSYSTEM" },
+    { at: 13200, text: "Coffee dependency ....................... CRITICAL", cls: "boot-warn", status: "RESTORING HUMAN OPERABILITY" },
+    { at: 14600, text: "Unknown signal from sector 13 ........... IGNORED", cls: "boot-weird", status: "SCANNING DEEP WORK SECTOR" },
+    { at: 15900, text: "Jorge... tenemos un problema.", cls: "boot-alert", status: "ANOMALY DETECTED" },
+    { at: 18100, text: "ALJOGABA OS kernel ....................... READY", cls: "boot-ok", status: "FINALIZING WORKSTATION" },
+    { at: 19050, text: "Research vessel command deck ............ ONLINE", cls: "boot-ok", status: "OPENING COMMAND DECK" }
   ];
 
   let started = false;
   let completed = false;
   let startTime = 0;
   let raf = null;
-  const timers = [];
+  let timers = [];
 
-  function $(id) { return document.getElementById(id); }
+  const $ = id => document.getElementById(id);
+
+  function clearTimers() {
+    timers.forEach(clearTimeout);
+    timers = [];
+    if (raf) cancelAnimationFrame(raf);
+    raf = null;
+  }
+
+  function initialBootLog() {
+    const log = $("bootLog");
+    if (!log) return;
+    log.innerHTML = `
+      <p class="visible boot-dim">Cold start detected. Waking research vessel...</p>
+      <p class="visible">&gt; INITIALIZE ALJOGABA_OS <span class="boot-cursor blink">█</span></p>`;
+  }
+
+  function resetProgress() {
+    const fill = $("bootProgress");
+    const label = $("bootPercent");
+    const status = $("bootStatus");
+    if (fill) fill.style.width = "0%";
+    if (label) label.textContent = "00%";
+    if (status) status.textContent = "INITIALIZING CORE SYSTEMS";
+    const track = document.querySelector(".boot-progress-track");
+    if (track) track.setAttribute("aria-valuenow", "0");
+  }
 
   function revealLine(step) {
     const log = $("bootLog");
@@ -38,74 +67,99 @@
     if (completed) return;
     const elapsed = now - startTime;
     const raw = Math.min(1, elapsed / BOOT_DURATION);
-    // Slightly non-linear: quick wake-up, small hesitation in the middle, clean finish.
-    const eased = raw < .68
-      ? Math.pow(raw / .68, .82) * .72
-      : .72 + Math.pow((raw - .68) / .32, 1.35) * .28;
-    const percent = Math.min(100, Math.floor(eased * 100));
+    const staged = raw < .72
+      ? Math.pow(raw / .72, .88) * .75
+      : .75 + Math.pow((raw - .72) / .28, 1.4) * .25;
+    const percent = Math.min(100, Math.floor(staged * 100));
     const fill = $("bootProgress");
     const label = $("bootPercent");
+    const track = document.querySelector(".boot-progress-track");
     if (fill) fill.style.width = `${percent}%`;
     if (label) label.textContent = `${String(percent).padStart(2, "0")}%`;
+    if (track) track.setAttribute("aria-valuenow", String(percent));
 
-    if (raw < 1) {
-      raf = requestAnimationFrame(updateProgress);
-    } else {
-      finishBoot(false);
-    }
+    if (raw < 1) raf = requestAnimationFrame(updateProgress);
+    else finishBoot(false);
+  }
+
+  function releaseDesktop(skipped) {
+    const boot = $("boot");
+    const os = $("os");
+    if (boot) boot.classList.add("boot-complete", "is-hidden");
+    if (os) os.classList.remove("is-hidden");
+    if (!skipped && typeof window.openWelcome === "function") window.openWelcome();
+    if (skipped && typeof window.openWelcome === "function" && !document.querySelector(".os-window")) window.openWelcome();
   }
 
   function finishBoot(skipped = false) {
     if (completed) return;
     completed = true;
-    timers.forEach(clearTimeout);
-    if (raf) cancelAnimationFrame(raf);
+    clearTimers();
 
     const fill = $("bootProgress");
     const label = $("bootPercent");
     const status = $("bootStatus");
+    const track = document.querySelector(".boot-progress-track");
     if (fill) fill.style.width = "100%";
     if (label) label.textContent = "100%";
+    if (track) track.setAttribute("aria-valuenow", "100");
     if (status) status.textContent = skipped ? "MANUAL OVERRIDE ACCEPTED" : "ACCESS GRANTED";
 
     const log = $("bootLog");
     if (log && !skipped) {
       const p = document.createElement("p");
-      p.className = "boot-ok";
+      p.className = "boot-ok boot-access";
       p.textContent = "> WORKSTATION ACCESS GRANTED";
       log.appendChild(p);
       requestAnimationFrame(() => p.classList.add("visible"));
+      log.scrollTop = log.scrollHeight;
     }
 
-    setTimeout(() => {
-      const boot = $("boot");
-      if (boot) boot.classList.add("boot-complete", "is-hidden");
-      const os = $("os");
-      if (os) os.classList.remove("is-hidden");
-      if (typeof window.openWelcome === "function") window.openWelcome();
-    }, skipped ? 80 : 460);
+    timers.push(setTimeout(() => releaseDesktop(skipped), skipped ? 80 : RELEASE_DELAY));
+  }
+
+  function scheduleNormalBoot() {
+    steps.forEach(step => timers.push(setTimeout(() => revealLine(step), step.at)));
+    raf = requestAnimationFrame(updateProgress);
+  }
+
+  function scheduleReducedBoot() {
+    const compact = [steps[0], steps[2], steps[4], steps[11], steps[12]];
+    compact.forEach((step, i) => timers.push(setTimeout(() => revealLine(step), 120 + i * 180)));
+    timers.push(setTimeout(() => finishBoot(false), 1120));
   }
 
   function startBoot() {
     if (started) return;
     started = true;
+    completed = false;
     startTime = performance.now();
-
-    const reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) {
-      steps.slice(0, 4).forEach((step, i) => timers.push(setTimeout(() => revealLine(step), i * 160)));
-      timers.push(setTimeout(() => finishBoot(false), 900));
-      return;
-    }
-
-    steps.forEach(step => timers.push(setTimeout(() => revealLine(step), step.at)));
-    raf = requestAnimationFrame(updateProgress);
+    const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) scheduleReducedBoot();
+    else scheduleNormalBoot();
   }
 
+  function reboot() {
+    clearTimers();
+    started = false;
+    completed = false;
+    window.closeAllWorkstationWindows?.();
+    const os = $("os");
+    const boot = $("boot");
+    if (os) os.classList.add("is-hidden");
+    if (boot) boot.classList.remove("is-hidden", "boot-complete");
+    initialBootLog();
+    resetProgress();
+    timers.push(setTimeout(startBoot, 240));
+  }
+
+  window.rebootALJOGABAOS = reboot;
+
   document.addEventListener("DOMContentLoaded", () => {
+    initialBootLog();
+    resetProgress();
     const skip = $("skipBoot");
     if (skip) {
-      // Registered after app.js; this second handler provides the cinematic override.
       skip.addEventListener("click", event => {
         event.preventDefault();
         event.stopPropagation();
@@ -113,7 +167,7 @@
       });
     }
     document.addEventListener("keydown", event => {
-      if (event.key === "Escape" && !completed) finishBoot(true);
+      if (event.key === "Escape" && !completed && !$("boot")?.classList.contains("is-hidden")) finishBoot(true);
     });
     startBoot();
   });
