@@ -2,154 +2,338 @@
 
 Última revisión: 2026-10-21
 
+## Fuente canónica
+
+La fuente canónica para los diagramas **Module Infrastructure** es:
+
+`data/infrastructure.json`
+
+`data/workstation.json` conserva una instantánea/fallback histórico de infraestructura, pero no debe utilizarse para introducir nuevas relaciones. Toda corrección de cuentas, accesos, despliegues y dependencias por módulo debe realizarse primero en `data/infrastructure.json`.
+
 ## Regla de modelado
 
-ALJOGABA OS representa infraestructura **por módulo**. Una identidad de acceso no se interpreta como propietaria del sistema ni como nodo padre funcional.
+ALJOGABA OS representa infraestructura **por módulo**. Una identidad de acceso no se interpreta como propietaria funcional del sistema ni como nodo padre artificial.
 
-Cada esquema debe responder solamente:
+Cada esquema debe responder:
 
 1. ¿A qué sistema pertenece el módulo?
 2. ¿Dónde vive su código o fuente canónica?
 3. ¿Dónde se despliega o ejecuta?
-4. ¿Qué backend o servicio externo utiliza?
+4. ¿Qué backend o servicio externo utiliza realmente?
 5. ¿Qué identidad/cuenta confirmada administra cada recurso?
+6. ¿La relación está activa o solamente planeada?
 
-Si una identidad de acceso no está confirmada de forma directa, se omite en lugar de inferirse.
+Los correos se muestran únicamente como **identificadores de cuenta**. No son credenciales y nunca deben acompañarse de contraseñas, tokens, claves, secretos o códigos MFA.
 
 ## Identidades conceptuales
 
-- **ALJOGABA** → identidad personal/profesional; handle GitHub `aljogaba`.
-- **ALJOGABA ACADEMIC** → identidad académica/investigación; handle GitHub `aljogaba-academico`.
-- **EPISUIS** → identidad operativa de EPISUIS; handle GitHub `episuis-admin` y organización `episuis`.
+- **ALJOGABA** — GitHub `aljogaba`; correo de referencia `aljogaba@gmail.com`.
+- **ALJOGABA ACADEMIC** — GitHub `aljogaba-academico`; correo de referencia `aljogaba.academico@gmail.com`.
+- **EPISUIS** — GitHub `episuis-admin`; organización GitHub `episuis`; correo confirmado para Hostinger `episuis@gmail.com`.
 
-Mayúsculas identifican la identidad conceptual. Handles, repositorios y nombres técnicos conservan su escritura real.
+Mayúsculas identifican la identidad conceptual. Handles, repositorios, proyectos y nombres técnicos conservan su escritura real.
 
-## Perfil profesional
+---
 
-### Web profesional
+# 1. Perfil profesional
+
+## Web profesional
 
 - Código/sitio: `aljogaba/aljogaba.github.io`.
+- Cuenta GitHub: **ALJOGABA** / `aljogaba@gmail.com` / `aljogaba`.
 - Publicación: GitHub Pages.
-- Cuenta: **ALJOGABA** / GitHub `aljogaba`.
+- Backend externo: ninguno.
 
-### Herramientas
+## Herramientas
 
-- `aljogaba/sipro-porcino` — GitHub Pages habilitado.
-- `aljogaba/epi-2x2` — GitHub Pages habilitado.
-- `aljogaba/dimu-porcino` — GitHub Pages habilitado.
-- Cuenta: **ALJOGABA** / GitHub `aljogaba`.
+Repositorios:
 
-### CV canónico
+- `aljogaba/sipro-porcino`
+- `aljogaba/epi-2x2`
+- `aljogaba/dimu-porcino`
+
+Infraestructura:
+
+- Cuenta: **ALJOGABA** / `aljogaba@gmail.com` / GitHub `aljogaba`.
+- Publicación: GitHub Pages.
+- Backend externo: ninguno.
+- Cloudflare: no.
+- Supabase: no.
+
+## CV canónico
 
 - Fuente privada: `aljogaba/perfil-profesional-source`.
-- Cuenta: **ALJOGABA** / GitHub `aljogaba`.
+- Cuenta: **ALJOGABA** / `aljogaba@gmail.com` / GitHub `aljogaba`.
+- No se despliega como aplicación.
+- `sync_public_site()` genera derivados para `aljogaba.github.io`, entre ellos `assets/js/canonical-data.js` y `assets/js/profile-data.js`.
 
-### Notas técnicas
+Relación correcta:
+
+`perfil-profesional-source [PRIVATE] → derivados públicos → aljogaba.github.io`
+
+## Notas técnicas
 
 - Repositorio: `aljogaba/notas-tecnicas`.
-- Cuenta: **ALJOGABA** / GitHub `aljogaba`.
+- Cuenta: **ALJOGABA** / `aljogaba@gmail.com` / GitHub `aljogaba`.
+- Publicación: Jekyll + GitHub Pages.
+- Sitio: `aljogaba.github.io/notas-tecnicas`.
 
-El repositorio público histórico `aljogaba/DiseasesMapMx` es legacy y no forma parte de la infraestructura activa.
+---
 
-## EPISUIS
+# 2. EPISUIS
 
-### Capa GitHub común
+## Capa GitHub común
 
 - Cuenta operativa GitHub: **EPISUIS** / `episuis-admin`.
 - Organización: `episuis`.
 - Repositorios confirmados: `web`, `vigilancia-episuis`, `produccion`.
 
-### Web EPISUIS
+## Web EPISUIS
 
 - Fuente: `episuis/web`.
 - Publicación: GitHub Pages desde `main` / raíz.
 - Dominio público: `episuis.com.mx` mediante `CNAME`.
-- Registro/DNS del dominio: Hostinger bajo la identidad **EPISUIS**.
+- Dominio/Hostinger: cuenta asociada a `episuis@gmail.com`.
 
-### Vigilancia EPISUIS
+Relación:
+
+`episuis/web → GitHub Pages → episuis.com.mx`
+
+## Vigilancia EPISUIS
+
+### Código
 
 - Fuente: `episuis/vigilancia-episuis`.
-- Deploy: Cloudflare Pages, proyecto `vigilancia-episuis`.
-- Cuenta Cloudflare confirmada: **ALJOGABA**.
-- Backend: Supabase, workspace EPISUIS, proyecto `vigilancia-episuis`.
-- Correo transaccional: Resend.
-- Resend: **ALJOGABA** vía GitHub `aljogaba`, workspace `aljogaba`.
-- Sending domain de Resend: `episuis.com.mx`.
-- Uso confirmado de correo: invitaciones y activación de médicos veterinarios participantes.
+- GitHub: **EPISUIS** / `episuis-admin` / organización `episuis`.
 
-**Pendiente deliberado:** la identidad exacta usada para acceder al workspace EPISUIS de Supabase no se atribuye en ALJOGABA OS hasta contar con evidencia directa inequívoca.
+### Deploy
 
-### EPISUIS Producción
+- Cloudflare Pages: `vigilancia-episuis`.
+- Cuenta Cloudflare: **ALJOGABA**.
+- Acceso Cloudflare: directo por correo `aljogaba@gmail.com`, no mediante GitHub.
+- El proyecto de Cloudflare está conectado al repo `episuis/vigilancia-episuis` para despliegue.
+
+### Backend
+
+Ruta de acceso confirmada:
+
+`aljogaba@gmail.com → GitHub aljogaba → Supabase → Organization EPISUIS → vigilancia-episuis`
+
+### Correo transaccional
+
+- Resend activo para invitaciones/activación.
+- Acceso: `aljogaba@gmail.com → GitHub aljogaba → Resend`.
+- Workspace: `aljogaba`.
+- Sending domain: `episuis.com.mx`.
+- Resend utiliza el dominio para correo; no hospeda la web.
+
+## EPISUIS Producción
+
+### Código
 
 - Fuente: `episuis/produccion`.
-- Deploy: Cloudflare Worker `episuis-produccion`.
-- Cuenta Cloudflare confirmada: **ALJOGABA**.
-- Backend: Supabase, workspace EPISUIS, proyecto `produccion`.
+- GitHub: **EPISUIS** / `episuis-admin` / organización `episuis`.
 
-**Pendiente deliberado:** igual que en Vigilancia, no se atribuye una identidad concreta de login al workspace EPISUIS de Supabase sin confirmación directa.
+### Deploy
 
-## DiseasesMapMx
+- Cloudflare Worker: `episuis-produccion`.
+- Cuenta Cloudflare: **ALJOGABA**.
+- Acceso: directo con `aljogaba@gmail.com`.
+- El Worker está conectado al repo `episuis/produccion`.
 
-### Capa GitHub
+### Backend
 
-- Identidad: **ALJOGABA ACADEMIC** / GitHub `aljogaba-academico`.
+Ruta de acceso confirmada:
+
+`aljogaba@gmail.com → GitHub aljogaba → Supabase → Organization EPISUIS → produccion`
+
+Supabase proporciona actualmente la capa de datos/Auth del módulo.
+
+### Servicios no activos
+
+- Resend: no forma parte actualmente de Producción.
+- Dominio propio: no.
+- Otro backend externo: no confirmado/activo.
+
+---
+
+# 3. DiseasesMapMx
+
+## Capa GitHub común
+
+- Identidad: **ALJOGABA ACADEMIC**.
+- Correo: `aljogaba.academico@gmail.com`.
+- GitHub: `aljogaba-academico`.
 - Organización: `DiseasesMapMx`.
-- Repositorios activos: `DiseasesMapMx/web` y `DiseasesMapMx/analysis-engine`.
+- Repositorios canónicos activos:
+  - `DiseasesMapMx/web` — frontend web canónico.
+  - `DiseasesMapMx/analysis-engine` — backend científico privado.
 
-### Portal público / aplicación web
+El repositorio público `aljogaba/DiseasesMapMx` es legacy y no forma parte de la infraestructura activa.
 
-- Frontend canónico: `DiseasesMapMx/web`.
-- Deploy de producción: Cloudflare Worker `diseasesmapmx-web`.
-- Cuenta Cloudflare: **ALJOGABA ACADEMIC**, workspace/account `DiseasesMapMx`.
+## Supabase DiseasesMapMx
 
-### Dashboard
+Ruta de acceso confirmada:
 
-- Frontend: `DiseasesMapMx/web` (`dashboard.html`).
-- Deploy: mismo Worker `diseasesmapmx-web`.
-- Datos: Supabase `DiseasesMapMx Production`, únicamente desde datos curados/publicables.
-- El dashboard no consume directamente cargas del portal de colaboradores.
+`aljogaba.academico@gmail.com → GitHub aljogaba-academico → Supabase → Organization DiseasesMapMx → DiseasesMapMx Production`
 
-### Sequence Analysis
+## Cloudflare DiseasesMapMx
+
+- Acceso directo por correo `aljogaba.academico@gmail.com`, no mediante GitHub.
+- Account/workspace: `DiseasesMapMx`.
+- Worker activo: `diseasesmapmx-web`.
+- Origen conectado: `DiseasesMapMx/web`.
+
+## Portal público
 
 - Frontend: `DiseasesMapMx/web`.
-- Motor científico privado: `DiseasesMapMx/analysis-engine`.
-- Flujo documentado: usuario → frontend → analysis-engine → resultado estructurado → informe HTML.
+- Deploy: Cloudflare Worker `diseasesmapmx-web`.
+- Cuenta Cloudflare: **ALJOGABA ACADEMIC** / acceso directo con `aljogaba.academico@gmail.com`.
 
-### Catálogo molecular y curación
+## Dashboard
 
-- Interfaz administrativa: `DiseasesMapMx/web/admin/`.
-- Backend crítico: Supabase `DiseasesMapMx Production`.
-- Cuenta de acceso confirmada: **ALJOGABA ACADEMIC** vía GitHub `aljogaba-academico`.
-- Esquemas canónicos: `molecular`, `staging`, `public`, `private`.
+### Estado actual
 
-### Portal de colaboradores
+- Frontend: `DiseasesMapMx/web/dashboard.html` y `dashboard-es.html`.
+- Deploy: `diseasesmapmx-web`.
+- Datos actuales:
+  - `assets/data/sequences.csv`
+  - `maps/jalisco_municipios.geojson`
 
-- Frontend: `DiseasesMapMx/web/partner/`.
-- Deploy: `diseasesmapmx-web` en Cloudflare.
-- Backend: `DiseasesMapMx Production`.
-- Funciones controladas: Edge Functions `partner-*` para intake, QC, reportes y resultados.
-- La curación posterior es un proceso independiente.
+El Dashboard **no consulta actualmente DiseasesMapMx Production de forma directa**.
 
-## Gestión de proyectos científicos
+### Arquitectura planeada
 
-### Proyectos territoriales
+`DiseasesMapMx Production → datasets curados/reproducibles → actualización del Dashboard`
+
+Esta relación debe mostrarse como `PLANNED` / línea discontinua hasta que se implemente.
+
+## Sequence Analysis
+
+### Frontend
+
+- Repo: `DiseasesMapMx/web`.
+- Páginas: `phylogeny.html` y `phylogeny-es.html`.
+- Hosting: Cloudflare Worker `diseasesmapmx-web`.
+
+### Backend científico
+
+- Repo privado: `DiseasesMapMx/analysis-engine`.
+- Runtime: FastAPI + Uvicorn en Docker.
+- Hosting: Render.
+- Servicio: `diseasesmapmx-analysis-engine`.
+- Región: Virginia.
+- Acceso Render: `aljogaba.academico@gmail.com → GitHub aljogaba-academico → Render`.
+
+Flujo activo:
+
+`web / Sequence Analysis → Render / analysis-engine → resultado analítico`
+
+### Persistencia
+
+`analysis-engine / Render → DiseasesMapMx Production`
+
+Supabase sostiene telemetría y persistencia privada autorizada del servicio analítico.
+
+## Catálogo molecular y curación
+
+### Admin
+
+- Interfaz: `DiseasesMapMx/web/admin/`.
+- Se sirve dentro del mismo deployment `diseasesmapmx-web`.
+- Autenticación/operaciones: DiseasesMapMx Production.
+
+### Importación administrativa directa
+
+Flujo:
+
+`Admin → staging → validación/revisión → curación humana → molecular canónico`
+
+Las secuencias cargadas administrativamente **no pasan obligatoriamente por analysis-engine**.
+
+### Motor como herramienta auxiliar
+
+Desde Admin / motor de curación se puede utilizar `analysis-engine` como herramienta auxiliar, incluyendo consultas científicas a GenBank.
+
+Relación correcta:
+
+`Admin / curación → analysis-engine → GenBank`
+
+Esto es una capacidad auxiliar y no un paso obligatorio del flujo de ingestión administrativa.
+
+## Portal de colaboradores
+
+### Frontend y autenticación
+
+- Rutas: `/partner/`, `/results/` y sección **Colaboradores** en `/admin/`.
+- Frontend: `DiseasesMapMx/web`.
+- Deploy: `diseasesmapmx-web`.
+- Organizaciones/usuarios colaboradores: Supabase Auth en DiseasesMapMx Production.
+
+### Edge Functions
+
+- `partner-intake`
+- `partner-admin`
+- `partner-qc`
+- `partner-reports`
+- `partner-results`
+
+### Flujo validado
+
+`/partner/ → Supabase Auth → partner-intake → autorización Admin → AUTO-QC → analysis-engine / Render → resultado → staging.curation_cases → Admin / Curación`
+
+Después:
+
+`partner-reports → reports-private → liberación caso/token → /results/`
+
+La incorporación al catálogo `molecular`, asignación DMXSEQ, publicación y alimentación del Dashboard **no son automáticas**.
+
+### Correo
+
+Resend/notificaciones automáticas todavía no forman parte de la infraestructura activa de Portal de colaboradores; siguen pendientes.
+
+---
+
+# 4. Gestión de proyectos científicos
+
+## Proyectos territoriales
 
 - Repositorio privado: `aljogaba-academico/sanidad-porcina-investigacion`.
-- Cuenta: **ALJOGABA ACADEMIC** / GitHub `aljogaba-academico`.
+- Cuenta: **ALJOGABA ACADEMIC** / `aljogaba.academico@gmail.com` / GitHub `aljogaba-academico`.
+- Servicios externos: ninguno.
 
-### Investigación académica
+## Investigación académica
 
 - Repositorio privado: `aljogaba-academico/investigacion-academica`.
-- Cuenta: **ALJOGABA ACADEMIC** / GitHub `aljogaba-academico`.
+- Cuenta: **ALJOGABA ACADEMIC** / `aljogaba.academico@gmail.com` / GitHub `aljogaba-academico`.
+- Servicios externos: ninguno.
 
-## Servicios transversales: lectura correcta
+---
 
-- GitHub, Cloudflare, Supabase, Hostinger y Resend son proveedores/infraestructura.
-- No se representan como sistemas del ecosistema.
-- Una misma identidad puede administrar recursos de sistemas distintos.
-- Una misma plataforma puede contener recursos administrados por identidades distintas.
-- El diagrama debe mostrar esa relación **en el recurso concreto**, no convertir la identidad en padre del sistema.
+# Servicios transversales: lectura correcta
 
-## Seguridad
+GitHub, Cloudflare, Supabase, Render, Hostinger y Resend son infraestructura/proveedores. No son sistemas del ecosistema por sí mismos.
 
-Este registro es public-safe. No incluye ni debe incluir contraseñas, tokens, API keys, secretos, códigos MFA, service-role keys ni rutas administrativas sensibles.
+Una misma identidad puede administrar recursos de varios sistemas, y un mismo sistema puede apoyarse en recursos administrados con identidades distintas. Por eso la identidad/cuenta se anota **en el recurso concreto** y no como padre funcional del módulo.
+
+Ejemplo EPISUIS Vigilancia:
+
+- Código → EPISUIS / `episuis-admin`.
+- Cloudflare → ALJOGABA / `aljogaba@gmail.com` directo.
+- Supabase → ALJOGABA / `aljogaba@gmail.com` → GitHub `aljogaba`.
+- Resend → ALJOGABA / `aljogaba@gmail.com` → GitHub `aljogaba`.
+
+Eso no convierte ALJOGABA en propietario funcional de EPISUIS; solamente identifica las cuentas que sostienen recursos de infraestructura.
+
+# Seguridad
+
+Este registro es public-safe por decisión del propietario del repositorio. Puede incluir correos utilizados como identificadores de cuenta, pero nunca debe incluir:
+
+- contraseñas;
+- tokens;
+- API keys;
+- Supabase secret/service-role keys;
+- secretos de Render o Cloudflare;
+- códigos MFA o recuperación;
+- archivos `.env`;
+- enlaces administrativos sensibles que concedan acceso.
