@@ -86,7 +86,10 @@ El zoom actúa sobre los contenedores visuales y no modifica Mermaid ni sus dato
 - glitch de diagnóstico tras interacciones repetidas sobre módulos/nodos;
 - `Self Destruct` accesible desde `START → SYSTEM → Emergency Protocol`, detrás de una tapa de seguridad, y también desde terminal;
 - cuenta regresiva de 10 segundos con opción de abortar;
-- al concluir sólo reinicia la interfaz del OS.
+- en cero: flash rojo, blackout, línea CRT y tono sostenido si AUDIO está activo;
+- después de ~4 segundos la línea desaparece, el tono se corta y el OS intenta cerrar la pestaña;
+- si el navegador bloquea `window.close()` —lo habitual en pestañas abiertas manualmente— la pantalla queda negra y silenciosa como estado terminal final;
+- no hay reboot automático ni mensajes de recuperación.
 
 **Ningún Easter egg puede borrar datos ni modificar sistemas externos.**
 
@@ -247,7 +250,8 @@ workstation/
 │   │   ├── neon.css
 │   │   ├── refinement.css
 │   │   ├── deep-space.css
-│   │   └── v05-tuning.css
+│   │   ├── v05-tuning.css
+│   │   └── self-destruct-v2.css
 │   └── js/
 │       ├── app.js
 │       ├── refinement.js
@@ -256,7 +260,8 @@ workstation/
 │       ├── hotfix-v05.js
 │       ├── map-tuning.js
 │       ├── audio-tuning.js
-│       └── ux-fixes.js
+│       ├── ux-fixes.js
+│       └── self-destruct-v2.js
 ├── data/
 │   ├── systems.json
 │   ├── missions.json
