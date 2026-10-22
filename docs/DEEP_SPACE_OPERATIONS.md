@@ -127,10 +127,13 @@ La secuencia final aprobada:
 - en cero ejecuta un flash rojo final;
 - apaga completamente la interfaz a negro;
 - muestra una línea blanca CRT que se contrae y queda al centro;
-- si AUDIO está activo, mantiene un tono continuo de 880 Hz hasta que la pestaña/navegador se cierre;
+- si AUDIO está activo, mantiene un tono continuo de 880 Hz durante el estado terminal;
+- después de aproximadamente 4 segundos la línea se contrae hasta desaparecer y el tono se corta;
+- inmediatamente después intenta cerrar la pestaña con `window.close()`;
+- si el navegador bloquea el cierre automático —comportamiento habitual en pestañas abiertas manualmente— la pantalla queda negra y silenciosa como estado terminal final;
 - no muestra instrucciones, mensajes de recuperación ni reinicia automáticamente el OS.
 
-La página no intenta cerrar por código una pestaña abierta manualmente, porque los navegadores modernos suelen bloquearlo. El estado terminal se mantiene hasta que el usuario cierre manualmente la pestaña o navegador.
+El intento de cierre es deliberadamente no invasivo: no navega a otra URL ni fuerza una recarga si el navegador lo rechaza.
 
 **Nunca elimina datos, repositorios, archivos, configuraciones externas ni credenciales.**
 
