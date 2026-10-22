@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="ALJOGABA OS">
+  <rect x="3" y="3" width="58" height="58" rx="6" fill="#05030a" stroke="#33e6ff" stroke-width="4"/>
+  <text x="12" y="42" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="30" font-weight="800" fill="#f4fbff">A</text>
+  <path d="M38 24 L49 32 L38 40" fill="none" stroke="#33e6ff" stroke-width="4" stroke-linecap="square" stroke-linejoin="miter"/>
+</svg>
