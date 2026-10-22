@@ -3,6 +3,7 @@
   const RELEASE_DELAY = 650;
   const ANOMALY_PAUSE_START = 15900;
   const ANOMALY_PAUSE_END = 17500;
+  const AUDIO_PREF_KEY = "aljogaba-os-deep-space-v05";
   const steps = [
     { at: 900, text: "Power core handshake .................... OK", cls: "boot-ok", status: "POWER CORE" },
     { at: 2300, text: "Mounting research environment ........... ONLINE", cls: "boot-ok", status: "MOUNTING RESEARCH ENVIRONMENT" },
@@ -28,6 +29,15 @@
 
   const $ = id => document.getElementById(id);
 
+  function audioAllowed() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(AUDIO_PREF_KEY) || "{}");
+      return saved.audio === true;
+    } catch (_) {
+      return false;
+    }
+  }
+
   function armAudio() {
     try {
       if (!audioContext) {
@@ -39,6 +49,7 @@
   }
 
   function anomalyBeep() {
+    if (!audioAllowed()) return;
     try {
       armAudio();
       if (!audioContext || audioContext.state !== "running") return;
@@ -187,7 +198,7 @@
   }
 
   function reboot() {
-    armAudio();
+    if (audioAllowed()) armAudio();
     clearTimers();
     started = false;
     completed = false;
@@ -214,8 +225,8 @@
         finishBoot(true);
       });
     }
-    document.addEventListener("pointerdown", armAudio, { once: true, capture: true });
-    document.addEventListener("keydown", armAudio, { once: true, capture: true });
+    document.addEventListener("pointerdown", () => { if (audioAllowed()) armAudio(); }, { once: true, capture: true });
+    document.addEventListener("keydown", () => { if (audioAllowed()) armAudio(); }, { once: true, capture: true });
     document.addEventListener("keydown", event => {
       if (event.key === "Escape" && !completed && !$("boot")?.classList.contains("is-hidden")) finishBoot(true);
     });
