@@ -1,0 +1,63 @@
+/* Final self-destruct state: terminal blackout. */
+.self-destruct-v2.terminal-impact{animation:terminalImpact .18s steps(1) 1}
+@keyframes terminalImpact{0%{filter:brightness(1)}50%{filter:brightness(2.2) saturate(1.6)}100%{filter:brightness(.25)}}
+
+.terminal-dead-screen{
+  position:fixed;
+  inset:0;
+  z-index:999999;
+  background:#000;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  cursor:none;
+}
+
+.terminal-death-flash{
+  position:absolute;
+  inset:0;
+  background:#ff1f2a;
+  opacity:0;
+  animation:terminalRedFlash .18s steps(1) 1;
+}
+
+.terminal-death-line{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:100vw;
+  height:3px;
+  background:#fff;
+  transform:translate(-50%,-50%);
+  box-shadow:0 0 12px rgba(255,255,255,.95),0 0 28px rgba(255,255,255,.55);
+  animation:terminalLineCollapse .9s cubic-bezier(.7,0,.2,1) forwards;
+}
+
+@keyframes terminalRedFlash{
+  0%{opacity:.96}
+  58%{opacity:.96}
+  100%{opacity:0}
+}
+
+@keyframes terminalLineCollapse{
+  0%{width:100vw;height:4px;opacity:1}
+  68%{width:30vw;height:3px;opacity:1}
+  100%{width:18vw;height:2px;opacity:1}
+}
+
+html.terminal-state-dead,
+html.terminal-state-dead body{
+  overflow:hidden!important;
+  background:#000!important;
+}
+
+html.terminal-state-dead body > *:not(.terminal-dead-screen){
+  visibility:hidden!important;
+}
+
+@media (prefers-reduced-motion:reduce){
+  .self-destruct-v2.terminal-impact,
+  .terminal-death-flash,
+  .terminal-death-line{animation:none!important}
+  .terminal-death-line{width:18vw;height:2px}
+}
