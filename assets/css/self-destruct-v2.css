@@ -31,6 +31,13 @@
   transform:translate(-50%,-50%);
   box-shadow:0 0 12px rgba(255,255,255,.95),0 0 28px rgba(255,255,255,.55);
   animation:terminalLineCollapse .9s cubic-bezier(.7,0,.2,1) forwards;
+  transition:width .58s cubic-bezier(.8,0,.2,1),opacity .58s linear,box-shadow .58s linear;
+}
+
+.terminal-dead-screen.terminal-closing .terminal-death-line{
+  width:0;
+  opacity:0;
+  box-shadow:none;
 }
 
 @keyframes terminalRedFlash{
@@ -60,4 +67,5 @@ html.terminal-state-dead body > *:not(.terminal-dead-screen){
   .terminal-death-flash,
   .terminal-death-line{animation:none!important}
   .terminal-death-line{width:18vw;height:2px}
+  .terminal-dead-screen.terminal-closing .terminal-death-line{width:0;opacity:0}
 }
