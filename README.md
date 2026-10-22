@@ -18,9 +18,84 @@ ALJOGABA OS existe para responder con rapidez:
 
 La workstation no sustituye a EPISUIS, DiseasesMapMx, el Perfil profesional ni la Gestión de proyectos científicos. Funciona como **capa de orientación, navegación y memoria operativa**.
 
+## v0.5 — Deep Space Operations
+
+v0.5 conserva intacto el núcleo funcional de v0.4 y añade una capa opcional de ambientación e interacción.
+
+Regla de diseño:
+
+> **Operación primero → ambientación después → Easter eggs al fondo.**
+
+### Display / CRT
+
+- scanlines y viñeta CRT sutiles;
+- flicker breve durante boot;
+- selector de fósforo `CYAN`, `GREEN`, `AMBER` y `RED`;
+- CRT configurable ON/OFF;
+- preferencias guardadas únicamente en `localStorage`.
+
+### Audio / COMMS
+
+- AUDIO OFF por defecto;
+- blips y clicks discretos de interfaz;
+- ráfagas breves de estática / enlace COMMS;
+- firmas acústicas ligeras por sistema;
+- ambient hum opcional y OFF por defecto;
+- beep de anomalía del boot sincronizado con la preferencia AUDIO;
+- audio sintetizado con Web Audio API, sin archivos externos.
+
+COMMS es efímero: no es ticker, historial ni bitácora.
+
+### Command Terminal
+
+La terminal funciona como segunda interfaz de navegación del OS. No ejecuta shell real ni comandos del sistema operativo.
+
+Comandos iniciales:
+
+```text
+help
+status
+systems
+modules
+open <system/tool/module>
+infrastructure <system>
+missions
+radar
+theme <cyan|green|amber|red>
+audio <on|off>
+fx
+clear
+reboot
+```
+
+### Radar Calibration
+
+El Long Range Scanner incorpora `CALIBRATE`: ejecuta una pasada visual, telemetría acústica opcional y concluye con `SYSTEM ARRAY NOMINAL`.
+
+### Controlled Easter Eggs
+
+- glitch de diagnóstico tras interacciones repetidas sobre módulos/nodos;
+- `Self Destruct` detrás de una tapa de seguridad y accesible también desde terminal;
+- cuenta regresiva de 10 segundos con opción de abortar;
+- al concluir sólo reinicia la interfaz del OS.
+
+**Ningún Easter egg puede borrar datos ni modificar sistemas externos.**
+
+### Exclusiones deliberadas
+
+v0.5 **NO** incluye:
+
+- Flight Log / analytics de uso;
+- ticker / cinta de alertas;
+- Captain's Log / Bitácora del Capitán;
+- telemetría externa;
+- métricas persistentes de navegación.
+
+La especificación completa vive en `docs/DEEP_SPACE_OPERATIONS.md`.
+
 ## v0.4 — Command Deck / Infrastructure Map
 
-Esta versión consolida la taxonomía real del ecosistema y añade la capa auditada de infraestructura por módulo.
+Esta versión consolidó la taxonomía real del ecosistema y añadió la capa auditada de infraestructura por módulo.
 
 ### Inventario canónico actual
 
@@ -53,9 +128,10 @@ GitHub, Mermaid, QGIS, Python, Quarto, Supabase y tecnologías equivalentes pert
 ## Componentes del escritorio
 
 - **Mission Control** — 29 rutas agrupadas por Identidad científica, Epidemiología y vigilancia, Producción, Inteligencia molecular, Desarrollo de proyectos y Comunicación/visualización. Las rutas se muestran con Mermaid.
-- **System Map / Long Range Scanner** — radar interactivo para los cuatro sistemas y mapa de arquitectura con zoom/scroll.
+- **System Map / Long Range Scanner** — radar interactivo para los cuatro sistemas y mapa de arquitectura con zoom/scroll; v0.5 añade calibración visual opcional.
 - **Toolbox** — las tres Tools científicas; GitHub se conserva únicamente como shortcut de infraestructura.
 - **Module Infrastructure** — diagramas Mermaid por módulo con fuente, deploy, backend/servicios y cuenta de acceso confirmada.
+- **Command Terminal** — navegación alternativa mediante comandos simulados/operativos del OS, sin shell real.
 - **Engine Room / Tech Core** — tecnologías incrustadas en el ecosistema, sin tratarlas como accesos directos.
 - **Output Bay** — salidas derivadas que puede producir el ecosistema.
 - **Local Ops** — comandos locales seguros y reutilizables; no almacena secretos ni direcciones internas.
@@ -104,7 +180,7 @@ La secuencia de arranque se extiende a aproximadamente 20 segundos para funciona
 - pausa de progreso durante la anomalía;
 - mensajes de humor ficticio del sistema;
 - `Jorge... tenemos un problema.` integrado en la misma gramática tipográfica;
-- señal electrónica breve cuando el navegador permite audio;
+- señal electrónica breve sólo cuando AUDIO está activo y el navegador permite reproducción;
 - `SKIP BOOT [ESC]`;
 - cierre con `ACCESS GRANTED`;
 - soporte de `prefers-reduced-motion`.
@@ -149,11 +225,13 @@ workstation/
 │   ├── css/
 │   │   ├── styles.css
 │   │   ├── neon.css
-│   │   └── refinement.css
+│   │   ├── refinement.css
+│   │   └── deep-space.css
 │   └── js/
 │       ├── app.js
 │       ├── refinement.js
-│       └── boot.js
+│       ├── boot.js
+│       └── deep-space.js
 ├── data/
 │   ├── systems.json
 │   ├── missions.json
@@ -162,8 +240,15 @@ workstation/
 │   └── infrastructure.json
 └── docs/
     ├── github-pages.md
-    └── INFRASTRUCTURE_RELATIONSHIP_AUDIT.md
+    ├── INFRASTRUCTURE_RELATIONSHIP_AUDIT.md
+    └── DEEP_SPACE_OPERATIONS.md
 ```
+
+## Regla operativa de documentación
+
+Toda modificación estructural, funcional o de infraestructura debe dejar actualizada su documentación canónica en el mismo cambio.
+
+El `README.md` es la puerta de entrada operativa del repositorio. Los flujos que requieren mayor detalle viven en `docs/` y se enlazan desde el README.
 
 ## Regla de seguridad
 
@@ -186,4 +271,4 @@ Los repositorios privados pueden representarse por nombre cuando es útil para o
 
 ---
 
-**ALJOGABA OS · Research Workstation · v0.4**
+**ALJOGABA OS · Research Workstation · v0.5**
