@@ -90,7 +90,8 @@
     (item.edges || []).forEach(edge => {
       const [from, to, label, mode] = edge;
       if (mode === "planned") lines.push(`  ${from} -.-> ${to}`);
-      else lines.push(`  ${from} -->|${mermaidEscape(label || "")}| ${to}`);
+      else if (label) lines.push(`  ${from} -->|\"${mermaidEscape(label)}\"| ${to}`);
+      else lines.push(`  ${from} --> ${to}`);
     });
     lines.push("  classDef module fill:#24102e,color:#ffffff,stroke:#ff3fb4,stroke-width:3px;");
     lines.push("  classDef source fill:#161020,color:#eee9f7,stroke:#8b5cf6,stroke-width:2px;");
