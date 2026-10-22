@@ -23,19 +23,27 @@ La capa v0.5 debe poder desactivarse sin afectar Systems, Modules, Mission Contr
   - `GREEN`
   - `AMBER`
   - `RED`
+- El selector modifica terminal, LEDs y acentos de interfaz; no re-renderiza ni recolorea Mermaid.
 - Preferencia persistida únicamente en `localStorage`.
 - CRT configurable ON/OFF.
 
 ### 2. Audio
 
 - Audio OFF por defecto.
-- Blips discretos de interfaz.
-- Click mecánico corto.
+- Blips de hover claramente audibles pero breves.
+- Click mecánico con mayor presencia que hover.
 - Ráfagas breves de estática / enlace COMMS.
 - Firmas acústicas ligeras por sistema.
 - Ambient hum opcional y separado; OFF por defecto.
-- El beep de anomalía del boot respeta la misma preferencia AUDIO.
+- `Master volume` interno de Deep Space disponible en FX, independiente del volumen general de Windows/navegador.
+- El beep de anomalía del boot respeta la preferencia AUDIO.
 - Audio sintetizado mediante Web Audio API; no requiere archivos de audio externos.
+
+Jerarquía de mezcla:
+
+```text
+ambient hum < hover < click < COMMS/system link < radar/alert < self destruct
+```
 
 ### 3. COMMS
 
@@ -73,11 +81,18 @@ reboot
 
 Existe un comando Easter egg de autodestrucción, pero sólo activa una simulación visual local.
 
-### 5. Radar Calibration
+### 5. System Map / zoom y calibración
 
-El Long Range Scanner incorpora `CALIBRATE`.
+El Long Range Scanner incorpora:
 
-La secuencia:
+- zoom operativo tanto en `ECOSYSTEM RADAR` como en `ARCHITECTURE`;
+- rango aproximado de 35% a 160%;
+- control `FIT` para ajustar la vista completa al espacio disponible;
+- `CALIBRATE` para el radar.
+
+`FIT` y zoom actúan sobre el contenedor visual. No alteran la definición Mermaid ni la fuente de datos del mapa.
+
+La calibración:
 
 1. lleva el mapa a modo radar si es necesario;
 2. ejecuta una pasada visual de calibración;
@@ -108,6 +123,19 @@ La secuencia:
 
 **Nunca elimina datos, repositorios, archivos, configuraciones externas ni credenciales.**
 
+## Identidad visual / favicon
+
+La marca de pestaña utiliza `assets/favicon.svg`:
+
+- terminal oscura;
+- borde cian;
+- marca `A>`;
+- diseñada para seguir siendo legible a tamaño pequeño.
+
+## Corrección v0.5 — About Workstation
+
+Se corrigió un bloqueo causado por una recursión de `MutationObserver` al actualizar la insignia de versión de About. El hotfix vive en `assets/js/hotfix-v05.js` y evita volver a crear el ciclo de mutaciones.
+
 ## Exclusiones explícitas
 
 Por decisión de diseño, v0.5 NO incluye:
@@ -123,7 +151,7 @@ Estas exclusiones evitan sobrecargar la workstation y crear nuevas capas de info
 
 ## Persistencia local
 
-Las preferencias de Deep Space Operations utilizan:
+Preferencias generales:
 
 ```text
 localStorage key: aljogaba-os-deep-space-v05
@@ -137,15 +165,26 @@ Contenido esperado:
 - crt;
 - fx.
 
+Volumen maestro de la mezcla v0.5:
+
+```text
+localStorage key: aljogaba-os-master-volume-v05
+```
+
 No se almacenan métricas de uso ni datos del ecosistema.
 
 ## Archivos
 
 ```text
 assets/css/deep-space.css
+assets/css/v05-tuning.css
 assets/js/deep-space.js
-assets/js/boot.js          # integración de preferencia AUDIO
-index.html                 # carga de la capa v0.5
+assets/js/audio-tuning.js
+assets/js/map-tuning.js
+assets/js/hotfix-v05.js
+assets/js/boot.js
+assets/favicon.svg
+index.html
 ```
 
 ## Separación arquitectónica
@@ -173,4 +212,5 @@ Todo cambio futuro en esta capa debe:
 2. respetar `prefers-reduced-motion`;
 3. no introducir telemetría de uso;
 4. no duplicar datos canónicos de sistemas o infraestructura;
-5. documentarse en este archivo y, si cambia la arquitectura general, también en `README.md`.
+5. mantener Mermaid como componente funcional independiente de las paletas de fósforo;
+6. documentarse en este archivo y, si cambia la arquitectura general, también en `README.md`.
