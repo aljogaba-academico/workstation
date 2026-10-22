@@ -31,16 +31,18 @@ Regla de diseño:
 - scanlines y viñeta CRT sutiles;
 - flicker breve durante boot;
 - selector de fósforo `CYAN`, `GREEN`, `AMBER` y `RED`;
+- el fósforo modifica terminal, LEDs y acentos, pero no re-renderiza ni recolorea Mermaid;
 - CRT configurable ON/OFF;
 - preferencias guardadas únicamente en `localStorage`.
 
 ### Audio / COMMS
 
 - AUDIO OFF por defecto;
-- blips y clicks discretos de interfaz;
+- blips de hover y clicks reforzados;
 - ráfagas breves de estática / enlace COMMS;
 - firmas acústicas ligeras por sistema;
 - ambient hum opcional y OFF por defecto;
+- `Master volume` interno configurable desde FX;
 - beep de anomalía del boot sincronizado con la preferencia AUDIO;
 - audio sintetizado con Web Audio API, sin archivos externos.
 
@@ -68,9 +70,16 @@ clear
 reboot
 ```
 
-### Radar Calibration
+### System Map / Long Range Scanner
 
-El Long Range Scanner incorpora `CALIBRATE`: ejecuta una pasada visual, telemetría acústica opcional y concluye con `SYSTEM ARRAY NOMINAL`.
+El mapa incorpora:
+
+- zoom tanto para `ECOSYSTEM RADAR` como para `ARCHITECTURE`;
+- rango aproximado de 35% a 160%;
+- botón `FIT` para encajar la figura completa en la ventana;
+- `CALIBRATE` para el radar, con pasada visual y telemetría acústica opcional.
+
+El zoom actúa sobre los contenedores visuales y no modifica Mermaid ni sus datos.
 
 ### Controlled Easter Eggs
 
@@ -80,6 +89,12 @@ El Long Range Scanner incorpora `CALIBRATE`: ejecuta una pasada visual, telemetr
 - al concluir sólo reinicia la interfaz del OS.
 
 **Ningún Easter egg puede borrar datos ni modificar sistemas externos.**
+
+### Correcciones y polish v0.5
+
+- corregido bloqueo de `About Workstation` causado por recursión de `MutationObserver`;
+- favicon `A>` en terminal oscura con borde cian;
+- controles compactos para móvil sin alterar la composición de escritorio.
 
 ### Exclusiones deliberadas
 
@@ -128,7 +143,7 @@ GitHub, Mermaid, QGIS, Python, Quarto, Supabase y tecnologías equivalentes pert
 ## Componentes del escritorio
 
 - **Mission Control** — 29 rutas agrupadas por Identidad científica, Epidemiología y vigilancia, Producción, Inteligencia molecular, Desarrollo de proyectos y Comunicación/visualización. Las rutas se muestran con Mermaid.
-- **System Map / Long Range Scanner** — radar interactivo para los cuatro sistemas y mapa de arquitectura con zoom/scroll; v0.5 añade calibración visual opcional.
+- **System Map / Long Range Scanner** — radar interactivo para los cuatro sistemas y mapa de arquitectura con zoom/scroll, `FIT` y calibración visual opcional.
 - **Toolbox** — las tres Tools científicas; GitHub se conserva únicamente como shortcut de infraestructura.
 - **Module Infrastructure** — diagramas Mermaid por módulo con fuente, deploy, backend/servicios y cuenta de acceso confirmada.
 - **Command Terminal** — navegación alternativa mediante comandos simulados/operativos del OS, sin shell real.
@@ -222,16 +237,21 @@ workstation/
 ├── .nojekyll
 ├── README.md
 ├── assets/
+│   ├── favicon.svg
 │   ├── css/
 │   │   ├── styles.css
 │   │   ├── neon.css
 │   │   ├── refinement.css
-│   │   └── deep-space.css
+│   │   ├── deep-space.css
+│   │   └── v05-tuning.css
 │   └── js/
 │       ├── app.js
 │       ├── refinement.js
 │       ├── boot.js
-│       └── deep-space.js
+│       ├── deep-space.js
+│       ├── hotfix-v05.js
+│       ├── map-tuning.js
+│       └── audio-tuning.js
 ├── data/
 │   ├── systems.json
 │   ├── missions.json
