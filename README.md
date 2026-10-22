@@ -85,6 +85,7 @@ Criterios actuales:
 - arrastre de ventanas deshabilitado en dispositivos de puntero grueso para evitar desplazamientos accidentales;
 - cuadrícula compacta de accesos en teléfonos;
 - START, taskbar, terminal, settings y COMMS adaptados a pantallas estrechas;
+- START dispone de un área vertical scrollable independiente en móvil y landscape para que todas las opciones permanezcan accesibles;
 - Mermaid conserva scroll horizontal cuando el diagrama requiere más espacio, en lugar de deformar el contenido;
 - soporte de orientación vertical/horizontal y `prefers-reduced-motion`.
 
