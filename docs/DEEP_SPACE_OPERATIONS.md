@@ -119,13 +119,18 @@ Se mantiene detrás de una tapa de seguridad. También puede activarse mediante 
 
 Se retiró de `Deep Space Settings` para separar claramente **configuración** de **protocolo teatral**.
 
-La secuencia:
+La secuencia final aprobada:
 
 - activa modo visual de alerta;
 - inicia cuenta regresiva de 10 segundos;
-- permite abortar;
-- al concluir informa que la simulación terminó;
-- reinicia la interfaz de ALJOGABA OS.
+- permite abortar antes de cero;
+- en cero ejecuta un flash rojo final;
+- apaga completamente la interfaz a negro;
+- muestra una línea blanca CRT que se contrae y queda al centro;
+- si AUDIO está activo, mantiene un tono continuo de 880 Hz hasta que la pestaña/navegador se cierre;
+- no muestra instrucciones, mensajes de recuperación ni reinicia automáticamente el OS.
+
+La página no intenta cerrar por código una pestaña abierta manualmente, porque los navegadores modernos suelen bloquearlo. El estado terminal se mantiene hasta que el usuario cierre manualmente la pestaña o navegador.
 
 **Nunca elimina datos, repositorios, archivos, configuraciones externas ni credenciales.**
 
@@ -194,11 +199,13 @@ No se almacenan métricas de uso ni datos del ecosistema.
 ```text
 assets/css/deep-space.css
 assets/css/v05-tuning.css
+assets/css/self-destruct-v2.css
 assets/js/deep-space.js
 assets/js/audio-tuning.js
 assets/js/map-tuning.js
 assets/js/hotfix-v05.js
 assets/js/ux-fixes.js
+assets/js/self-destruct-v2.js
 assets/js/boot.js
 assets/favicon.svg
 index.html
