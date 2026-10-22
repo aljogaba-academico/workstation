@@ -1,0 +1,16 @@
+/* ALJOGABA OS v0.5 tuning: map controls, audio control UI and small polish. */
+
+.map-zoom{display:flex;align-items:center;gap:6px}
+.map-fit-button{min-width:48px;font-weight:800}
+.map-canvas .radar-field,
+.map-canvas .mermaid-stage{transform-origin:center center}
+
+.master-volume-setting{grid-column:1 / -1}
+.master-volume-row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px}
+.master-volume-row input[type="range"]{width:100%;accent-color:var(--phosphor)}
+.master-volume-row strong{min-width:46px;text-align:right;color:var(--phosphor-dim)}
+
+@media (max-width:820px){
+  .map-zoom{width:100%;justify-content:flex-end}
+  .map-fit-button{min-width:44px}
+}
