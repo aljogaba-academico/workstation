@@ -84,7 +84,7 @@ El zoom actúa sobre los contenedores visuales y no modifica Mermaid ni sus dato
 ### Controlled Easter Eggs
 
 - glitch de diagnóstico tras interacciones repetidas sobre módulos/nodos;
-- `Self Destruct` detrás de una tapa de seguridad y accesible también desde terminal;
+- `Self Destruct` accesible desde `START → SYSTEM → Emergency Protocol`, detrás de una tapa de seguridad, y también desde terminal;
 - cuenta regresiva de 10 segundos con opción de abortar;
 - al concluir sólo reinicia la interfaz del OS.
 
@@ -93,6 +93,9 @@ El zoom actúa sobre los contenedores visuales y no modifica Mermaid ni sus dato
 ### Correcciones y polish v0.5
 
 - corregido bloqueo de `About Workstation` causado por recursión de `MutationObserver`;
+- corregido error de sintaxis Mermaid en etiquetas técnicas con símbolos como `sync_public_site()`;
+- mejorado el contraste de `Deep Space Settings` bajo las distintas paletas de fósforo;
+- separado `Emergency Protocol` de los controles de configuración y movido a START;
 - favicon `A>` en terminal oscura con borde cian;
 - controles compactos para móvil sin alterar la composición de escritorio.
 
@@ -151,6 +154,7 @@ GitHub, Mermaid, QGIS, Python, Quarto, Supabase y tecnologías equivalentes pert
 - **Output Bay** — salidas derivadas que puede producir el ecosistema.
 - **Local Ops** — comandos locales seguros y reutilizables; no almacena secretos ni direcciones internas.
 - **Side Quests** — acceso separado a Smoke Lab y Entre libros y letras sin convertirlos en Core Systems.
+- **Emergency Protocol** — simulación teatral protegida desde START; separada de los controles FX.
 
 ## Module Infrastructure
 
@@ -251,7 +255,8 @@ workstation/
 │       ├── deep-space.js
 │       ├── hotfix-v05.js
 │       ├── map-tuning.js
-│       └── audio-tuning.js
+│       ├── audio-tuning.js
+│       └── ux-fixes.js
 ├── data/
 │   ├── systems.json
 │   ├── missions.json
