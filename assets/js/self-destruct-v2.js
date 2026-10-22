@@ -6,6 +6,7 @@
   let terminalGain = null;
   let countdownTimer = null;
   let alarmTimer = null;
+  let closeTimer = null;
   let active = false;
 
   function prefs() {
@@ -65,9 +66,31 @@
     terminalOsc.start();
   }
 
+  function stopTerminalTone() {
+    if (!terminalOsc || !terminalGain || !ctx) return;
+    try {
+      const now = ctx.currentTime;
+      terminalGain.gain.cancelScheduledValues(now);
+      terminalGain.gain.setValueAtTime(Math.max(.0002, terminalGain.gain.value || .055 * masterGain()), now);
+      terminalGain.gain.exponentialRampToValueAtTime(.0001, now + .08);
+      terminalOsc.stop(now + .09);
+    } catch (_) {
+      try { terminalOsc.stop(); } catch (_) {}
+    }
+    setTimeout(() => {
+      try { terminalOsc?.disconnect(); terminalGain?.disconnect(); } catch (_) {}
+      terminalOsc = null;
+      terminalGain = null;
+    }, 140);
+  }
+
   function stopTransientAudio() {
     clearInterval(alarmTimer);
     alarmTimer = null;
+  }
+
+  function attemptBrowserClose() {
+    try { window.close(); } catch (_) {}
   }
 
   function enterTerminalState() {
@@ -82,6 +105,15 @@
     document.body.appendChild(dead);
     document.documentElement.classList.add("terminal-state-dead");
     startTerminalTone();
+
+    clearTimeout(closeTimer);
+    closeTimer = setTimeout(() => {
+      dead.classList.add("terminal-closing");
+      setTimeout(() => {
+        stopTerminalTone();
+        attemptBrowserClose();
+      }, 620);
+    }, 4000);
   }
 
   function beginSelfDestructV2() {
