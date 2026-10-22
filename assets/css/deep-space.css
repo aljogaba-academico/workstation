@@ -144,8 +144,12 @@ body.red-alert .os-shell{animation:redAlertPulse .55s steps(2) infinite}
 
 @media (max-width:820px){
   .deep-space-controls{gap:3px}
-  .deep-space-control{font-size:.58rem;padding:3px 4px}
-  .deep-space-control .control-text{display:none}
+  .deep-space-control{font-size:.58rem;padding:3px 5px;min-width:26px}
+  .menubar-right .deep-space-control .control-led{display:inline-block!important;margin-right:2px}
+  .deep-space-control .control-text{display:none!important}
+  .deep-space-control[data-deep-control="display"]::after{content:"D"}
+  .deep-space-control[data-deep-control="audio"]::after{content:"A"}
+  .deep-space-control[data-deep-control="fx"]::after{content:"FX"}
   .deep-settings-grid{grid-template-columns:1fr}
   .radar-calibrate{margin-left:0}
 }
