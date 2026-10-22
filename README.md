@@ -1,124 +1,21 @@
-# workstation
+# ALJOGABA OS · Research Workstation
 
-**ALJOGABA OS · Research Workstation**
-
-Estación de mando y navegación para el ecosistema científico y profesional de Alberto Jorge Galindo Barboza.
+Estación de mando y navegación del ecosistema científico y profesional de **Alberto Jorge Galindo Barboza**.
 
 **Live:** https://aljogaba-academico.github.io/workstation/
 
 ## Propósito
 
-ALJOGABA OS existe para responder con rapidez:
+ALJOGABA OS responde cuatro preguntas operativas:
 
-1. **¿Qué puedo hacer dentro de mi ecosistema?**
-2. **¿Qué sistema, módulo o herramienta debo usar?**
-3. **¿Dónde vive cada componente técnico?**
-4. **¿Con qué identidad/cuenta entro a cada proveedor?**
-5. **¿Qué piezas dependen de una infraestructura crítica antes de tocarla?**
+1. ¿Qué sistema, módulo o herramienta debo usar?
+2. ¿Dónde vive cada componente técnico?
+3. ¿Cómo se relacionan los sistemas y su infraestructura?
+4. ¿Con qué identidad/cuenta se accede a cada proveedor?
 
-La workstation no sustituye a EPISUIS, DiseasesMapMx, el Perfil profesional ni la Gestión de proyectos científicos. Funciona como **capa de orientación, navegación y memoria operativa**.
+La workstation **no sustituye las fuentes canónicas** de EPISUIS, DiseasesMapMx, Perfil profesional o Gestión de proyectos científicos. Es una capa pública de orientación, navegación y memoria operativa.
 
-## v0.5 — Deep Space Operations
-
-v0.5 conserva intacto el núcleo funcional de v0.4 y añade una capa opcional de ambientación e interacción.
-
-Regla de diseño:
-
-> **Operación primero → ambientación después → Easter eggs al fondo.**
-
-### Display / CRT
-
-- scanlines y viñeta CRT sutiles;
-- flicker breve durante boot;
-- selector de fósforo `CYAN`, `GREEN`, `AMBER` y `RED`;
-- el fósforo modifica terminal, LEDs y acentos, pero no re-renderiza ni recolorea Mermaid;
-- CRT configurable ON/OFF;
-- preferencias guardadas únicamente en `localStorage`.
-
-### Audio / COMMS
-
-- AUDIO OFF por defecto;
-- blips de hover y clicks reforzados;
-- ráfagas breves de estática / enlace COMMS;
-- firmas acústicas ligeras por sistema;
-- ambient hum opcional y OFF por defecto;
-- `Master volume` interno configurable desde FX;
-- beep de anomalía del boot sincronizado con la preferencia AUDIO;
-- audio sintetizado con Web Audio API, sin archivos externos.
-
-COMMS es efímero: no es ticker, historial ni bitácora.
-
-### Command Terminal
-
-La terminal funciona como segunda interfaz de navegación del OS. No ejecuta shell real ni comandos del sistema operativo.
-
-Comandos iniciales:
-
-```text
-help
-status
-systems
-modules
-open <system/tool/module>
-infrastructure <system>
-missions
-radar
-theme <cyan|green|amber|red>
-audio <on|off>
-fx
-clear
-reboot
-```
-
-### System Map / Long Range Scanner
-
-El mapa incorpora:
-
-- zoom tanto para `ECOSYSTEM RADAR` como para `ARCHITECTURE`;
-- rango aproximado de 35% a 160%;
-- botón `FIT` para encajar la figura completa en la ventana;
-- `CALIBRATE` para el radar, con pasada visual y telemetría acústica opcional.
-
-El zoom actúa sobre los contenedores visuales y no modifica Mermaid ni sus datos.
-
-### Controlled Easter Eggs
-
-- glitch de diagnóstico tras interacciones repetidas sobre módulos/nodos;
-- `Self Destruct` accesible desde `START → SYSTEM → Emergency Protocol`, detrás de una tapa de seguridad, y también desde terminal;
-- cuenta regresiva de 10 segundos con opción de abortar;
-- en cero: flash rojo, blackout, línea CRT y tono sostenido si AUDIO está activo;
-- después de ~4 segundos la línea desaparece, el tono se corta y el OS intenta cerrar la pestaña;
-- si el navegador bloquea `window.close()` —lo habitual en pestañas abiertas manualmente— la pantalla queda negra y silenciosa como estado terminal final;
-- no hay reboot automático ni mensajes de recuperación.
-
-**Ningún Easter egg puede borrar datos ni modificar sistemas externos.**
-
-### Correcciones y polish v0.5
-
-- corregido bloqueo de `About Workstation` causado por recursión de `MutationObserver`;
-- corregido error de sintaxis Mermaid en etiquetas técnicas con símbolos como `sync_public_site()`;
-- mejorado el contraste de `Deep Space Settings` bajo las distintas paletas de fósforo;
-- separado `Emergency Protocol` de los controles de configuración y movido a START;
-- favicon `A>` en terminal oscura con borde cian;
-- controles compactos para móvil sin alterar la composición de escritorio.
-
-### Exclusiones deliberadas
-
-v0.5 **NO** incluye:
-
-- Flight Log / analytics de uso;
-- ticker / cinta de alertas;
-- Captain's Log / Bitácora del Capitán;
-- telemetría externa;
-- métricas persistentes de navegación.
-
-La especificación completa vive en `docs/DEEP_SPACE_OPERATIONS.md`.
-
-## v0.4 — Command Deck / Infrastructure Map
-
-Esta versión consolidó la taxonomía real del ecosistema y añadió la capa auditada de infraestructura por módulo.
-
-### Inventario canónico actual
+## Inventario canónico
 
 - **4 Systems**
 - **14 Modules**
@@ -129,95 +26,92 @@ Los contadores se derivan de los archivos de datos; no se mantienen manualmente 
 
 ### Systems
 
-1. **Perfil profesional** — 4 módulos: Web profesional, Herramientas, CV canónico y Notas técnicas.
-2. **EPISUIS** — 3 módulos: Web EPISUIS, Vigilancia EPISUIS y EPISUIS Producción.
-3. **DiseasesMapMx** — 5 módulos: Portal público, Dashboard, Sequence Analysis, Catálogo molecular y curación, Portal de colaboradores.
-4. **Gestión de proyectos científicos** — 2 módulos: Proyectos territoriales e Investigación académica.
-
-El marco metodológico EPISUIS se mantiene como capa metodológica transversal y no se cuenta como módulo operativo.
+1. **Perfil profesional** — Web profesional, Herramientas, CV canónico, Notas técnicas.
+2. **EPISUIS** — Web EPISUIS, Vigilancia EPISUIS, EPISUIS Producción.
+3. **DiseasesMapMx** — Portal público, Dashboard, Sequence Analysis, Catálogo molecular y curación, Portal de colaboradores.
+4. **Gestión de proyectos científicos** — Proyectos territoriales, Investigación académica.
 
 ### Tools
 
-Solo se cuentan aplicaciones propias que se abren para ejecutar una tarea:
+- SIPRO-Porcino
+- Epi 2×2
+- DIMUPorcino
 
-- **SIPRO-Porcino — Simulador Integral de Producción Porcina**
-- **Epi 2×2 — Calculadora epidemiológica para tablas de contingencia**
-- **DIMUPorcino — Diseño Integral de Muestreo Porcino**
+GitHub, Mermaid, Python, Quarto, QGIS, Supabase y tecnologías equivalentes pertenecen a infraestructura/Engine Room, no al contador de Tools.
 
-GitHub, Mermaid, QGIS, Python, Quarto, Supabase y tecnologías equivalentes pertenecen a infraestructura o al **Engine Room**, no al contador de Tools.
+## Componentes principales
 
-## Componentes del escritorio
+- **Mission Control** — rutas de trabajo.
+- **System Map / Long Range Scanner** — radar y arquitectura.
+- **Toolbox** — herramientas científicas propias.
+- **Module Infrastructure** — relaciones auditadas por módulo.
+- **Command Terminal** — navegación alternativa sin shell real.
+- **Engine Room / Tech Core** — tecnologías del ecosistema.
+- **Output Bay** — salidas derivadas.
+- **Local Ops** — comandos locales seguros.
+- **Side Quests** — proyectos no-core.
+- **Emergency Protocol** — Easter egg teatral protegido, sin operaciones de datos.
 
-- **Mission Control** — 29 rutas agrupadas por Identidad científica, Epidemiología y vigilancia, Producción, Inteligencia molecular, Desarrollo de proyectos y Comunicación/visualización. Las rutas se muestran con Mermaid.
-- **System Map / Long Range Scanner** — radar interactivo para los cuatro sistemas y mapa de arquitectura con zoom/scroll, `FIT` y calibración visual opcional.
-- **Toolbox** — las tres Tools científicas; GitHub se conserva únicamente como shortcut de infraestructura.
-- **Module Infrastructure** — diagramas Mermaid por módulo con fuente, deploy, backend/servicios y cuenta de acceso confirmada.
-- **Command Terminal** — navegación alternativa mediante comandos simulados/operativos del OS, sin shell real.
-- **Engine Room / Tech Core** — tecnologías incrustadas en el ecosistema, sin tratarlas como accesos directos.
-- **Output Bay** — salidas derivadas que puede producir el ecosistema.
-- **Local Ops** — comandos locales seguros y reutilizables; no almacena secretos ni direcciones internas.
-- **Side Quests** — acceso separado a Smoke Lab y Entre libros y letras sin convertirlos en Core Systems.
-- **Emergency Protocol** — simulación teatral protegida desde START; separada de los controles FX.
+## v0.5 — Deep Space Operations
 
-## Module Infrastructure
+v0.5 añade una capa opcional de ambientación e interacción sin modificar el núcleo funcional:
 
-La vista distingue explícitamente:
+- CRT y selector de fósforo;
+- audio UI, COMMS, ambient hum y volumen maestro;
+- Command Terminal;
+- zoom/FIT y calibración del radar;
+- glitches controlados;
+- Emergency Protocol / Self Destruct;
+- favicon `A>`;
+- tuning responsivo para touch/móvil.
 
-- **System / module** — componente funcional que se está documentando.
-- **Source** — repositorio o fuente canónica.
-- **Deployment** — GitHub Pages, Cloudflare o Render cuando aplica.
-- **Backend / data** — Supabase y recursos persistentes cuando aplica.
-- **Service** — Resend, motor analítico u otros servicios auxiliares confirmados.
-- **Account** — identidad, correo/handle y método de acceso cuando han sido verificados.
-- **PLANNED** — relaciones futuras, dibujadas con línea discontinua y nunca mezcladas con infraestructura activa.
+Regla de diseño:
 
-Los correos se muestran únicamente como **identificadores de cuenta**. Nunca se almacenan credenciales.
+> **Operación primero → ambientación después → Easter eggs al fondo.**
 
-### Infraestructura crítica documentada
+La especificación y comportamiento detallado de esta capa viven únicamente en:
 
-**DiseasesMapMx**
+`docs/DEEP_SPACE_OPERATIONS.md`
 
-- Código canónico: organización GitHub `DiseasesMapMx` (`web`, `analysis-engine`).
-- Web de producción: Cloudflare Worker `diseasesmapmx-web`.
-- Backend científico de Sequence Analysis: Render, servicio `diseasesmapmx-analysis-engine`.
-- Backend y catálogo molecular canónico: Supabase `DiseasesMapMx Production`.
-- Dashboard actual: archivos aislados del repo `web`; migración a datasets generados desde Production marcada como `PLANNED`.
-- Portal de colaboradores: Supabase Auth + Edge Functions + analysis-engine + staging/curación.
-- `aljogaba/DiseasesMapMx` se considera **LEGACY** y no forma parte de la infraestructura activa.
+## Responsive baseline
 
-**EPISUIS**
+La composición principal sigue siendo escritorio. En móvil/tablet se aplica una capa de adaptación, no un producto paralelo.
 
-- Organización GitHub `episuis`: `web`, `vigilancia-episuis`, `produccion`.
-- Web principal: GitHub Pages + dominio `episuis.com.mx`.
-- Dominio/DNS: Hostinger.
-- Vigilancia: Cloudflare Pages + Supabase `vigilancia-episuis` + Resend.
-- Producción: Cloudflare Worker `episuis-produccion` + Supabase `produccion`.
-- Cloudflare EPISUIS se accede directamente con la cuenta ALJOGABA; Supabase EPISUIS se accede mediante GitHub `aljogaba`.
+Criterios actuales:
 
-## Boot / reboot
+- ventanas contenidas dentro del viewport;
+- `100dvh` y soporte de safe areas;
+- controles táctiles ampliados;
+- arrastre de ventanas deshabilitado en dispositivos de puntero grueso para evitar desplazamientos accidentales;
+- cuadrícula compacta de accesos en teléfonos;
+- START, taskbar, terminal, settings y COMMS adaptados a pantallas estrechas;
+- Mermaid conserva scroll horizontal cuando el diagrama requiere más espacio, en lugar de deformar el contenido;
+- soporte de orientación vertical/horizontal y `prefers-reduced-motion`.
 
-La secuencia de arranque se extiende a aproximadamente 20 segundos para funcionar como experiencia demostrativa. Incluye:
+Archivos de esta capa:
 
-- mensajes escalonados y legibles;
-- pausa de progreso durante la anomalía;
-- mensajes de humor ficticio del sistema;
-- `Jorge... tenemos un problema.` integrado en la misma gramática tipográfica;
-- señal electrónica breve sólo cuando AUDIO está activo y el navegador permite reproducción;
-- `SKIP BOOT [ESC]`;
-- cierre con `ACCESS GRANTED`;
-- soporte de `prefers-reduced-motion`.
+- `assets/css/responsive-polish.css`
+- `assets/js/responsive-polish.js`
 
-`START → Restart ALJOGABA OS` restablece ventanas y reproduce la secuencia completa sin requerir `Ctrl+F5`.
+## SEO / identidad pública
 
-## Ventanas
+La URL canónica es:
 
-Las ventanas se limitan dinámicamente al área disponible entre menubar y taskbar. El contenido excedente hace scroll **dentro de la ventana**. Esto evita que Mission Control, System Map, Toolbox o Module Infrastructure queden fuera del navegador.
+`https://aljogaba-academico.github.io/workstation/`
 
-## Flujo conceptual
+La página identifica explícitamente a **Alberto Jorge Galindo Barboza** como autor/creador mediante:
 
-`CAPTURAR → ORGANIZAR → ANALIZAR → INTERPRETAR → GESTIONAR → COMUNICAR`
+- `<meta name="author">`;
+- título y descripción SEO;
+- canonical URL;
+- Open Graph;
+- Twitter Card;
+- datos estructurados `schema.org` (`Person`, `WebSite`, `WebPage`);
+- vínculo visible desde `About ALJOGABA OS` hacia el perfil profesional público;
+- `robots.txt`;
+- `sitemap.xml`.
 
-Se presenta como telemetría/proceso, no como botones.
+No se utilizan `meta keywords` ni telemetría/analytics externos.
 
 ## Fuentes de datos
 
@@ -232,15 +126,23 @@ data/
 
 **Regla:** `data/infrastructure.json` es la fuente canónica de **Module Infrastructure**.
 
-La auditoría humana que explica y justifica esas relaciones vive en:
+## Documentación canónica
 
-`docs/INFRASTRUCTURE_RELATIONSHIP_AUDIT.md`
+El README funciona como **índice operativo**, no como duplicado de toda la documentación.
+
+- `docs/INFRASTRUCTURE_RELATIONSHIP_AUDIT.md` — auditoría y justificación de relaciones de infraestructura.
+- `docs/DEEP_SPACE_OPERATIONS.md` — especificación de la capa v0.5, audio, FX, terminal, radar y Easter eggs.
+- `docs/github-pages.md` — publicación en GitHub Pages.
+
+Cuando un detalle ya vive en uno de esos documentos, el README solo lo referencia.
 
 ## Arquitectura
 
 ```text
 workstation/
 ├── index.html
+├── robots.txt
+├── sitemap.xml
 ├── .nojekyll
 ├── README.md
 ├── assets/
@@ -251,7 +153,8 @@ workstation/
 │   │   ├── refinement.css
 │   │   ├── deep-space.css
 │   │   ├── v05-tuning.css
-│   │   └── self-destruct-v2.css
+│   │   ├── self-destruct-v2.css
+│   │   └── responsive-polish.css
 │   └── js/
 │       ├── app.js
 │       ├── refinement.js
@@ -261,7 +164,8 @@ workstation/
 │       ├── map-tuning.js
 │       ├── audio-tuning.js
 │       ├── ux-fixes.js
-│       └── self-destruct-v2.js
+│       ├── self-destruct-v2.js
+│       └── responsive-polish.js
 ├── data/
 │   ├── systems.json
 │   ├── missions.json
@@ -276,24 +180,28 @@ workstation/
 
 ## Regla operativa de documentación
 
-Toda modificación estructural, funcional o de infraestructura debe dejar actualizada su documentación canónica en el mismo cambio.
+> **Toda modificación estructural, funcional o de infraestructura debe actualizar su documentación canónica en el mismo cambio.**
 
-El `README.md` es la puerta de entrada operativa del repositorio. Los flujos que requieren mayor detalle viven en `docs/` y se enlazan desde el README.
+Para evitar entropía documental:
 
-## Regla de seguridad
+1. `README.md` = índice operativo y estado general.
+2. Un flujo detallado vive en **un solo documento canónico** dentro de `docs/`.
+3. No se crean documentos nuevos si un documento existente puede absorber correctamente el cambio.
+4. No se copian bloques completos entre README y `docs/`; se enlazan.
+5. Código, datos y documentación deben describir el mismo estado operativo.
 
-GitHub Pages es público. ALJOGABA OS puede registrar **nombres operativos, correos usados como identificadores de cuenta y relaciones administrativas**, pero nunca debe almacenar:
+## Seguridad
+
+GitHub Pages es público. ALJOGABA OS puede mostrar nombres operativos, repositorios privados por nombre, correos usados como identificadores de cuenta y relaciones administrativas confirmadas, pero nunca almacena:
 
 - contraseñas;
 - tokens;
 - API keys;
 - MFA / recovery codes;
-- archivos `.env`;
+- `.env`;
 - secretos de backend;
-- claves service-role/secret de Supabase;
+- service-role/secret keys;
 - enlaces administrativos sensibles que concedan acceso.
-
-Los repositorios privados pueden representarse por nombre cuando es útil para orientación, sin convertir la workstation en un almacén de credenciales.
 
 ## Principio rector
 
@@ -301,4 +209,5 @@ Los repositorios privados pueden representarse por nombre cuando es útil para o
 
 ---
 
-**ALJOGABA OS · Research Workstation · v0.5**
+**ALJOGABA OS · Research Workstation · v0.5**  
+**Alberto Jorge Galindo Barboza**
