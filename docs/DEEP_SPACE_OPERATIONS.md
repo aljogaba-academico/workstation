@@ -111,7 +111,13 @@ No altera datos ni navegación.
 
 #### Self Destruct
 
-Disponible detrás de una tapa de seguridad dentro de Deep Space Settings y mediante terminal.
+El acceso visual vive en:
+
+`START → SYSTEM → Emergency Protocol`
+
+Se mantiene detrás de una tapa de seguridad. También puede activarse mediante el comando Easter egg de terminal.
+
+Se retiró de `Deep Space Settings` para separar claramente **configuración** de **protocolo teatral**.
 
 La secuencia:
 
@@ -132,9 +138,19 @@ La marca de pestaña utiliza `assets/favicon.svg`:
 - marca `A>`;
 - diseñada para seguir siendo legible a tamaño pequeño.
 
-## Corrección v0.5 — About Workstation
+## Correcciones v0.5
+
+### About Workstation
 
 Se corrigió un bloqueo causado por una recursión de `MutationObserver` al actualizar la insignia de versión de About. El hotfix vive en `assets/js/hotfix-v05.js` y evita volver a crear el ciclo de mutaciones.
+
+### Deep Space Settings
+
+Se reforzó el contraste de títulos, textos y controles dentro de tarjetas claras para que las paletas de fósforo no reduzcan la legibilidad.
+
+### Module Infrastructure / Mermaid
+
+Las etiquetas de aristas se generan entre comillas para que nombres técnicos con símbolos —por ejemplo `sync_public_site()`— no produzcan errores de sintaxis en Mermaid.
 
 ## Exclusiones explícitas
 
@@ -182,6 +198,7 @@ assets/js/deep-space.js
 assets/js/audio-tuning.js
 assets/js/map-tuning.js
 assets/js/hotfix-v05.js
+assets/js/ux-fixes.js
 assets/js/boot.js
 assets/favicon.svg
 index.html
