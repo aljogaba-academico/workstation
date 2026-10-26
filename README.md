@@ -146,6 +146,7 @@ workstation/
 ├── sitemap.xml
 ├── .nojekyll
 ├── README.md
+├── LICENSE
 ├── assets/
 │   ├── favicon.svg
 │   ├── css/
@@ -203,6 +204,12 @@ GitHub Pages es público. ALJOGABA OS puede mostrar nombres operativos, reposito
 - secretos de backend;
 - service-role/secret keys;
 - enlaces administrativos sensibles que concedan acceso.
+
+## Licencia y derechos de uso
+
+El **código fuente** de este repositorio se distribuye bajo la **MIT License**; consultar `LICENSE`.
+
+La licencia MIT **no cubre automáticamente** la documentación, los textos editoriales, los archivos de datos y configuración que describen el ecosistema personal/profesional, la identidad visual, el nombre **ALJOGABA OS**, logotipos, marcas ni otros contenidos creativos o de identidad propios. Salvo indicación expresa en contrario, esos materiales permanecen bajo copyright de **Alberto Jorge Galindo Barboza** y no se autoriza su reutilización, redistribución o adaptación por el solo hecho de estar visibles en este repositorio público.
 
 ## Principio rector
 
