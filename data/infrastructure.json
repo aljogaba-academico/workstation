@@ -1,5 +1,5 @@
 {
-  "version": "2026-10-21-audited",
+  "version": "2026-10-26-audited",
   "accessRegistry": [
     {
       "provider": "GitHub",
@@ -184,7 +184,7 @@
         {"id":"dep","label":"Cloudflare Worker: diseasesmapmx-web","type":"deploy","account":"ALJOGABA ACADEMIC · aljogaba.academico@gmail.com · acceso directo Cloudflare / Account DiseasesMapMx"}
       ],
       "edges": [["m","src","frontend canónico"],["src","dep","production deploy"]],
-      "note": "El repositorio público aljogaba/DiseasesMapMx es legacy y no forma parte de la infraestructura activa."
+      "note": "El antiguo repositorio público aljogaba/DiseasesMapMx fue retirado; su evolución histórica se conserva en la documentación canónica de DiseasesMapMx/web."
     },
     {
       "system": "diseasesmapmx",
