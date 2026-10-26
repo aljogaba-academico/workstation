@@ -134,6 +134,20 @@
       "note": "Publicación propia en aljogaba.github.io/notas-tecnicas."
     },
     {
+      "system": "sidequests",
+      "module": "Entre libros y letras",
+      "summary": "Proyecto personal y cultural con administración canónica privada y presentación pública derivada.",
+      "nodes": [
+        {"id":"m","label":"Entre libros y letras","type":"module"},
+        {"id":"admin","label":"GitHub repo: entre-libros-y-letras-admin [PRIVATE]","type":"source","account":"ALJOGABA · aljogaba@gmail.com · GitHub / aljogaba"},
+        {"id":"derived","label":"exports/biblioteca-jorge.json","type":"data","account":"ALJOGABA · repo entre-libros-y-letras-admin"},
+        {"id":"public","label":"GitHub repo: entre-libros-y-letras [PUBLIC]","type":"source","account":"ALJOGABA · aljogaba@gmail.com · GitHub / aljogaba"},
+        {"id":"pages","label":"GitHub Pages","type":"deploy","account":"ALJOGABA · aljogaba@gmail.com"}
+      ],
+      "edges": [["m","admin","administración canónica"],["admin","derived","genera salida pública"],["derived","public","publicar_biblioteca.cmd"],["m","public","presentación pública"],["public","pages","publicación"]],
+      "note": "El repositorio privado administra acervos, asignaciones, sesiones y participación. Sólo la salida pública autorizada de la Biblioteca de Jorge se deriva hacia el sitio; no usa backend externo."
+    },
+    {
       "system": "episuis",
       "module": "Web EPISUIS",
       "summary": "Sitio institucional público de EPISUIS.",
