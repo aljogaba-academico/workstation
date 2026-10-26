@@ -121,11 +121,11 @@ data/
 ├── systems.json          # Systems y Modules
 ├── missions.json         # Mission Routes
 ├── tools.json            # Tools propias
-├── workstation.json      # tecnologías, outputs, Local Ops, Side Quests y fallback histórico
-└── infrastructure.json   # relaciones auditadas por módulo y directorio de accesos
+├── workstation.json      # tecnologías, outputs, Local Ops y Side Quests
+└── infrastructure.json   # única fuente canónica de relaciones por módulo y directorio de accesos
 ```
 
-**Regla:** `data/infrastructure.json` es la fuente canónica de **Module Infrastructure**.
+**Regla:** `data/infrastructure.json` es la **única fuente de verdad** de **Module Infrastructure**. `workstation.json` no mantiene una copia paralela de estas relaciones.
 
 ## Documentación canónica
 
