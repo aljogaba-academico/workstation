@@ -1,5 +1,5 @@
 {
-  "version": "2026-10-26-audited",
+  "version": "2026-10-27-auth-audited",
   "accessRegistry": [
     {
       "provider": "GitHub",
@@ -7,7 +7,7 @@
         {
           "identity": "ALJOGABA",
           "handle": "aljogaba · aljogaba@gmail.com",
-          "resources": "perfil profesional · tools · side projects"
+          "resources": "perfil profesional · tools · side projects · Owner de Organization episuis"
         },
         {
           "identity": "ALJOGABA ACADEMIC",
@@ -15,9 +15,14 @@
           "resources": "proyectos académicos · DiseasesMapMx · workstation"
         },
         {
-          "identity": "EPISUIS",
-          "handle": "episuis-admin",
-          "resources": "Organization / episuis"
+          "identity": "EPISUIS ADMIN",
+          "handle": "episuis-admin · cuenta GitHub técnica",
+          "resources": "Owner de Organization episuis · respaldo administrativo · sin OAuth activo a Cloudflare, Supabase o Resend"
+        },
+        {
+          "identity": "EPISUIS ORGANIZATION",
+          "handle": "GitHub Organization / episuis",
+          "resources": "contenedor de repositorios y GitHub Apps; no es una identidad de login y no tiene recovery codes propios"
         }
       ]
     },
@@ -149,16 +154,31 @@
     },
     {
       "system": "episuis",
+      "module": "GitHub governance & integrations",
+      "summary": "Gobierno de la organización GitHub y separación entre Owners, organización e instalaciones de GitHub Apps.",
+      "nodes": [
+        {"id":"m","label":"EPISUIS · GitHub governance","type":"module"},
+        {"id":"org","label":"GitHub Organization: episuis","type":"source","account":"Organization resource container · no login identity"},
+        {"id":"owner1","label":"Owner: episuis-admin","type":"service","account":"EPISUIS ADMIN · cuenta GitHub técnica · 2FA"},
+        {"id":"owner2","label":"Owner: aljogaba","type":"service","account":"ALJOGABA · aljogaba@gmail.com · 2FA"},
+        {"id":"cfapp","label":"GitHub App: Cloudflare Workers and Pages","type":"service","account":"Installed on Organization episuis · selected repos only"},
+        {"id":"codex","label":"GitHub App: ChatGPT Codex Connector","type":"service","account":"Installed on Organization episuis"}
+      ],
+      "edges": [["m","org","organización"],["org","owner1","administrada por"],["org","owner2","administrada por"],["org","cfapp","GitHub App instalada"],["org","codex","GitHub App instalada"]],
+      "note": "La organización no inicia sesión y no tiene recovery codes propios. Los códigos de recuperación pertenecen a cada cuenta Owner. episuis-admin conserva gobierno/respaldo GitHub, pero no autentica activamente Cloudflare, Supabase ni Resend por OAuth."
+    },
+    {
+      "system": "episuis",
       "module": "Web EPISUIS",
       "summary": "Sitio institucional público de EPISUIS.",
       "nodes": [
         {"id":"m","label":"Web EPISUIS","type":"module"},
-        {"id":"src","label":"GitHub repo: episuis/web","type":"source","account":"EPISUIS · GitHub / episuis-admin · Organization episuis"},
-        {"id":"dep","label":"GitHub Pages","type":"deploy","account":"EPISUIS · GitHub / episuis-admin"},
+        {"id":"src","label":"GitHub repo: episuis/web","type":"source","account":"GitHub Organization / episuis · Owners: episuis-admin + aljogaba"},
+        {"id":"dep","label":"GitHub Pages","type":"deploy","account":"GitHub Organization / episuis"},
         {"id":"dom","label":"episuis.com.mx","type":"domain","account":"EPISUIS · episuis@gmail.com · Hostinger"}
       ],
       "edges": [["m","src","vive en"],["src","dep","se publica con"],["dep","dom","CNAME / dominio público"]],
-      "note": "Hostinger sostiene el dominio; la web se publica desde GitHub Pages."
+      "note": "Hostinger sostiene el dominio; la web se publica desde GitHub Pages. La organización posee el repo; los Owners administran el recurso mediante sus cuentas individuales."
     },
     {
       "system": "episuis",
@@ -166,14 +186,15 @@
       "summary": "Aplicación de vigilancia epidemiológica con frontend desplegado en Cloudflare, backend Supabase y correo transaccional Resend.",
       "nodes": [
         {"id":"m","label":"Vigilancia EPISUIS","type":"module"},
-        {"id":"src","label":"GitHub repo: episuis/vigilancia-episuis","type":"source","account":"EPISUIS · GitHub / episuis-admin · Organization episuis"},
+        {"id":"src","label":"GitHub repo: episuis/vigilancia-episuis","type":"source","account":"GitHub Organization / episuis · Owners: episuis-admin + aljogaba"},
+        {"id":"ghapp","label":"GitHub App: Cloudflare Workers and Pages","type":"service","account":"Organization episuis · access to vigilancia-episuis"},
         {"id":"dep","label":"Cloudflare Pages: vigilancia-episuis","type":"deploy","account":"ALJOGABA · aljogaba@gmail.com · acceso directo Cloudflare"},
         {"id":"db","label":"Supabase: Organization EPISUIS / vigilancia-episuis","type":"backend","account":"ALJOGABA · aljogaba@gmail.com → GitHub aljogaba → Supabase"},
         {"id":"mail","label":"Resend: correo transaccional","type":"service","account":"ALJOGABA · aljogaba@gmail.com → GitHub aljogaba → Resend"},
         {"id":"maildom","label":"Sending domain: episuis.com.mx","type":"domain","account":"ALJOGABA · Resend / workspace aljogaba"}
       ],
-      "edges": [["m","src","código"],["src","dep","deploy conectado"],["m","db","backend / datos"],["m","mail","invitaciones y activación"],["mail","maildom","identidad de envío"]],
-      "note": "Cloudflare se accede directamente con aljogaba@gmail.com. Supabase EPISUIS se accede mediante GitHub aljogaba. Resend usa episuis.com.mx para correo, no para hosting web."
+      "edges": [["m","src","código"],["src","ghapp","repo autorizado"],["ghapp","dep","deploy conectado"],["m","db","backend / datos"],["m","mail","invitaciones y activación"],["mail","maildom","identidad de envío"]],
+      "note": "El repo pertenece a la organización episuis. La GitHub App de Cloudflare está instalada en la organización y limitada a repos seleccionados. Cloudflare se administra con aljogaba@gmail.com; Supabase y Resend usan GitHub aljogaba. episuis-admin no es la identidad activa de esos proveedores."
     },
     {
       "system": "episuis",
@@ -181,12 +202,13 @@
       "summary": "Plataforma de gestión productiva en desarrollo, con Cloudflare y Supabase como infraestructura activa.",
       "nodes": [
         {"id":"m","label":"EPISUIS Producción","type":"module"},
-        {"id":"src","label":"GitHub repo: episuis/produccion","type":"source","account":"EPISUIS · GitHub / episuis-admin · Organization episuis"},
+        {"id":"src","label":"GitHub repo: episuis/produccion","type":"source","account":"GitHub Organization / episuis · Owners: episuis-admin + aljogaba"},
+        {"id":"ghapp","label":"GitHub App: Cloudflare Workers and Pages","type":"service","account":"Organization episuis · access to produccion"},
         {"id":"dep","label":"Cloudflare Worker: episuis-produccion","type":"deploy","account":"ALJOGABA · aljogaba@gmail.com · acceso directo Cloudflare"},
         {"id":"db","label":"Supabase: Organization EPISUIS / produccion","type":"backend","account":"ALJOGABA · aljogaba@gmail.com → GitHub aljogaba → Supabase"}
       ],
-      "edges": [["m","src","código"],["src","dep","deploy conectado"],["m","db","backend / Auth / datos"]],
-      "note": "Actualmente no usa Resend, dominio propio ni otro servicio externo adicional."
+      "edges": [["m","src","código"],["src","ghapp","repo autorizado"],["ghapp","dep","deploy conectado"],["m","db","backend / Auth / datos"]],
+      "note": "El repo pertenece a la organización episuis. La GitHub App de Cloudflare está instalada en la organización y limitada a repos seleccionados. Cloudflare y Supabase se administran con ALJOGABA; episuis-admin permanece como Owner GitHub de gobierno/respaldo y no autentica esos proveedores. Resend no forma parte actualmente de Producción."
     },
     {
       "system": "diseasesmapmx",
@@ -288,10 +310,13 @@
   ],
   "rules": [
     "Una identidad de acceso no implica propiedad funcional del sistema.",
+    "Una organización GitHub no inicia sesión: las cuentas Owner se autentican y la organización posee repositorios e instalaciones de GitHub Apps.",
+    "Los recovery codes pertenecen a cuentas GitHub individuales; una organización no tiene recovery codes propios.",
+    "Antes de crear una cuenta nueva en un proveedor se debe definir propietario funcional, identidad de administración y mecanismo de autenticación canónico.",
     "Cada esquema describe un módulo y sólo relaciones confirmadas.",
     "Mayúsculas = identidad conceptual; minúsculas = handle o identificador técnico.",
     "Los correos se muestran sólo como identificadores de cuenta, nunca como credenciales.",
     "Las relaciones futuras se marcan explícitamente como PLANNED y con línea discontinua.",
-    "No se almacenan contraseñas, tokens, API keys, secretos ni códigos MFA."
+    "No se almacenan contraseñas, tokens, API keys, secretos ni códigos MFA o recuperación."
   ]
 }
