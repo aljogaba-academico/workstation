@@ -1,6 +1,6 @@
 # ALJOGABA OS — Infrastructure Relationship Audit
 
-Última revisión: 2026-10-21
+Última revisión: 2026-10-27
 
 ## Fuente canónica
 
@@ -29,7 +29,8 @@ Los correos se muestran únicamente como **identificadores de cuenta**. No son c
 
 - **ALJOGABA** — GitHub `aljogaba`; correo de referencia `aljogaba@gmail.com`.
 - **ALJOGABA ACADEMIC** — GitHub `aljogaba-academico`; correo de referencia `aljogaba.academico@gmail.com`.
-- **EPISUIS** — GitHub `episuis-admin`; organización GitHub `episuis`; correo confirmado para Hostinger `episuis@gmail.com`.
+- **EPISUIS ADMIN** — GitHub `episuis-admin`; cuenta técnica/administrativa con 2FA y función de Owner de la organización `episuis`.
+- **EPISUIS ORGANIZATION** — organización GitHub `episuis`; contenedor de repositorios y GitHub Apps. No es una identidad de login, no tiene contraseña propia ni recovery codes.
 
 Mayúsculas identifican la identidad conceptual. Handles, repositorios, proyectos y nombres técnicos conservan su escritura real.
 
@@ -82,11 +83,20 @@ Relación correcta:
 
 # 2. EPISUIS
 
-## Capa GitHub común
+## Gobierno GitHub común
 
-- Cuenta operativa GitHub: **EPISUIS** / `episuis-admin`.
 - Organización: `episuis`.
-- Repositorios confirmados: `web`, `vigilancia-episuis`, `produccion`.
+- Owners confirmados: `episuis-admin` y `aljogaba`.
+- Ambos Owners tienen 2FA activo.
+- La organización exige 2FA y métodos seguros.
+- `episuis-admin` funciona como cuenta técnica/administrativa de respaldo y gobierno GitHub.
+- `episuis-admin` no mantiene OAuth activo con Cloudflare, Supabase o Resend.
+- GitHub Apps instaladas en la organización:
+  - `Cloudflare Workers and Pages`.
+  - `ChatGPT Codex Connector`.
+- `Cloudflare Workers and Pages` está limitado a los repositorios `vigilancia-episuis` y `produccion`.
+
+La organización `episuis` no se autentica como usuario: los accesos, 2FA, passkeys y recovery codes pertenecen a las cuentas Owner individuales.
 
 ## Web EPISUIS
 
@@ -104,14 +114,17 @@ Relación:
 ### Código
 
 - Fuente: `episuis/vigilancia-episuis`.
-- GitHub: **EPISUIS** / `episuis-admin` / organización `episuis`.
+- Propietario del repo: **EPISUIS ORGANIZATION** / `episuis`.
+- Owners que pueden administrarlo: `episuis-admin` y `aljogaba`.
 
 ### Deploy
 
-- Cloudflare Pages: `vigilancia-episuis`.
+- Producto Cloudflare: **Cloudflare Pages**.
+- Proyecto: `vigilancia-episuis`.
+- URL operativa: `https://vigilancia-episuis.pages.dev/`.
 - Cuenta Cloudflare: **ALJOGABA**.
 - Acceso Cloudflare: directo por correo `aljogaba@gmail.com`, no mediante GitHub.
-- El proyecto de Cloudflare está conectado al repo `episuis/vigilancia-episuis` para despliegue.
+- El proyecto está conectado al repo `episuis/vigilancia-episuis` mediante la GitHub App `Cloudflare Workers and Pages` instalada en la organización `episuis`.
 
 ### Backend
 
@@ -132,14 +145,18 @@ Ruta de acceso confirmada:
 ### Código
 
 - Fuente: `episuis/produccion`.
-- GitHub: **EPISUIS** / `episuis-admin` / organización `episuis`.
+- Propietario del repo: **EPISUIS ORGANIZATION** / `episuis`.
+- Owners que pueden administrarlo: `episuis-admin` y `aljogaba`.
 
 ### Deploy
 
-- Cloudflare Worker: `episuis-produccion`.
+- Producto Cloudflare: **Cloudflare Workers** con Static Assets.
+- Worker: `episuis-produccion`.
+- URL operativa: `https://episuis-produccion.aljogaba.workers.dev/`.
+- Configuración versionada: `wrangler.jsonc`, con `dist/` como directorio de assets y manejo SPA.
 - Cuenta Cloudflare: **ALJOGABA**.
 - Acceso: directo con `aljogaba@gmail.com`.
-- El Worker está conectado al repo `episuis/produccion`.
+- El Worker está conectado al repo `episuis/produccion` mediante la GitHub App `Cloudflare Workers and Pages` instalada en la organización `episuis`.
 
 ### Backend
 
@@ -154,6 +171,19 @@ Supabase proporciona actualmente la capa de datos/Auth del módulo.
 - Resend: no forma parte actualmente de Producción.
 - Dominio propio: no.
 - Otro backend externo: no confirmado/activo.
+
+## Por qué Vigilancia usa `pages.dev` y Producción usa `workers.dev`
+
+No es una inconsistencia ni implica cuentas distintas.
+
+- `vigilancia-episuis.pages.dev` corresponde a un **proyecto Cloudflare Pages**.
+- `episuis-produccion.aljogaba.workers.dev` corresponde a un **Cloudflare Worker** que sirve la aplicación mediante Static Assets.
+
+Ambos recursos viven bajo la misma identidad operativa de Cloudflare (**ALJOGABA / `aljogaba@gmail.com`**) y ambos reciben código desde repositorios propiedad de la organización GitHub `episuis` mediante la GitHub App de Cloudflare.
+
+La diferencia del dominio técnico refleja el **producto de despliegue de Cloudflare**, no una diferencia de propiedad o autenticación.
+
+Si en el futuro se desea uniformar la presentación pública, pueden asociarse dominios propios como `vigilancia.episuis.com.mx` y `produccion.episuis.com.mx` sin cambiar necesariamente la arquitectura subyacente.
 
 ---
 
@@ -318,7 +348,7 @@ Una misma identidad puede administrar recursos de varios sistemas, y un mismo si
 
 Ejemplo EPISUIS Vigilancia:
 
-- Código → EPISUIS / `episuis-admin`.
+- Código → organización GitHub `episuis`; Owners `episuis-admin` + `aljogaba`.
 - Cloudflare → ALJOGABA / `aljogaba@gmail.com` directo.
 - Supabase → ALJOGABA / `aljogaba@gmail.com` → GitHub `aljogaba`.
 - Resend → ALJOGABA / `aljogaba@gmail.com` → GitHub `aljogaba`.
