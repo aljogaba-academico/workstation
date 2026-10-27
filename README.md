@@ -132,6 +132,7 @@ data/
 El README funciona como **índice operativo**, no como duplicado de toda la documentación.
 
 - `docs/INFRASTRUCTURE_RELATIONSHIP_AUDIT.md` — auditoría y justificación de relaciones de infraestructura.
+- `docs/IDENTITY_AUTHENTICATION_MODEL.md` — diferencia entre cuentas, organizaciones, GitHub Apps, OAuth y rutas canónicas de autenticación; incluye la regla para no crear cuentas nuevas sin definir antes identidad y propietario.
 - `docs/DEEP_SPACE_OPERATIONS.md` — especificación de la capa v0.5, audio, FX, terminal, radar y Easter eggs.
 - `docs/github-pages.md` — publicación en GitHub Pages.
 
@@ -177,6 +178,7 @@ workstation/
 └── docs/
     ├── github-pages.md
     ├── INFRASTRUCTURE_RELATIONSHIP_AUDIT.md
+    ├── IDENTITY_AUTHENTICATION_MODEL.md
     └── DEEP_SPACE_OPERATIONS.md
 ```
 
