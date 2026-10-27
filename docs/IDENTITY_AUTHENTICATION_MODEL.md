@@ -1,6 +1,6 @@
 # ALJOGABA OS — Identity, authentication and ownership model
 
-Última revisión: 2026-10-26
+Última revisión: 2026-10-27
 
 ## Propósito
 
@@ -176,7 +176,69 @@ más:
 
 ---
 
-## 4. Regla para crear nuevas cuentas o integraciones
+## 4. Modelo confirmado para DiseasesMapMx
+
+### Gobierno de la organización GitHub
+
+Organización: `DiseasesMapMx`.
+
+La organización **no es una identidad de login**. No tiene contraseña, passkey ni códigos de recuperación propios. Los repositorios canónicos viven en la organización y son administrados por cuentas GitHub autorizadas.
+
+Owner confirmado en la auditoría actual:
+
+- `aljogaba-academico` — cuenta académica/de desarrollo científico, asociada a `aljogaba.academico@gmail.com`.
+
+Durante la revisión de la organización se observó que `aljogaba-academico` era el único Owner visible. Por tanto, la redundancia de Owners debe tratarse como un punto de gobierno distinto del modelo de autenticación; no debe inventarse una segunda identidad hasta que sea creada o confirmada explícitamente.
+
+Repositorios canónicos activos:
+
+- `DiseasesMapMx/web` — aplicación web, Admin y frontend público;
+- `DiseasesMapMx/analysis-engine` — backend científico privado.
+
+### Cuenta `aljogaba-academico`
+
+`aljogaba-academico` **sí autentica en GitHub** y administra la organización DiseasesMapMx. Sus métodos de autenticación, 2FA y recovery codes pertenecen a esa cuenta individual, no a la organización.
+
+La identidad operativa confirmada para la infraestructura científica es **ALJOGABA ACADEMIC**, asociada a `aljogaba.academico@gmail.com`.
+
+### Proveedores externos de DiseasesMapMx
+
+Rutas confirmadas:
+
+- **Cloudflare** → acceso directo con `aljogaba.academico@gmail.com` → Account/Workspace DiseasesMapMx → Worker `diseasesmapmx-web`.
+- **Supabase** → `aljogaba.academico@gmail.com → GitHub aljogaba-academico → Supabase` → Organization DiseasesMapMx → project `DiseasesMapMx Production`.
+- **Render** → `aljogaba.academico@gmail.com → GitHub aljogaba-academico → Render` → service `diseasesmapmx-analysis-engine`.
+
+Esto significa que la organización GitHub `DiseasesMapMx` es propietaria de repositorios y permisos GitHub, mientras que la autenticación de los proveedores externos se realiza mediante la cuenta `aljogaba-academico` o mediante acceso directo asociado a `aljogaba.academico@gmail.com`.
+
+### GitHub Apps de DiseasesMapMx
+
+No deben suponerse por analogía con EPISUIS. Las instalaciones de GitHub Apps de la organización DiseasesMapMx deben registrarse únicamente después de comprobarlas en `Organization Settings → Installed GitHub Apps`.
+
+Hasta esa comprobación, Workstation debe distinguir entre:
+
+- **confirmado:** organización, Owner, repositorios y rutas Cloudflare/Supabase/Render;
+- **pendiente de auditoría:** GitHub Apps instaladas y su alcance por repositorio.
+
+### Relación operativa resumida
+
+`GitHub Organization DiseasesMapMx → repos web + analysis-engine`
+
+`aljogaba-academico → administra Organization DiseasesMapMx`
+
+`aljogaba.academico@gmail.com → Cloudflare / DiseasesMapMx`
+
+`aljogaba.academico@gmail.com → GitHub aljogaba-academico → Supabase / DiseasesMapMx Production`
+
+`aljogaba.academico@gmail.com → GitHub aljogaba-academico → Render / diseasesmapmx-analysis-engine`
+
+Regla:
+
+> **DiseasesMapMx no “entra” a GitHub ni a los proveedores. La organización posee recursos; la cuenta `aljogaba-academico` es la identidad administrativa actualmente confirmada.**
+
+---
+
+## 5. Regla para crear nuevas cuentas o integraciones
 
 Antes de registrarse en un proveedor nuevo o pulsar "Continue with GitHub", responder primero estas preguntas:
 
@@ -195,7 +257,7 @@ Regla operativa:
 
 ---
 
-## 5. Qué NO debe almacenarse en Workstation
+## 6. Qué NO debe almacenarse en Workstation
 
 Workstation puede documentar identidades, correos de referencia, organizaciones, proveedores, repositorios, relaciones y mecanismos de autenticación a nivel conceptual.
 
