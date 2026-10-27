@@ -211,6 +211,37 @@ Rutas confirmadas:
 
 Esto significa que la organización GitHub `DiseasesMapMx` es propietaria de repositorios y permisos GitHub, mientras que la autenticación de los proveedores externos se realiza mediante la cuenta `aljogaba-academico` o mediante acceso directo asociado a `aljogaba.academico@gmail.com`.
 
+### Auditoría Supabase DiseasesMapMx — 2026-10-27
+
+Se verificó la separación entre **administración de Supabase** y **usuarios de la aplicación**:
+
+- Dashboard Supabase: `aljogaba.academico@gmail.com → GitHub aljogaba-academico → Supabase`.
+- Organization Supabase: `DiseasesMapMx`, plan Free, un Owner (`aljogaba.academico@gmail.com`) con MFA activo.
+- Supabase Auth de DiseasesMapMx: usuarios de la aplicación mediante email; estos usuarios no equivalen a miembros/Owners del dashboard.
+- Portal de colaboradores: el acceso debe combinar `auth.users` con membership/rol explícito en las tablas privadas; la existencia de un usuario Auth no concede por sí sola privilegios administrativos ni de organización.
+
+Controles confirmados durante la auditoría:
+
+- Data privacy de Supabase Assistant: `Disabled`.
+- Access Tokens personales: ninguno creado.
+- OAuth App autorizada: ChatGPT, utilizada para trabajo autorizado sobre la organización/proyecto.
+- MFA organizacional no puede imponerse en Free; la cuenta Owner sí tiene MFA activo.
+- `DiseasesMapMx Production` activo y saludable al cierre de la auditoría.
+- Auth: email habilitado; confirmación de email habilitada; sign-in anónimo deshabilitado; proveedores OAuth externos deshabilitados; contraseña mínima de 12 caracteres.
+- Leaked Password Protection: no disponible en el plan actual; permanece como warning conocido del Security Advisor.
+- Site URL de Auth: `https://diseasesmapmx-web.diseasesmapmx.workers.dev`.
+- Redirect URLs permitidas: producción en `diseasesmapmx-web.diseasesmapmx.workers.dev/**` y desarrollo local en `localhost:5500/**` / `127.0.0.1:5500/**`.
+- Data API: habilitada, pero con 0 tablas y 0 funciones expuestas individualmente; exposición automática de tablas nuevas deshabilitada.
+- API keys: existe una clave publishable para frontend y una secret para backend; nunca documentar ni almacenar sus valores en Workstation.
+- Storage: `submissions-private`, `reports-private`, `reference-panels-private` e `imports-private` son privados y sus policies exigen `authenticated` + `is_app_admin()`; `molecular-imports` también es privado y restringe tamaño (50 MB) y MIME types.
+- Edge Functions administrativas `admin-curation` y `admin-molecular` usan validación interna del bearer token y comprobación de `public.app_admins`, por lo que `verify_jwt=false` no implica acceso abierto.
+- Security Advisor: 0 errores; 1 warning conocido (Leaked Password Protection); sugerencias RLS sin policies directas corresponden a esquemas cerrados/controlados por backend y no deben corregirse en masa sin revisar arquitectura.
+- Performance Advisor: 0 errores y 0 warnings al cierre de la revisión.
+
+Regla operativa derivada:
+
+> **En DiseasesMapMx, autenticar a una persona no equivale a autorizarla. La autorización depende del contexto: `app_admins` para administración interna y memberships/roles explícitos para colaboradores.**
+
 ### GitHub Apps de DiseasesMapMx
 
 No deben suponerse por analogía con EPISUIS. Las instalaciones de GitHub Apps de la organización DiseasesMapMx deben registrarse únicamente después de comprobarlas en `Organization Settings → Installed GitHub Apps`.
