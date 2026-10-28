@@ -1,0 +1,88 @@
+{
+  "version": "2026-10-28-professional-ecosystem-v1",
+  "scope": "Ecosistema profesional, académico e institucional. Excluye cuentas y servicios de uso personal, Club Entre Libros y Letras, Smoke Lab, entretenimiento y consulta personal.",
+  "identities": [
+    {
+      "id": "aljogaba",
+      "label": "ALJOGABA",
+      "subtitle": "Identidad profesional y académica principal",
+      "emails": ["aljogaba@gmail.com", "jorge.inifap@gmail.com", "galindo.alberto@inifap.gob.mx"]
+    },
+    {
+      "id": "academic",
+      "label": "ALJOGABA ACADEMIC",
+      "subtitle": "Identidad académica de desarrollo científico e infraestructura",
+      "emails": ["aljogaba.academico@gmail.com"]
+    },
+    {
+      "id": "episuis",
+      "label": "EPISUIS",
+      "subtitle": "Identidad institucional y presencia profesional",
+      "emails": ["episuis@gmail.com"]
+    }
+  ],
+  "nodes": [
+    {"id":"aljogaba","root":"aljogaba","label":"ALJOGABA","kind":"identity","detail":"Identidad profesional/académica principal"},
+    {"id":"mail-main","root":"aljogaba","label":"aljogaba@gmail.com","kind":"account","detail":"Correo principal profesional"},
+    {"id":"mail-inifap-x","root":"aljogaba","label":"jorge.inifap@gmail.com","kind":"account","detail":"Correo asociado a X @aljogaba"},
+    {"id":"mail-inifap-inst","root":"aljogaba","label":"galindo.alberto@inifap.gob.mx","kind":"account","detail":"Correo institucional verificado / secundario en ResearchGate"},
+    {"id":"web-profile","root":"aljogaba","label":"Perfil profesional","kind":"hub","detail":"Directorio central del ecosistema académico","url":"https://aljogaba.github.io/","status":"activo"},
+    {"id":"github-main","root":"aljogaba","label":"GitHub · aljogaba","kind":"service","detail":"Código, herramientas, perfil profesional y Owner de episuis","url":"https://github.com/aljogaba","status":"activo"},
+    {"id":"orcid","root":"aljogaba","label":"ORCID · 0000-0003-4223-6161","kind":"academic","detail":"Identificador académico principal · 2FA activo · sin alternate sign-in","url":"https://orcid.org/0000-0003-4223-6161","status":"activo"},
+    {"id":"scholar","root":"aljogaba","label":"Google Scholar","kind":"academic","detail":"Perfil bibliométrico · acceso con aljogaba@gmail.com · afiliación INIFAP verificada","status":"activo"},
+    {"id":"researchgate","root":"aljogaba","label":"ResearchGate","kind":"academic","detail":"Principal: aljogaba@gmail.com · adicional: galindo.alberto@inifap.gob.mx","url":"https://www.researchgate.net/profile/Alberto-Jorge-Galindo-Barboza-2","status":"activo"},
+    {"id":"elsevier","root":"aljogaba","label":"Elsevier account","kind":"account","detail":"Cuenta paraguas · acceso con aljogaba@gmail.com"},
+    {"id":"scopus","root":"aljogaba","label":"Scopus · Author ID 36666208000","kind":"academic","detail":"Perfil de autor conectado a Elsevier y ORCID","url":"https://www.scopus.com/authid/detail.uri?authorId=36666208000","status":"activo"},
+    {"id":"mendeley","root":"aljogaba","label":"Mendeley","kind":"academic","detail":"Acceso con la misma cuenta Elsevier / aljogaba@gmail.com","url":"https://www.mendeley.com/","status":"activo"},
+    {"id":"semantic","root":"aljogaba","label":"Semantic Scholar","kind":"academic","detail":"Acceso con aljogaba@gmail.com · ORCID visible en el perfil","url":"https://www.semanticscholar.org/author/2327092786","status":"activo"},
+    {"id":"sciprofiles","root":"aljogaba","label":"SciProfiles","kind":"academic","detail":"Cuenta principal verificada: aljogaba@gmail.com","url":"https://sciprofiles.com/","status":"activo"},
+    {"id":"ncbi","root":"aljogaba","label":"NCBI / My NCBI","kind":"academic","detail":"Correo confirmado aljogaba@gmail.com · login vinculado por ORCID","url":"https://www.ncbi.nlm.nih.gov/account/","status":"activo"},
+    {"id":"genbank","root":"aljogaba","label":"GenBank","kind":"academic","detail":"Repositorio de secuencias · acceso operativo vía NCBI/ORCID","url":"https://www.ncbi.nlm.nih.gov/genbank/","status":"activo"},
+    {"id":"wos","root":"aljogaba","label":"Web of Science Researcher Profile","kind":"academic","detail":"Relación autorizada desde ORCID · acceso directo no confirmado","url":"https://www.webofscience.com/","status":"conectado-no-operativo"},
+    {"id":"x-main","root":"aljogaba","label":"X · @aljogaba","kind":"social","detail":"Perfil académico/profesional · asociado a jorge.inifap@gmail.com","url":"https://x.com/aljogaba","status":"activo"},
+    {"id":"linkedin-main","root":"aljogaba","label":"LinkedIn · Alberto Jorge Galindo Barboza","kind":"social","detail":"Perfil exclusivamente académico/profesional · administra la página EPISUIS","url":"https://www.linkedin.com/in/alberto-jorge-galindo-barboza-89326515b/","status":"activo"},
+
+    {"id":"academic","root":"academic","label":"ALJOGABA ACADEMIC","kind":"identity","detail":"Desarrollo científico e infraestructura"},
+    {"id":"mail-academic","root":"academic","label":"aljogaba.academico@gmail.com","kind":"account","detail":"Correo académico"},
+    {"id":"github-academic","root":"academic","label":"GitHub · aljogaba-academico","kind":"service","detail":"Cuenta académica · Owner confirmado de DiseasesMapMx","url":"https://github.com/aljogaba-academico","status":"activo"},
+    {"id":"github-dmx","root":"academic","label":"GitHub Organization · DiseasesMapMx","kind":"resource","detail":"Contenedor de repositorios; no es identidad de login","url":"https://github.com/DiseasesMapMx","status":"activo"},
+    {"id":"workstation","root":"academic","label":"ALJOGABA OS · Workstation","kind":"hub","detail":"Mapa operativo del ecosistema profesional y científico","url":"https://aljogaba-academico.github.io/workstation/","status":"activo"},
+    {"id":"cf-dmx","root":"academic","label":"Cloudflare · DiseasesMapMx","kind":"infra","detail":"Acceso directo con correo académico · 2FA TOTP + email · un Super Administrator","url":"https://dash.cloudflare.com/","status":"activo"},
+    {"id":"worker-dmx","root":"academic","label":"Worker · diseasesmapmx-web","kind":"resource","detail":"Static-assets Worker · main auto deploy · previews de ramas habilitados","url":"https://diseasesmapmx-web.diseasesmapmx.workers.dev","status":"activo"},
+    {"id":"supabase-dmx","root":"academic","label":"Supabase · DiseasesMapMx","kind":"infra","detail":"Acceso: correo académico → GitHub aljogaba-academico","url":"https://supabase.com/dashboard","status":"activo"},
+    {"id":"render-dmx","root":"academic","label":"Render · Workspace DiseasesMapMx","kind":"infra","detail":"Acceso: correo académico → GitHub aljogaba-academico · un Admin","url":"https://dashboard.render.com/","status":"activo"},
+    {"id":"analysis-engine","root":"academic","label":"diseasesmapmx-analysis-engine","kind":"resource","detail":"Web Service Docker · main · Auto-Deploy · Virginia (US East) · Free · sin disco persistente","url":"https://diseasesmapmx-analysis-engine.onrender.com","status":"activo"},
+
+    {"id":"episuis","root":"episuis","label":"EPISUIS","kind":"identity","detail":"Identidad institucional profesional"},
+    {"id":"mail-episuis","root":"episuis","label":"episuis@gmail.com","kind":"account","detail":"Correo institucional"},
+    {"id":"web-episuis","root":"episuis","label":"episuis.com.mx","kind":"hub","detail":"Sitio institucional público","url":"https://episuis.com.mx/","status":"activo"},
+    {"id":"hostinger","root":"episuis","label":"Hostinger","kind":"infra","detail":"Gestión del dominio episuis.com.mx · identidad EPISUIS","url":"https://www.hostinger.com/","status":"activo"},
+    {"id":"fb-admin","root":"episuis","label":"Facebook admin · George Galindo","kind":"account","detail":"Perfil de soporte administrativo; sin uso social ni presencia pública"},
+    {"id":"fb-page","root":"episuis","label":"Facebook Page · EPISUIS","kind":"social","detail":"Activo público administrado por George Galindo","url":"https://www.facebook.com/profile.php?id=61587832233674","status":"activo"},
+    {"id":"ig-episuis","root":"episuis","label":"Instagram · @episuis","kind":"social","detail":"Presencia institucional · acceso con episuis@gmail.com","url":"https://www.instagram.com/episuis/","status":"activo"},
+    {"id":"x-episuis","root":"episuis","label":"X · @episuis","kind":"social","detail":"Reserva de identidad / baja actividad","url":"https://x.com/episuis","status":"reserva"},
+    {"id":"linkedin-episuis","root":"episuis","label":"LinkedIn Company Page · EPISUIS","kind":"social","detail":"Reserva de nombre / presencia institucional sin actividad · administrada desde LinkedIn académico ALJOGABA","url":"https://www.linkedin.com/company/111901502/","status":"reserva"},
+    {"id":"github-episuis","root":"episuis","label":"GitHub Organization · episuis","kind":"resource","detail":"Contenedor de repositorios; Owners: aljogaba + episuis-admin","url":"https://github.com/episuis","status":"activo"},
+    {"id":"cf-episuis","root":"episuis","label":"Cloudflare · EPISUIS","kind":"infra","detail":"Acceso directo: aljogaba@gmail.com · Super Administrator · 2FA TOTP + email","url":"https://dash.cloudflare.com/","status":"activo"},
+    {"id":"supabase-episuis","root":"episuis","label":"Supabase · EPISUIS","kind":"infra","detail":"Acceso: aljogaba@gmail.com → GitHub aljogaba","url":"https://supabase.com/dashboard","status":"activo"},
+    {"id":"resend","root":"episuis","label":"Resend · Team EPISUIS","kind":"infra","detail":"Login por Google o GitHub aljogaba · MFA activo · dominio episuis.com.mx","url":"https://resend.com/","status":"activo"},
+    {"id":"vigilancia","root":"episuis","label":"Vigilancia EPISUIS","kind":"resource","detail":"Cloudflare Pages + Supabase + Resend","url":"https://vigilancia-episuis.pages.dev","status":"activo"},
+    {"id":"produccion","root":"episuis","label":"EPISUIS Producción","kind":"resource","detail":"Cloudflare Worker + Supabase produccion-episuis","url":"https://episuis-produccion.aljogaba.workers.dev","status":"activo"}
+  ],
+  "edges": [
+    ["aljogaba","mail-main","identidad"],["aljogaba","mail-inifap-x","identidad auxiliar"],["aljogaba","mail-inifap-inst","correo institucional"],
+    ["aljogaba","web-profile","hub"],["mail-main","github-main","acceso"],["mail-main","orcid","cuenta"],["mail-main","scholar","acceso"],["mail-main","researchgate","principal"],["mail-inifap-inst","researchgate","correo adicional"],
+    ["mail-main","elsevier","acceso"],["elsevier","scopus","perfil conectado"],["elsevier","mendeley","acceso"],["orcid","scopus","vínculo académico"],["mail-main","semantic","acceso"],["mail-main","sciprofiles","acceso"],
+    ["mail-main","ncbi","correo recuperación"],["orcid","ncbi","linked account / login"],["ncbi","genbank","repositorio"],["orcid","wos","trusted organization"],
+    ["mail-inifap-x","x-main","acceso"],["aljogaba","linkedin-main","presencia profesional"],
+
+    ["academic","mail-academic","identidad"],["mail-academic","github-academic","acceso"],["github-academic","github-dmx","Owner / administración"],["academic","workstation","opera"],
+    ["mail-academic","cf-dmx","acceso directo"],["cf-dmx","worker-dmx","aloja"],["github-academic","supabase-dmx","OAuth / acceso"],["github-academic","render-dmx","login + deploy credentials"],["render-dmx","analysis-engine","aloja"],
+
+    ["episuis","mail-episuis","identidad"],["episuis","web-episuis","presencia institucional"],["mail-episuis","hostinger","acceso"],["hostinger","web-episuis","dominio"],
+    ["mail-episuis","fb-admin","acceso"],["fb-admin","fb-page","administra"],["mail-episuis","ig-episuis","acceso"],["mail-episuis","x-episuis","acceso"],
+    ["linkedin-main","linkedin-episuis","administra"],["episuis","linkedin-episuis","activo institucional"],["episuis","github-episuis","organización"],
+    ["mail-main","cf-episuis","acceso directo"],["github-main","supabase-episuis","OAuth / acceso"],["mail-main","resend","Google o GitHub aljogaba"],
+    ["cf-episuis","vigilancia","frontend"],["supabase-episuis","vigilancia","backend"],["resend","vigilancia","SMTP"],["cf-episuis","produccion","frontend"],["supabase-episuis","produccion","backend"]
+  ]
+}
