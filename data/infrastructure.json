@@ -1,5 +1,5 @@
 {
-  "version": "2026-10-27-auth-audited",
+  "version": "2026-10-28-cloudflare-episuis-audited",
   "accessRegistry": [
     {
       "provider": "GitHub",
@@ -31,8 +31,8 @@
       "entries": [
         {
           "identity": "ALJOGABA",
-          "handle": "aljogaba@gmail.com · acceso directo por correo",
-          "resources": "Pages vigilancia-episuis · Worker episuis-produccion"
+          "handle": "aljogaba@gmail.com · acceso directo por correo + contraseña · 2FA activo",
+          "resources": "cuenta EPISUIS · único miembro Super Administrator · Pages vigilancia-episuis · Worker episuis-produccion · sin Account API Tokens, OAuth clients ni connected apps"
         },
         {
           "identity": "ALJOGABA ACADEMIC",
@@ -47,7 +47,7 @@
         {
           "identity": "ALJOGABA",
           "handle": "aljogaba@gmail.com → GitHub aljogaba",
-          "resources": "Organization EPISUIS · projects vigilancia-episuis y produccion"
+          "resources": "Organization EPISUIS · projects vigilancia-episuis y produccion-episuis"
         },
         {
           "identity": "ALJOGABA ACADEMIC",
@@ -169,6 +169,22 @@
     },
     {
       "system": "episuis",
+      "module": "Cloudflare account governance",
+      "summary": "Cuenta operativa de Cloudflare que sostiene los despliegues de Vigilancia y Producción, con acceso y superficie administrativa auditados.",
+      "nodes": [
+        {"id":"m","label":"EPISUIS · Cloudflare governance","type":"module"},
+        {"id":"acct","label":"Cloudflare account · EPISUIS","type":"service","account":"ALJOGABA · aljogaba@gmail.com · acceso directo por correo + contraseña"},
+        {"id":"member","label":"Member: aljogaba@gmail.com · Super Administrator","type":"service","account":"ALJOGABA · único miembro confirmado"},
+        {"id":"mfa","label":"2FA: TOTP + email · recovery codes","type":"service","account":"ALJOGABA · seguridad de cuenta"},
+        {"id":"clean","label":"API tokens: 0 · OAuth clients: 0 · connected apps: 0","type":"service","account":"Cloudflare · audit 2026-10-28"},
+        {"id":"pages","label":"Pages: vigilancia-episuis","type":"deploy","account":"ALJOGABA · Cloudflare"},
+        {"id":"worker","label":"Worker: episuis-produccion","type":"deploy","account":"ALJOGABA · Cloudflare"}
+      ],
+      "edges": [["m","acct","cuenta operativa"],["acct","member","administrada por"],["acct","mfa","protegida con"],["acct","clean","superficie de acceso"],["acct","pages","aloja"],["acct","worker","aloja"]],
+      "note": "La auditoría de cuenta confirmó una sola sesión activa al momento de la revisión. No se documentan contraseñas, códigos de recuperación ni valores de variables/secretos."
+    },
+    {
+      "system": "episuis",
       "module": "Web EPISUIS",
       "summary": "Sitio institucional público de EPISUIS.",
       "nodes": [
@@ -183,32 +199,36 @@
     {
       "system": "episuis",
       "module": "Vigilancia EPISUIS",
-      "summary": "Aplicación de vigilancia epidemiológica con frontend desplegado en Cloudflare, backend Supabase y correo transaccional Resend.",
+      "summary": "Aplicación de vigilancia epidemiológica con frontend desplegado en Cloudflare Pages, backend Supabase y correo transaccional Resend.",
       "nodes": [
         {"id":"m","label":"Vigilancia EPISUIS","type":"module"},
-        {"id":"src","label":"GitHub repo: episuis/vigilancia-episuis","type":"source","account":"GitHub Organization / episuis · Owners: episuis-admin + aljogaba"},
+        {"id":"src","label":"GitHub repo: episuis/vigilancia-episuis · main","type":"source","account":"GitHub Organization / episuis · Owners: episuis-admin + aljogaba"},
         {"id":"ghapp","label":"GitHub App: Cloudflare Workers and Pages","type":"service","account":"Organization episuis · access to vigilancia-episuis"},
-        {"id":"dep","label":"Cloudflare Pages: vigilancia-episuis","type":"deploy","account":"ALJOGABA · aljogaba@gmail.com · acceso directo Cloudflare"},
+        {"id":"dep","label":"Cloudflare Pages: vigilancia-episuis · auto deploy","type":"deploy","account":"ALJOGABA · aljogaba@gmail.com · acceso directo Cloudflare"},
+        {"id":"dom","label":"vigilancia-episuis.pages.dev","type":"domain","account":"Cloudflare Pages · production URL"},
+        {"id":"env","label":"Build env: VITE_SUPABASE_URL + VITE_SUPABASE_PUBLISHABLE_KEY","type":"service","account":"Cloudflare Pages · valores no documentados"},
         {"id":"db","label":"Supabase: Organization EPISUIS / vigilancia-episuis","type":"backend","account":"ALJOGABA · aljogaba@gmail.com → GitHub aljogaba → Supabase"},
         {"id":"mail","label":"Resend: correo transaccional","type":"service","account":"ALJOGABA · aljogaba@gmail.com → GitHub aljogaba → Resend"},
         {"id":"maildom","label":"Sending domain: episuis.com.mx","type":"domain","account":"ALJOGABA · Resend / workspace aljogaba"}
       ],
-      "edges": [["m","src","código"],["src","ghapp","repo autorizado"],["ghapp","dep","deploy conectado"],["m","db","backend / datos"],["m","mail","invitaciones y activación"],["mail","maildom","identidad de envío"]],
-      "note": "El repo pertenece a la organización episuis. La GitHub App de Cloudflare está instalada en la organización y limitada a repos seleccionados. Cloudflare se administra con aljogaba@gmail.com; Supabase y Resend usan GitHub aljogaba. episuis-admin no es la identidad activa de esos proveedores."
+      "edges": [["m","src","código"],["src","ghapp","repo autorizado"],["ghapp","dep","deploy conectado"],["env","dep","build env"],["dep","dom","publica"],["m","db","backend / datos"],["m","mail","invitaciones y activación"],["mail","maildom","identidad de envío"]],
+      "note": "Cloudflare Pages usa main y despliegue automático. No se observaron bindings adicionales. Runtime: ubicación predeterminada, compatibility date 2026-08-20, sin compatibility flags y fail-open."
     },
     {
       "system": "episuis",
       "module": "EPISUIS Producción",
-      "summary": "Plataforma de gestión productiva en desarrollo, con Cloudflare y Supabase como infraestructura activa.",
+      "summary": "Plataforma de gestión productiva con frontend Worker conectado a GitHub y backend Supabase; no usa actualmente Resend.",
       "nodes": [
         {"id":"m","label":"EPISUIS Producción","type":"module"},
-        {"id":"src","label":"GitHub repo: episuis/produccion","type":"source","account":"GitHub Organization / episuis · Owners: episuis-admin + aljogaba"},
+        {"id":"src","label":"GitHub repo: episuis/produccion · main","type":"source","account":"GitHub Organization / episuis · Owners: episuis-admin + aljogaba"},
         {"id":"ghapp","label":"GitHub App: Cloudflare Workers and Pages","type":"service","account":"Organization episuis · access to produccion"},
         {"id":"dep","label":"Cloudflare Worker: episuis-produccion","type":"deploy","account":"ALJOGABA · aljogaba@gmail.com · acceso directo Cloudflare"},
-        {"id":"db","label":"Supabase: Organization EPISUIS / produccion","type":"backend","account":"ALJOGABA · aljogaba@gmail.com → GitHub aljogaba → Supabase"}
+        {"id":"dom","label":"episuis-produccion.aljogaba.workers.dev","type":"domain","account":"Cloudflare Worker · production URL"},
+        {"id":"env","label":"Build env: VITE_SUPABASE_URL + VITE_SUPABASE_PUBLISHABLE_KEY","type":"service","account":"Cloudflare Worker · valores no documentados"},
+        {"id":"db","label":"Supabase: Organization EPISUIS / produccion-episuis","type":"backend","account":"ALJOGABA · aljogaba@gmail.com → GitHub aljogaba → Supabase"}
       ],
-      "edges": [["m","src","código"],["src","ghapp","repo autorizado"],["ghapp","dep","deploy conectado"],["m","db","backend / Auth / datos"]],
-      "note": "El repo pertenece a la organización episuis. La GitHub App de Cloudflare está instalada en la organización y limitada a repos seleccionados. Cloudflare y Supabase se administran con ALJOGABA; episuis-admin permanece como Owner GitHub de gobierno/respaldo y no autentica esos proveedores. Resend no forma parte actualmente de Producción."
+      "edges": [["m","src","código"],["src","ghapp","repo autorizado"],["ghapp","dep","deploy conectado"],["env","dep","build env"],["dep","dom","publica"],["m","db","backend / Auth / datos"]],
+      "note": "Worker desplegado desde main mediante el flujo de build/implementación con Wrangler. No se observaron service bindings, Queues ni dominios personalizados adicionales. Worker Previews no forma parte del flujo operativo actual."
     },
     {
       "system": "diseasesmapmx",
