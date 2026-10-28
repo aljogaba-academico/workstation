@@ -1,6 +1,8 @@
 (() => {
   let professionalEcosystem = null;
   let ecosystemZoom = 1;
+  let renderRevision = 0;
+
   const ecosystemReady = fetch("data/professional-ecosystem.json", { cache: "no-store" })
     .then(response => {
       if (!response.ok) throw new Error(`Professional ecosystem registry ${response.status}`);
@@ -90,16 +92,27 @@
     map.scrollTo({ left: 0, top: 0, behavior: "smooth" });
   }
 
-  async function renderEcosystemMap(target, root, attempts = 0) {
+  async function renderEcosystemMap(target, root, revision, attempts = 0) {
     if (!window.mermaid) {
       target.innerHTML = `<p class="map-loading">Loading professional ecosystem <span class="blink">█</span></p>`;
-      if (attempts < 50) setTimeout(() => renderEcosystemMap(target, root, attempts + 1), 120);
+      if (attempts < 50) setTimeout(() => renderEcosystemMap(target, root, revision, attempts + 1), 120);
       return;
     }
+
     target.innerHTML = `<div class="professional-ecosystem-stage"><div class="mermaid">${ecosystemMermaid(root)}</div></div>`;
-    await window.mermaid.run({ nodes: [$(".mermaid", target)] });
-    const win = target.closest(".os-window");
-    if (win) updateZoomUi(win);
+    const mermaidNode = $(".mermaid", target);
+
+    try {
+      await window.mermaid.run({ nodes: [mermaidNode] });
+      if (revision !== renderRevision) return;
+      const win = target.closest(".os-window");
+      if (win) updateZoomUi(win);
+    } catch (error) {
+      console.error("Professional Ecosystem Mermaid render failed", error);
+      if (revision === renderRevision) {
+        target.innerHTML = `<p class="map-loading">Map render error. Select the tab again.</p>`;
+      }
+    }
   }
 
   function statusLabel(status = "") {
@@ -159,17 +172,17 @@
             <h2>Professional Ecosystem</h2>
             <p>${esc(professionalEcosystem?.scope || "")}</p>
           </div>
-          <div class="ecosystem-tabs">
-            ${buttons.map(([id, label], index) => `<button class="ecosystem-tab ${index === 0 ? "active" : ""}" data-ecosystem-root="${esc(id)}">${esc(label)}</button>`).join("")}
+          <div class="ecosystem-tabs" role="tablist" aria-label="Professional ecosystem identities">
+            ${buttons.map(([id, label], index) => `<button type="button" class="ecosystem-tab ${index === 0 ? "active" : ""}" data-ecosystem-root="${esc(id)}" role="tab" aria-selected="${index === 0 ? "true" : "false"}">${esc(label)}</button>`).join("")}
           </div>
         </div>
         <div class="ecosystem-map-toolbar">
           <span>MAP VIEW</span>
-          <button class="retro-button compact" data-ecosystem-zoom="out" aria-label="Alejar mapa">−</button>
+          <button type="button" class="retro-button compact" data-ecosystem-zoom="out" aria-label="Alejar mapa">−</button>
           <span data-ecosystem-zoom-label>100%</span>
-          <button class="retro-button compact" data-ecosystem-zoom="in" aria-label="Acercar mapa">+</button>
-          <button class="retro-button compact" data-ecosystem-zoom="reset">100%</button>
-          <button class="retro-button compact" data-ecosystem-zoom="fit">FIT</button>
+          <button type="button" class="retro-button compact" data-ecosystem-zoom="in" aria-label="Acercar mapa">+</button>
+          <button type="button" class="retro-button compact" data-ecosystem-zoom="reset">100%</button>
+          <button type="button" class="retro-button compact" data-ecosystem-zoom="fit">FIT</button>
           <small>La ventana también puede redimensionarse desde la esquina inferior derecha.</small>
         </div>
         <div class="professional-ecosystem-map"></div>
@@ -179,11 +192,46 @@
   }
 
   function renderRoot(win, root) {
-    $$(".ecosystem-tab", win).forEach(button => button.classList.toggle("active", button.dataset.ecosystemRoot === root));
+    $$(".ecosystem-tab", win).forEach(button => {
+      const active = button.dataset.ecosystemRoot === root;
+      button.classList.toggle("active", active);
+      button.setAttribute("aria-selected", String(active));
+    });
+
     const map = $(".professional-ecosystem-map", win);
     const directory = $(".professional-ecosystem-directory", win);
+    if (!map || !directory) return;
+
     directory.innerHTML = quickAccessHtml(root);
-    renderEcosystemMap(map, root);
+    const revision = ++renderRevision;
+    renderEcosystemMap(map, root, revision);
+  }
+
+  function handleEcosystemClick(win, event) {
+    const tab = event.target.closest("[data-ecosystem-root]");
+    if (tab && win.contains(tab)) {
+      event.preventDefault();
+      event.stopPropagation();
+      renderRoot(win, tab.dataset.ecosystemRoot);
+      return;
+    }
+
+    const zoomButton = event.target.closest("[data-ecosystem-zoom]");
+    if (!zoomButton || !win.contains(zoomButton)) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+    const action = zoomButton.dataset.ecosystemZoom;
+    if (action === "fit") {
+      fitEcosystemMap(win);
+      return;
+    }
+    if (action === "reset") ecosystemZoom = 1;
+    else {
+      const delta = action === "in" ? .1 : -.1;
+      ecosystemZoom = Math.min(1.6, Math.max(.45, Math.round((ecosystemZoom + delta) * 10) / 10));
+    }
+    updateZoomUi(win);
   }
 
   window.openProfessionalEcosystem = async function() {
@@ -196,18 +244,8 @@
       height: 720,
       html: shellHtml(),
       onMount: win => {
+        win.addEventListener("click", event => handleEcosystemClick(win, event));
         renderRoot(win, "overview");
-        $$(".ecosystem-tab", win).forEach(button => button.addEventListener("click", () => renderRoot(win, button.dataset.ecosystemRoot)));
-        $$("[data-ecosystem-zoom]", win).forEach(button => button.addEventListener("click", () => {
-          const action = button.dataset.ecosystemZoom;
-          if (action === "fit") return fitEcosystemMap(win);
-          if (action === "reset") ecosystemZoom = 1;
-          else {
-            const delta = action === "in" ? .1 : -.1;
-            ecosystemZoom = Math.min(1.6, Math.max(.45, Math.round((ecosystemZoom + delta) * 10) / 10));
-          }
-          updateZoomUi(win);
-        }));
       }
     });
   };
@@ -221,6 +259,7 @@
     const identityButton = document.querySelector('#startMenu [data-launch="identity"]');
     if (!identityButton || document.querySelector('#startMenu [data-launch="ecosystem"]')) return;
     const button = document.createElement("button");
+    button.type = "button";
     button.dataset.launch = "ecosystem";
     button.innerHTML = "◎ Professional Ecosystem";
     identityButton.insertAdjacentElement("afterend", button);
@@ -239,6 +278,7 @@
     }
     if (container.querySelector('[data-icon-id="professional-ecosystem"]')) return;
     const button = document.createElement("button");
+    button.type = "button";
     button.className = "desktop-icon";
     button.dataset.iconId = "professional-ecosystem";
     button.setAttribute("aria-label", "Abrir Professional Ecosystem");
