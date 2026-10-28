@@ -1,0 +1,231 @@
+.professional-ecosystem-shell {
+  min-height: 100%;
+  display: grid;
+  grid-template-rows: auto minmax(300px, 1fr) auto auto;
+  gap: 14px;
+}
+
+.professional-ecosystem-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: end;
+}
+
+.professional-ecosystem-head h2 {
+  margin: 4px 0 6px;
+}
+
+.professional-ecosystem-head p:last-child {
+  margin-bottom: 0;
+  max-width: 760px;
+  color: #cfc4dd;
+}
+
+.ecosystem-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.ecosystem-tab {
+  padding: 7px 10px;
+  border: 1px solid rgba(139, 92, 246, .35);
+  background: rgba(20, 12, 31, .74);
+  color: #cfc4dd;
+  font: inherit;
+  font-size: .72rem;
+  cursor: pointer;
+}
+
+.ecosystem-tab:hover,
+.ecosystem-tab.active {
+  border-color: #33e6ff;
+  color: #fff;
+  background: rgba(12, 31, 43, .88);
+  box-shadow: inset 0 -2px 0 #ff3fb4;
+}
+
+.professional-ecosystem-map {
+  min-height: 300px;
+  overflow: auto;
+  border: 1px solid rgba(51, 230, 255, .28);
+  background:
+    linear-gradient(rgba(51,230,255,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(51,230,255,.035) 1px, transparent 1px),
+    rgba(5, 3, 10, .62);
+  background-size: 26px 26px;
+  box-shadow: inset 0 0 30px rgba(51, 230, 255, .04);
+}
+
+.professional-ecosystem-stage {
+  min-width: 760px;
+  padding: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.professional-ecosystem-stage svg {
+  max-width: none !important;
+  height: auto !important;
+}
+
+.professional-ecosystem-directory {
+  min-width: 0;
+}
+
+.ecosystem-overview-copy {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.ecosystem-overview-copy p,
+.ecosystem-identity-summary {
+  margin: 0;
+  padding: 11px 12px;
+  border: 1px solid rgba(98, 71, 121, .34);
+  background: rgba(13, 9, 20, .66);
+  color: #cfc4dd;
+  line-height: 1.45;
+}
+
+.ecosystem-overview-copy strong {
+  color: #fff;
+}
+
+.ecosystem-identity-summary {
+  margin-bottom: 10px;
+}
+
+.ecosystem-identity-summary h3 {
+  margin: 3px 0 5px;
+  color: #fff;
+}
+
+.ecosystem-identity-summary p {
+  margin: 0 0 6px;
+}
+
+.ecosystem-identity-summary code {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  color: #33e6ff;
+}
+
+.ecosystem-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.ecosystem-card {
+  min-width: 0;
+  padding: 10px 11px;
+  border: 1px solid rgba(98, 71, 121, .34);
+  background: rgba(13, 9, 20, .66);
+}
+
+.ecosystem-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.ecosystem-card strong {
+  color: #fff;
+  font-size: .78rem;
+}
+
+.ecosystem-card p {
+  min-height: 2.4em;
+  margin: 7px 0 10px;
+  color: #a99bbd;
+  font-size: .7rem;
+  line-height: 1.4;
+}
+
+.ecosystem-card a,
+.ecosystem-no-link {
+  font-size: .66rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.ecosystem-card a {
+  color: #33e6ff;
+  text-decoration: none;
+}
+
+.ecosystem-card a:hover {
+  color: #fff;
+}
+
+.ecosystem-no-link {
+  color: #71657f;
+}
+
+.ecosystem-status {
+  flex: 0 0 auto;
+  padding: 2px 5px;
+  border: 1px solid rgba(101, 245, 163, .38);
+  color: #8effbd;
+  font-size: .55rem;
+  letter-spacing: .05em;
+}
+
+.ecosystem-status.status-reserva {
+  border-color: rgba(255, 189, 63, .42);
+  color: #ffcf72;
+}
+
+.ecosystem-status.status-conectado-no-operativo {
+  border-color: rgba(145, 167, 255, .38);
+  color: #b8c5ff;
+}
+
+.ecosystem-kind-account { border-left: 3px solid #8b5cf6; }
+.ecosystem-kind-academic { border-left: 3px solid #33e6ff; }
+.ecosystem-kind-social { border-left: 3px solid #ff79c9; }
+.ecosystem-kind-infra { border-left: 3px solid #ffbd3f; }
+.ecosystem-kind-resource { border-left: 3px solid #65f5a3; }
+.ecosystem-kind-hub,
+.ecosystem-kind-service { border-left: 3px solid #91a7ff; }
+
+.professional-ecosystem-note {
+  margin: 0;
+  padding: 9px 11px;
+  border-left: 3px solid #ffbd3f;
+  background: rgba(255, 189, 63, .07);
+  color: #f4dfac;
+  font-size: .72rem;
+}
+
+@media (max-width: 920px) {
+  .professional-ecosystem-head {
+    grid-template-columns: 1fr;
+  }
+
+  .ecosystem-tabs {
+    justify-content: flex-start;
+  }
+
+  .ecosystem-card-grid,
+  .ecosystem-overview-copy {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .ecosystem-card-grid,
+  .ecosystem-overview-copy {
+    grid-template-columns: 1fr;
+  }
+
+  .professional-ecosystem-stage {
+    min-width: 650px;
+  }
+}
