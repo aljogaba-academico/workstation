@@ -36,19 +36,47 @@
   margin-top: 6px;
 }
 
-/* Mouse users should get an explicit navigation affordance without changing
-   Mermaid's own SVG geometry or node labels. */
+/* Prevent a wide Mermaid stage from widening the whole window body. The map
+   itself owns horizontal overflow; headers, tabs and FIT controls stay visible. */
+.professional-ecosystem-shell,
+.professional-ecosystem-head,
+.ecosystem-map-toolbar,
+.professional-ecosystem-directory,
+.professional-ecosystem-note,
+.module-infrastructure-detail,
+.mission-detail,
+.map-shell {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.professional-ecosystem-shell,
+.map-shell {
+  width: 100%;
+  overflow: hidden;
+}
+
+.ecosystem-map-toolbar,
+.mermaid-nav-toolbar,
+.map-toolbar {
+  position: relative;
+  z-index: 2;
+  max-width: 100%;
+}
+
+/* Mouse users get explicit panning without changing Mermaid node geometry. */
 .map-canvas[data-mode="architecture"],
 .mission-route-map,
 .module-infrastructure-map,
 .professional-ecosystem-map {
   cursor: grab;
+  user-select: none;
 }
 
-.map-canvas[data-mode="architecture"]:active,
-.mission-route-map:active,
-.module-infrastructure-map:active,
-.professional-ecosystem-map:active {
+.map-canvas[data-mode="architecture"].is-panning,
+.mission-route-map.is-panning,
+.module-infrastructure-map.is-panning,
+.professional-ecosystem-map.is-panning {
   cursor: grabbing;
 }
 
