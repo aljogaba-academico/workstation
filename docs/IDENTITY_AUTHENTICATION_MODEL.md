@@ -1,6 +1,6 @@
 # ALJOGABA OS — Identity, authentication and ownership model
 
-Última revisión: 2026-10-27
+Última revisión: 2026-10-28
 
 ## Propósito
 
@@ -120,10 +120,22 @@ Instalada en la organización para permitir trabajo autorizado sobre los reposit
 
 La identidad operativa confirmada es:
 
-- **Cloudflare** → acceso directo con `aljogaba@gmail.com`.
+- **Cloudflare** → acceso directo con `aljogaba@gmail.com` mediante correo + contraseña; 2FA activo.
 - **Supabase EPISUIS** → `aljogaba@gmail.com → GitHub aljogaba → Supabase`.
 - **Resend** → `aljogaba@gmail.com → GitHub aljogaba → Resend`.
 - **Hostinger / dominio `episuis.com.mx`** → `episuis@gmail.com`.
+
+Auditoría Cloudflare del 2026-10-28:
+
+- nombre de perfil: `Alberto Jorge Galindo Barboza · EPISUIS`;
+- un solo miembro confirmado en la cuenta: `aljogaba@gmail.com`, rol `Super Administrator`;
+- 2FA activo mediante aplicación TOTP y correo electrónico;
+- códigos de recuperación habilitados, sin registrar sus valores en Workstation;
+- Account API Tokens: ninguno;
+- OAuth clients: ninguno;
+- connected apps: ninguna;
+- una sesión activa observada durante la revisión;
+- recursos activos: Cloudflare Pages `vigilancia-episuis` y Worker `episuis-produccion`.
 
 Por tanto:
 
@@ -157,6 +169,9 @@ más:
 - repo: organización `episuis`;
 - GitHub App Cloudflare: instalada en organización `episuis`;
 - cuenta Cloudflare: `aljogaba@gmail.com`;
+- Cloudflare Pages: `vigilancia-episuis`, rama `main`, despliegue automático;
+- URL de producción: `https://vigilancia-episuis.pages.dev`;
+- variables de frontend: `VITE_SUPABASE_URL` + `VITE_SUPABASE_PUBLISHABLE_KEY`;
 - cuenta Supabase: `aljogaba@gmail.com → GitHub aljogaba`;
 - cuenta Resend: `aljogaba@gmail.com → GitHub aljogaba`.
 
@@ -166,12 +181,16 @@ más:
 
 más:
 
-`EPISUIS Producción → Supabase produccion`
+`EPISUIS Producción → Supabase produccion-episuis`
 
 - repo: organización `episuis`;
 - GitHub App Cloudflare: instalada en organización `episuis`;
 - cuenta Cloudflare: `aljogaba@gmail.com`;
+- Worker: `episuis-produccion`, rama `main`;
+- URL de producción: `https://episuis-produccion.aljogaba.workers.dev`;
+- variables de frontend: `VITE_SUPABASE_URL` + `VITE_SUPABASE_PUBLISHABLE_KEY`;
 - cuenta Supabase: `aljogaba@gmail.com → GitHub aljogaba`;
+- proyecto Supabase visible: `produccion-episuis`;
 - Resend: no forma parte actualmente de este módulo.
 
 ---
