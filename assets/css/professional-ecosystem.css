@@ -1,7 +1,14 @@
+.os-window[data-window-id="professional-ecosystem"]:not(.maximized) {
+  resize: both;
+  overflow: hidden;
+  min-width: 680px;
+  min-height: 480px;
+}
+
 .professional-ecosystem-shell {
   min-height: 100%;
   display: grid;
-  grid-template-rows: auto minmax(300px, 1fr) auto auto;
+  grid-template-rows: auto auto minmax(300px, 1fr) auto auto;
   gap: 14px;
 }
 
@@ -47,6 +54,37 @@
   box-shadow: inset 0 -2px 0 #ff3fb4;
 }
 
+.ecosystem-map-toolbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  min-height: 31px;
+  padding: 5px 7px;
+  border: 1px solid rgba(98, 71, 121, .34);
+  background: rgba(13, 9, 20, .66);
+}
+
+.ecosystem-map-toolbar > span:first-child {
+  margin-right: 4px;
+  color: #ff79c9;
+  font-size: .66rem;
+  letter-spacing: .08em;
+}
+
+.ecosystem-map-toolbar [data-ecosystem-zoom-label] {
+  min-width: 44px;
+  text-align: center;
+  color: #33e6ff;
+  font-size: .7rem;
+}
+
+.ecosystem-map-toolbar small {
+  margin-left: auto;
+  color: #8f80a5;
+  font-size: .63rem;
+}
+
 .professional-ecosystem-map {
   min-height: 300px;
   overflow: auto;
@@ -65,6 +103,7 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  transform-origin: top left;
 }
 
 .professional-ecosystem-stage svg {
@@ -216,6 +255,19 @@
   .ecosystem-card-grid,
   .ecosystem-overview-copy {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ecosystem-map-toolbar small {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 720px) {
+  .os-window[data-window-id="professional-ecosystem"]:not(.maximized) {
+    resize: none;
+    min-width: 0;
+    min-height: 0;
   }
 }
 
