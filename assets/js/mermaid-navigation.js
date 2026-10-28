@@ -108,7 +108,7 @@
       <button class="retro-button compact" data-mermaid-nav-action="in" aria-label="Acercar diagrama">+</button>
       <button class="retro-button compact" data-mermaid-nav-action="reset">100%</button>
       <button class="retro-button compact" data-mermaid-nav-action="fit">FIT</button>
-      <small>Rueda: desplazamiento · Shift + rueda: horizontal</small>`;
+      <small>Rueda: navegar · Shift + rueda: horizontal · arrastrar: mover mapa</small>`;
 
     toolbar.addEventListener('click', event => {
       const action = event.target.closest('[data-mermaid-nav-action]')?.dataset.mermaidNavAction;
@@ -130,26 +130,105 @@
     viewport.addEventListener('wheel', event => {
       const hasHorizontalOverflow = viewport.scrollWidth > viewport.clientWidth + 2;
       const hasVerticalOverflow = viewport.scrollHeight > viewport.clientHeight + 2;
+      if (!hasHorizontalOverflow && !hasVerticalOverflow) return;
 
-      // Native vertical scrolling remains intact when the diagram is actually tall.
-      // Shift + wheel always pans horizontally. For wide/short diagrams, the normal
-      // wheel is translated to horizontal panning so a mouse can navigate them.
+      const dx = event.deltaX || 0;
+      const dy = event.deltaY || 0;
+
       if (event.shiftKey && hasHorizontalOverflow) {
         event.preventDefault();
-        viewport.scrollLeft += event.deltaY || event.deltaX;
+        viewport.scrollLeft += dy || dx;
         return;
       }
 
-      if (!hasVerticalOverflow && hasHorizontalOverflow && Math.abs(event.deltaY) >= Math.abs(event.deltaX)) {
+      // Trackpads often send a dominant horizontal delta; honor it directly.
+      if (hasHorizontalOverflow && Math.abs(dx) > Math.abs(dy)) {
         event.preventDefault();
-        viewport.scrollLeft += event.deltaY;
+        viewport.scrollLeft += dx;
+        return;
+      }
+
+      // Keep the wheel inside the Mermaid viewport while there is vertical room.
+      if (hasVerticalOverflow && Math.abs(dy) >= Math.abs(dx)) {
+        const maxTop = Math.max(0, viewport.scrollHeight - viewport.clientHeight);
+        const canMoveDown = dy > 0 && viewport.scrollTop < maxTop - 1;
+        const canMoveUp = dy < 0 && viewport.scrollTop > 1;
+        if (canMoveDown || canMoveUp) {
+          event.preventDefault();
+          viewport.scrollTop += dy;
+          return;
+        }
+      }
+
+      // Once vertical movement is exhausted, a wide diagram uses the same wheel
+      // motion for horizontal panning instead of leaking immediately to the window.
+      if (hasHorizontalOverflow && Math.abs(dy) >= Math.abs(dx)) {
+        const maxLeft = Math.max(0, viewport.scrollWidth - viewport.clientWidth);
+        const canMoveRight = dy > 0 && viewport.scrollLeft < maxLeft - 1;
+        const canMoveLeft = dy < 0 && viewport.scrollLeft > 1;
+        if (canMoveRight || canMoveLeft) {
+          event.preventDefault();
+          viewport.scrollLeft += dy;
+        }
       }
     }, { passive: false });
+  }
+
+  function bindDragPan(viewport) {
+    if (viewport.dataset.mermaidDragBound === '1') return;
+    viewport.dataset.mermaidDragBound = '1';
+
+    let pointerId = null;
+    let startX = 0;
+    let startY = 0;
+    let startLeft = 0;
+    let startTop = 0;
+    let moved = false;
+
+    viewport.addEventListener('pointerdown', event => {
+      if (event.button !== 0 || event.target.closest('button,a,input,select,textarea')) return;
+      pointerId = event.pointerId;
+      startX = event.clientX;
+      startY = event.clientY;
+      startLeft = viewport.scrollLeft;
+      startTop = viewport.scrollTop;
+      moved = false;
+      viewport.setPointerCapture?.(pointerId);
+      viewport.classList.add('is-panning');
+    });
+
+    viewport.addEventListener('pointermove', event => {
+      if (pointerId !== event.pointerId) return;
+      const dx = event.clientX - startX;
+      const dy = event.clientY - startY;
+      if (!moved && Math.hypot(dx, dy) < 4) return;
+      moved = true;
+      viewport.scrollLeft = startLeft - dx;
+      viewport.scrollTop = startTop - dy;
+      event.preventDefault();
+    });
+
+    const endPan = event => {
+      if (pointerId !== event.pointerId) return;
+      viewport.releasePointerCapture?.(pointerId);
+      pointerId = null;
+      viewport.classList.remove('is-panning');
+    };
+    viewport.addEventListener('pointerup', endPan);
+    viewport.addEventListener('pointercancel', endPan);
+
+    viewport.addEventListener('click', event => {
+      if (!moved) return;
+      event.preventDefault();
+      event.stopPropagation();
+      moved = false;
+    }, true);
   }
 
   function enhance(viewport) {
     if (!(viewport instanceof HTMLElement)) return;
     bindWheel(viewport);
+    bindDragPan(viewport);
     if (stageFor(viewport)?.querySelector('svg')) makeToolbar(viewport);
   }
 
@@ -162,7 +241,6 @@
     records.forEach(record => record.addedNodes.forEach(node => {
       if (node.nodeType === Node.ELEMENT_NODE) scan(node);
     }));
-    // Mermaid replaces placeholder contents asynchronously; rescan known viewports.
     document.querySelectorAll(VIEWPORT_SELECTOR).forEach(enhance);
   });
 
