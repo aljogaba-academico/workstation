@@ -1,5 +1,6 @@
 (() => {
   let professionalEcosystem = null;
+  let ecosystemZoom = 1;
   const ecosystemReady = fetch("data/professional-ecosystem.json", { cache: "no-store" })
     .then(response => {
       if (!response.ok) throw new Error(`Professional ecosystem registry ${response.status}`);
@@ -69,6 +70,26 @@
     return lines.join("\n");
   }
 
+  function updateZoomUi(win) {
+    const stage = $(".professional-ecosystem-stage", win);
+    if (stage) stage.style.zoom = ecosystemZoom;
+    const label = $("[data-ecosystem-zoom-label]", win);
+    if (label) label.textContent = `${Math.round(ecosystemZoom * 100)}%`;
+  }
+
+  function fitEcosystemMap(win) {
+    const map = $(".professional-ecosystem-map", win);
+    const stage = $(".professional-ecosystem-stage", win);
+    const svg = stage?.querySelector("svg");
+    if (!map || !stage || !svg) return;
+    stage.style.zoom = 1;
+    const naturalWidth = Math.max(svg.getBoundingClientRect().width, 1);
+    const availableWidth = Math.max(map.clientWidth - 36, 1);
+    ecosystemZoom = Math.min(1, Math.max(.45, Math.floor((availableWidth / naturalWidth) * 100) / 100));
+    updateZoomUi(win);
+    map.scrollTo({ left: 0, top: 0, behavior: "smooth" });
+  }
+
   async function renderEcosystemMap(target, root, attempts = 0) {
     if (!window.mermaid) {
       target.innerHTML = `<p class="map-loading">Loading professional ecosystem <span class="blink">█</span></p>`;
@@ -77,6 +98,8 @@
     }
     target.innerHTML = `<div class="professional-ecosystem-stage"><div class="mermaid">${ecosystemMermaid(root)}</div></div>`;
     await window.mermaid.run({ nodes: [$(".mermaid", target)] });
+    const win = target.closest(".os-window");
+    if (win) updateZoomUi(win);
   }
 
   function statusLabel(status = "") {
@@ -140,6 +163,15 @@
             ${buttons.map(([id, label], index) => `<button class="ecosystem-tab ${index === 0 ? "active" : ""}" data-ecosystem-root="${esc(id)}">${esc(label)}</button>`).join("")}
           </div>
         </div>
+        <div class="ecosystem-map-toolbar">
+          <span>MAP VIEW</span>
+          <button class="retro-button compact" data-ecosystem-zoom="out" aria-label="Alejar mapa">−</button>
+          <span data-ecosystem-zoom-label>100%</span>
+          <button class="retro-button compact" data-ecosystem-zoom="in" aria-label="Acercar mapa">+</button>
+          <button class="retro-button compact" data-ecosystem-zoom="reset">100%</button>
+          <button class="retro-button compact" data-ecosystem-zoom="fit">FIT</button>
+          <small>La ventana también puede redimensionarse desde la esquina inferior derecha.</small>
+        </div>
         <div class="professional-ecosystem-map"></div>
         <section class="professional-ecosystem-directory"></section>
         <p class="professional-ecosystem-note">El mapa documenta identidades, métodos de acceso, perfiles, recursos y presencia profesional. No almacena contraseñas, códigos MFA, recovery codes, API keys ni valores de secretos.</p>
@@ -166,20 +198,69 @@
       onMount: win => {
         renderRoot(win, "overview");
         $$(".ecosystem-tab", win).forEach(button => button.addEventListener("click", () => renderRoot(win, button.dataset.ecosystemRoot)));
+        $$("[data-ecosystem-zoom]", win).forEach(button => button.addEventListener("click", () => {
+          const action = button.dataset.ecosystemZoom;
+          if (action === "fit") return fitEcosystemMap(win);
+          if (action === "reset") ecosystemZoom = 1;
+          else {
+            const delta = action === "in" ? .1 : -.1;
+            ecosystemZoom = Math.min(1.6, Math.max(.45, Math.round((ecosystemZoom + delta) * 10) / 10));
+          }
+          updateZoomUi(win);
+        }));
       }
     });
   };
 
-  document.addEventListener("DOMContentLoaded", () => {
+  function launchProfessionalEcosystem() {
+    document.getElementById("startMenu")?.classList.add("is-hidden");
+    window.openProfessionalEcosystem();
+  }
+
+  function installStartShortcut() {
     const identityButton = document.querySelector('#startMenu [data-launch="identity"]');
     if (!identityButton || document.querySelector('#startMenu [data-launch="ecosystem"]')) return;
     const button = document.createElement("button");
     button.dataset.launch = "ecosystem";
     button.innerHTML = "◎ Professional Ecosystem";
     identityButton.insertAdjacentElement("afterend", button);
-    button.addEventListener("click", () => {
-      document.getElementById("startMenu")?.classList.add("is-hidden");
-      window.openProfessionalEcosystem();
+    button.addEventListener("click", event => {
+      event.preventDefault();
+      event.stopPropagation();
+      launchProfessionalEcosystem();
     });
+  }
+
+  function installDesktopShortcut(attempts = 0) {
+    const container = document.getElementById("desktopIcons");
+    if (!container || !container.children.length) {
+      if (attempts < 80) setTimeout(() => installDesktopShortcut(attempts + 1), 100);
+      return;
+    }
+    if (container.querySelector('[data-icon-id="professional-ecosystem"]')) return;
+    const button = document.createElement("button");
+    button.className = "desktop-icon";
+    button.dataset.iconId = "professional-ecosystem";
+    button.setAttribute("aria-label", "Abrir Professional Ecosystem");
+    button.innerHTML = `<span class="pixel-icon">◎</span><span class="desktop-icon-label">Professional Ecosystem</span>`;
+    button.addEventListener("click", event => {
+      event.stopPropagation();
+      $$(".desktop-icon", container).forEach(x => x.classList.remove("selected"));
+      button.classList.add("selected");
+      if (window.matchMedia("(pointer: coarse)").matches) launchProfessionalEcosystem();
+    });
+    button.addEventListener("dblclick", event => {
+      event.stopPropagation();
+      launchProfessionalEcosystem();
+    });
+    button.addEventListener("keydown", event => {
+      if (event.key === "Enter") launchProfessionalEcosystem();
+    });
+    container.appendChild(button);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    installStartShortcut();
+    installDesktopShortcut();
   });
 })();
