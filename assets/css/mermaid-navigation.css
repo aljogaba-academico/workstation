@@ -64,6 +64,35 @@
   max-width: 100%;
 }
 
+/* Mermaid viewport contract: every diagram owns BOTH axes of scrolling.
+   Without a vertical cap, tall SVGs expanded their container and the window
+   body became the vertical scroller. These viewports now remain bounded so
+   horizontal and vertical navigation both happen inside the Mermaid box. */
+.mission-route-map,
+.module-infrastructure-map,
+.professional-ecosystem-map {
+  max-height: min(520px, 52dvh);
+  overflow-x: auto !important;
+  overflow-y: auto !important;
+  scrollbar-gutter: stable both-edges;
+  overscroll-behavior: contain;
+}
+
+/* System Map already lives in a fixed 1fr row. Keep that row shrinkable so its
+   own canvas, rather than the surrounding window, receives vertical overflow. */
+.map-shell {
+  min-height: 0;
+}
+
+.map-canvas[data-mode="architecture"] {
+  min-height: 0;
+  max-height: 100%;
+  overflow-x: auto !important;
+  overflow-y: auto !important;
+  scrollbar-gutter: stable both-edges;
+  overscroll-behavior: contain;
+}
+
 /* Mouse users get explicit panning without changing Mermaid node geometry. */
 .map-canvas[data-mode="architecture"],
 .mission-route-map,
@@ -84,5 +113,11 @@
   .mermaid-nav-toolbar small {
     width: 100%;
     margin-left: 0;
+  }
+
+  .mission-route-map,
+  .module-infrastructure-map,
+  .professional-ecosystem-map {
+    max-height: min(460px, 48dvh);
   }
 }
