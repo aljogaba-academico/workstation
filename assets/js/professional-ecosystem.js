@@ -14,6 +14,7 @@
 
   const esc = value => escapeHtml(String(value ?? ""));
   const safeLink = value => /^https:\/\//i.test(value || "") ? value : "";
+  const mermaidId = value => `n_${String(value || "node").replace(/[^A-Za-z0-9_]/g, "_")}`;
 
   function identityById(id) {
     return (professionalEcosystem?.identities || []).find(item => item.id === id);
@@ -34,12 +35,12 @@
       const lines = ["flowchart LR"];
       (professionalEcosystem?.identities || []).forEach(identity => {
         const emailText = (identity.emails || []).join(" · ");
-        lines.push(`  ${identity.id}[\"${mermaidEscape(identity.label)}<br/><span class='node-access'>${mermaidEscape(identity.subtitle)}<br/>${mermaidEscape(emailText)}</span>\"]`);
+        lines.push(`  ${mermaidId(identity.id)}[\"${mermaidEscape(identity.label)}<br/><span class='node-access'>${mermaidEscape(identity.subtitle)}<br/>${mermaidEscape(emailText)}</span>\"]`);
       });
-      lines.push("  aljogaba --- academic");
-      lines.push("  aljogaba --- episuis");
+      lines.push(`  ${mermaidId("aljogaba")} --- ${mermaidId("academic")}`);
+      lines.push(`  ${mermaidId("aljogaba")} --- ${mermaidId("episuis")}`);
       lines.push("  classDef identity fill:#24102e,color:#ffffff,stroke:#ff3fb4,stroke-width:3px;");
-      lines.push("  class aljogaba,academic,episuis identity;");
+      lines.push(`  class ${["aljogaba", "academic", "episuis"].map(mermaidId).join(",")} identity;`);
       return lines.join("\n");
     }
 
@@ -47,10 +48,12 @@
     const edges = edgesFor(root, nodes);
     const lines = ["flowchart TD"];
     nodes.forEach(node => {
-      lines.push(`  ${node.id}[\"${mermaidEscape(node.label)}<br/><span class='node-access'>${mermaidEscape(node.detail || "")}</span>\"]`);
+      lines.push(`  ${mermaidId(node.id)}[\"${mermaidEscape(node.label)}<br/><span class='node-access'>${mermaidEscape(node.detail || "")}</span>\"]`);
     });
     edges.forEach(([from, to, label]) => {
-      lines.push(label ? `  ${from} -->|\"${mermaidEscape(label)}\"| ${to}` : `  ${from} --> ${to}`);
+      const fromId = mermaidId(from);
+      const toId = mermaidId(to);
+      lines.push(label ? `  ${fromId} -->|\"${mermaidEscape(label)}\"| ${toId}` : `  ${fromId} --> ${toId}`);
     });
     lines.push("  classDef identity fill:#24102e,color:#ffffff,stroke:#ff3fb4,stroke-width:3px;");
     lines.push("  classDef account fill:#161020,color:#eee9f7,stroke:#8b5cf6,stroke-width:2px;");
@@ -61,7 +64,7 @@
     lines.push("  classDef hub fill:#171b28,color:#eefcff,stroke:#91a7ff,stroke-width:3px;");
     lines.push("  classDef service fill:#171b28,color:#eefcff,stroke:#91a7ff,stroke-width:2px;");
     const groups = {};
-    nodes.forEach(node => (groups[node.kind || "service"] ||= []).push(node.id));
+    nodes.forEach(node => (groups[node.kind || "service"] ||= []).push(mermaidId(node.id)));
     Object.entries(groups).forEach(([kind, ids]) => lines.push(`  class ${ids.join(",")} ${kind};`));
     return lines.join("\n");
   }
