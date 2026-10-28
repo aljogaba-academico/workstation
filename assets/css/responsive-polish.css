@@ -14,6 +14,63 @@ html,body{width:100%;max-width:100%}
   overscroll-behavior:contain;
 }
 
+/* Mermaid viewport contract -------------------------------------------------
+   Every Mermaid canvas must own the full width of its diagram. Previously the
+   stage could stay viewport-sized while a centered SVG overflowed to both
+   sides; the left part then lived at a negative coordinate and the horizontal
+   scrollbar could never reach it. This is especially visible on mobile.
+
+   The stage now grows to max-content when the diagram is wider than the
+   viewport, while remaining at least as wide as the viewport when it is not.
+   This keeps centered diagrams centered and makes every pixel reachable by
+   native horizontal scrolling. */
+.map-canvas,
+.mission-route-map,
+.module-infrastructure-map,
+.professional-ecosystem-map{
+  min-width:0;
+  max-width:100%;
+  overflow:auto;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
+  touch-action:pan-x pan-y;
+  scrollbar-gutter:stable;
+}
+
+.mermaid-stage,
+.mission-mermaid-stage,
+.module-mermaid-stage,
+.professional-ecosystem-stage{
+  width:max-content;
+  min-width:100%;
+  max-width:none;
+  box-sizing:border-box;
+  margin:0;
+  justify-content:center;
+  transform-origin:top left;
+}
+
+.mermaid-stage svg,
+.mission-mermaid-stage svg,
+.module-mermaid-stage svg,
+.professional-ecosystem-stage svg{
+  display:block;
+  flex:0 0 auto;
+  max-width:none!important;
+  height:auto!important;
+}
+
+/* Architecture needs a scrollable document flow; radar keeps the original
+   centered scanner composition. */
+.map-canvas[data-mode="architecture"]{
+  display:block;
+  place-items:initial;
+}
+.map-canvas[data-mode="radar"]{
+  display:grid;
+  place-items:center;
+}
+
 @supports (padding:max(0px)){
   .menubar{padding-top:max(6px,env(safe-area-inset-top));padding-left:max(12px,env(safe-area-inset-left));padding-right:max(12px,env(safe-area-inset-right))}
   .taskbar{padding-left:max(5px,env(safe-area-inset-left));padding-right:max(5px,env(safe-area-inset-right));padding-bottom:max(5px,env(safe-area-inset-bottom))}
