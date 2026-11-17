@@ -1,6 +1,6 @@
 # ALJOGABA OS — Infrastructure Relationship Audit
 
-Última revisión: 2026-10-27
+Última revisión: 2026-11-17
 
 ## Fuente canónica
 
@@ -52,6 +52,7 @@ Repositorios:
 - `aljogaba/sipro-porcino`
 - `aljogaba/epi-2x2`
 - `aljogaba/dimu-porcino`
+- `aljogaba/fastaudit`
 
 Infraestructura:
 
@@ -60,6 +61,8 @@ Infraestructura:
 - Backend externo: ninguno.
 - Cloudflare: no.
 - Supabase: no.
+
+FASTAudit ejecuta la auditoría y comparación exacta de FASTA íntegramente en el navegador. Es una herramienta propia del Perfil profesional; puede apoyar el control de calidad de datasets de DiseasesMapMx, pero no depende de sus servicios ni sustituye sus módulos de análisis molecular y curación.
 
 ## CV canónico
 

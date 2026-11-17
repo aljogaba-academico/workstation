@@ -19,8 +19,8 @@ La workstation **no sustituye las fuentes canónicas** de EPISUIS, DiseasesMapMx
 
 - **4 Systems**
 - **14 Modules**
-- **3 Tools**
-- **29 Mission Routes**
+- **4 Tools**
+- **31 Mission Routes**
 
 Los contadores se derivan de los archivos de datos; no se mantienen manualmente en la interfaz.
 
@@ -36,6 +36,7 @@ Los contadores se derivan de los archivos de datos; no se mantienen manualmente 
 - SIPRO-Porcino
 - Epi 2×2
 - DIMUPorcino
+- FASTAudit
 
 GitHub, Mermaid, Python, Quarto, QGIS, Supabase y tecnologías equivalentes pertenecen a infraestructura/Engine Room, no al contador de Tools.
 

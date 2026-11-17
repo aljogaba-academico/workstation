@@ -109,10 +109,11 @@
         {"id":"sipro","label":"GitHub repo: sipro-porcino","type":"source","account":"ALJOGABA · aljogaba@gmail.com · GitHub / aljogaba"},
         {"id":"epi","label":"GitHub repo: epi-2x2","type":"source","account":"ALJOGABA · aljogaba@gmail.com · GitHub / aljogaba"},
         {"id":"dimu","label":"GitHub repo: dimu-porcino","type":"source","account":"ALJOGABA · aljogaba@gmail.com · GitHub / aljogaba"},
+        {"id":"fastaudit","label":"GitHub repo: fastaudit","type":"source","account":"ALJOGABA · aljogaba@gmail.com · GitHub / aljogaba"},
         {"id":"pages","label":"GitHub Pages","type":"deploy","account":"ALJOGABA · aljogaba@gmail.com"}
       ],
-      "edges": [["m","sipro","incluye"],["m","epi","incluye"],["m","dimu","incluye"],["sipro","pages","publicación"],["epi","pages","publicación"],["dimu","pages","publicación"]],
-      "note": "SIPRO-Porcino, Epi 2×2 y DIMUPorcino trabajan únicamente desde GitHub Pages; no tienen backend externo."
+      "edges": [["m","sipro","incluye"],["m","epi","incluye"],["m","dimu","incluye"],["m","fastaudit","incluye"],["sipro","pages","publicación"],["epi","pages","publicación"],["dimu","pages","publicación"],["fastaudit","pages","publicación"]],
+      "note": "SIPRO-Porcino, Epi 2×2, DIMUPorcino y FASTAudit trabajan únicamente desde GitHub Pages; no tienen backend externo. FASTAudit procesa los archivos localmente en el navegador."
     },
     {
       "system": "perfil",

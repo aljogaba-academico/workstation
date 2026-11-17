@@ -25,5 +25,14 @@
     "status": "public",
     "description": "Diseño de muestreos sanitarios por estado, región, municipio o granja, con flujos por etapa y población.",
     "url": "https://aljogaba.github.io/dimu-porcino/"
+  },
+  {
+    "id": "fastaudit",
+    "name": "FASTAudit",
+    "fullName": "Auditor de calidad e integridad de secuencias FASTA",
+    "category": "BIOINFORMÁTICA",
+    "status": "development",
+    "description": "Auditoría estructural de secuencias nucleotídicas, encabezados, IDs, alfabetos IUPAC, longitudes, duplicados y comparación exacta de datasets FASTA; exportación CSV y reporte HTML.",
+    "url": "https://aljogaba.github.io/fastaudit/"
   }
 ]
