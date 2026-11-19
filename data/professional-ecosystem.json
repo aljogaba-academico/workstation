@@ -1,5 +1,5 @@
 {
-  "version": "2026-10-28-professional-ecosystem-v1",
+  "version": "2026-11-19-supabase-account-access",
   "scope": "Ecosistema profesional, académico e institucional. Excluye cuentas y servicios de uso personal, Club Entre Libros y Letras, Smoke Lab, entretenimiento y consulta personal.",
   "identities": [
     {
@@ -49,7 +49,7 @@
     {"id":"workstation","root":"academic","label":"ALJOGABA OS · Workstation","kind":"hub","detail":"Mapa operativo del ecosistema profesional y científico","url":"https://aljogaba-academico.github.io/workstation/","status":"activo"},
     {"id":"cf-dmx","root":"academic","label":"Cloudflare · DiseasesMapMx","kind":"infra","detail":"Acceso directo con correo académico · 2FA TOTP + email · un Super Administrator","url":"https://dash.cloudflare.com/","status":"activo"},
     {"id":"worker-dmx","root":"academic","label":"Worker · diseasesmapmx-web","kind":"resource","detail":"Static-assets Worker · main auto deploy · previews de ramas habilitados","url":"https://diseasesmapmx-web.diseasesmapmx.workers.dev","status":"activo"},
-    {"id":"supabase-dmx","root":"academic","label":"Supabase · DiseasesMapMx","kind":"infra","detail":"Acceso: correo académico → GitHub aljogaba-academico","url":"https://supabase.com/dashboard","status":"activo"},
+    {"id":"supabase-dmx","root":"academic","label":"Supabase · DiseasesMapMx","kind":"infra","detail":"Acceso: aljogaba.academico@gmail.com → GitHub aljogaba-academico → Organization DiseasesMapMx / DiseasesMapMx Production","url":"https://supabase.com/dashboard","status":"activo"},
     {"id":"render-dmx","root":"academic","label":"Render · Workspace DiseasesMapMx","kind":"infra","detail":"Acceso: correo académico → GitHub aljogaba-academico · un Admin","url":"https://dashboard.render.com/","status":"activo"},
     {"id":"analysis-engine","root":"academic","label":"diseasesmapmx-analysis-engine","kind":"resource","detail":"Web Service Docker · main · Auto-Deploy · Virginia (US East) · Free · sin disco persistente","url":"https://diseasesmapmx-analysis-engine.onrender.com","status":"activo"},
 
@@ -64,7 +64,7 @@
     {"id":"linkedin-episuis","root":"episuis","label":"LinkedIn Company Page · EPISUIS","kind":"social","detail":"Reserva de nombre / presencia institucional sin actividad · administrada desde LinkedIn académico ALJOGABA","url":"https://www.linkedin.com/company/111901502/","status":"reserva"},
     {"id":"github-episuis","root":"episuis","label":"GitHub Organization · episuis","kind":"resource","detail":"Contenedor de repositorios; Owners: aljogaba + episuis-admin","url":"https://github.com/episuis","status":"activo"},
     {"id":"cf-episuis","root":"episuis","label":"Cloudflare · EPISUIS","kind":"infra","detail":"Acceso directo: aljogaba@gmail.com · Super Administrator · 2FA TOTP + email","url":"https://dash.cloudflare.com/","status":"activo"},
-    {"id":"supabase-episuis","root":"episuis","label":"Supabase · EPISUIS","kind":"infra","detail":"Acceso: aljogaba@gmail.com → GitHub aljogaba","url":"https://supabase.com/dashboard","status":"activo"},
+    {"id":"supabase-episuis","root":"episuis","label":"Supabase · EPISUIS","kind":"infra","detail":"Acceso operativo: aljogaba@gmail.com → GitHub aljogaba → MFA propio Supabase → Organization EPISUIS / vigilancia-episuis. episuis-admin: no usar para Vigilancia; sin organizaciones visibles en sesión revisada el 2026-11-19.","url":"https://supabase.com/dashboard","status":"activo"},
     {"id":"resend","root":"episuis","label":"Resend · Team EPISUIS","kind":"infra","detail":"Login por Google o GitHub aljogaba · MFA activo · dominio episuis.com.mx","url":"https://resend.com/","status":"activo"},
     {"id":"vigilancia","root":"episuis","label":"Vigilancia EPISUIS","kind":"resource","detail":"Cloudflare Pages + Supabase + Resend","url":"https://vigilancia-episuis.pages.dev","status":"activo"},
     {"id":"produccion","root":"episuis","label":"EPISUIS Producción","kind":"resource","detail":"Cloudflare Worker + Supabase produccion-episuis","url":"https://episuis-produccion.aljogaba.workers.dev","status":"activo"}
