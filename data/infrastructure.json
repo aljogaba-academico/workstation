@@ -47,7 +47,7 @@
         {
           "identity": "ALJOGABA",
           "handle": "aljogaba@gmail.com → GitHub aljogaba",
-          "resources": "Organization EPISUIS · projects vigilancia-episuis y produccion-episuis (inventario documentado; estado de cada proyecto debe verificarse en Dashboard) · acceso Supabase con MFA TOTP independiente de GitHub · recovery codes generados y guardados 2026-11-19 (valores nunca almacenados aquí)"
+          "resources": "Organization EPISUIS · projects vigilancia-episuis y produccion-episuis (inventario documentado; estado de cada proyecto debe verificarse en Dashboard) · acceso Supabase con MFA TOTP independiente de GitHub · 2 factores TOTP registrados en Supabase el 2026-11-19 (Supabase — aljogaba / SUPABASE-ALJOGABA) · recovery codes generados y guardados 2026-11-19 (no almacenar códigos, QR ni claves aquí)"
         },
         {
           "identity": "ALJOGABA ACADEMIC",
