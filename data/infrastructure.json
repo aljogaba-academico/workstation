@@ -1,5 +1,5 @@
 {
-  "version": "2026-10-28-cloudflare-episuis-audited",
+  "version": "2026-11-19-supabase-accounts-reviewed",
   "accessRegistry": [
     {
       "provider": "GitHub",
@@ -47,12 +47,17 @@
         {
           "identity": "ALJOGABA",
           "handle": "aljogaba@gmail.com → GitHub aljogaba",
-          "resources": "Organization EPISUIS · projects vigilancia-episuis y produccion-episuis"
+          "resources": "Organization EPISUIS · projects vigilancia-episuis y produccion-episuis (inventario documentado; estado de cada proyecto debe verificarse en Dashboard) · acceso Supabase con MFA TOTP independiente de GitHub · recovery codes generados y guardados 2026-11-19 (valores nunca almacenados aquí)"
         },
         {
           "identity": "ALJOGABA ACADEMIC",
           "handle": "aljogaba.academico@gmail.com → GitHub aljogaba-academico",
           "resources": "Organization DiseasesMapMx · project DiseasesMapMx Production"
+        },
+        {
+          "identity": "EPISUIS ADMIN",
+          "handle": "episuis-admin · GitHub / episuis@gmail.com",
+          "resources": "No es la ruta operativa para Supabase EPISUIS. En la sesión revisada el 2026-11-19 no se mostraron organizaciones ni proyectos; no implica inexistencia permanente ni sustituye una auditoría de permisos."
         }
       ]
     },
