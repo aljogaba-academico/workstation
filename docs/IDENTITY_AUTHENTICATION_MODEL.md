@@ -1,6 +1,6 @@
 # ALJOGABA OS — Identity, authentication and ownership model
 
-Última revisión: 2026-10-28
+Última revisión: 2026-11-19
 
 ## Propósito
 
@@ -124,6 +124,20 @@ La identidad operativa confirmada es:
 - **Supabase EPISUIS** → `aljogaba@gmail.com → GitHub aljogaba → Supabase`.
 - **Resend** → `aljogaba@gmail.com → GitHub aljogaba → Resend`.
 - **Hostinger / dominio `episuis.com.mx`** → `episuis@gmail.com`.
+
+### Actualización Supabase — verificación operativa del 2026-11-19
+
+Se revisaron las rutas de acceso tras una incidencia de inicio de sesión. **No deben confundirse las cuentas de GitHub con las organizaciones o proyectos de Supabase**:
+
+| Cuenta utilizada para iniciar sesión | Ruta y alcance documentado |
+| --- | --- |
+| `aljogaba` (`aljogaba@gmail.com`) | **Continue with GitHub** → `aljogaba` → Supabase → organización **EPISUIS** → proyecto **`vigilancia-episuis`**. El inventario previo también registra `produccion-episuis`; su estado actual requiere revisión independiente en Dashboard. |
+| `aljogaba-academico` (`aljogaba.academico@gmail.com`) | **Continue with GitHub** → `aljogaba-academico` → Supabase → organización **DiseasesMapMx** → proyecto **DiseasesMapMx Production**. |
+| `episuis-admin` (cuenta técnica GitHub asociada a `episuis@gmail.com`) | **No usar para administrar Vigilancia**. Durante la sesión Supabase observada el 2026-11-19, el Dashboard no mostró organizaciones ni proyectos para esa identidad. Es una observación de esa sesión, no una prueba de ausencia absoluta de recursos. Conserva su función de gobierno/respaldo en GitHub. |
+
+**Autenticación y recuperación:** en el acceso de `aljogaba`, la aprobación de **GitHub Mobile** resolvió el segundo factor de GitHub; después **Supabase solicitó su propio código de aplicación autenticadora** (`Supabase — aljogaba`). Son dos MFA independientes. El 2026-11-19 se generaron y guardaron códigos de recuperación **de Supabase**; sus valores y ubicaciones privadas no se registran en Workstation. En esa revisión Supabase advertía que solo había un método MFA configurado, de modo que agregar un respaldo independiente sigue siendo una tarea pendiente.
+
+**Flujo para reactivar Vigilancia:** abrir `https://supabase.com/dashboard` → **Continue with GitHub** → seleccionar `aljogaba` (no `episuis-admin`) → completar MFA propio de Supabase → organización `EPISUIS` → `vigilancia-episuis` → revisar estado y restaurar solo si aparece pausado. No crear un proyecto nuevo.
 
 Auditoría Cloudflare del 2026-10-28:
 
