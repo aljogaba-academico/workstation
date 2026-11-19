@@ -1,6 +1,6 @@
 # ALJOGABA OS — Professional Ecosystem
 
-Última revisión: 2026-10-28
+Última revisión: 2026-11-19
 
 ## Propósito
 
@@ -49,7 +49,7 @@ Se excluyen deliberadamente cuentas y servicios de uso personal, entretenimiento
 - correo raíz: `aljogaba.academico@gmail.com`.
 - GitHub `aljogaba-academico`: administra la organización `DiseasesMapMx`.
 - Cloudflare DiseasesMapMx: acceso directo por correo académico; 2FA TOTP + email; un Super Administrator confirmado.
-- Supabase DiseasesMapMx: correo académico → GitHub `aljogaba-academico` → Supabase.
+- Supabase DiseasesMapMx: correo académico → GitHub `aljogaba-academico` → Supabase → organización DiseasesMapMx → `DiseasesMapMx Production`.
 - Render: correo académico → GitHub `aljogaba-academico` → Workspace `DiseasesMapMx`.
 - `diseasesmapmx-analysis-engine`: Docker, `main`, Auto-Deploy, Virginia (US East), Free, sin disco persistente.
 - Workstation: pertenece a esta rama de desarrollo científico.
@@ -64,7 +64,7 @@ Se excluyen deliberadamente cuentas y servicios de uso personal, entretenimiento
 - Hostinger: dominio `episuis.com.mx` bajo identidad EPISUIS.
 - GitHub Organization `episuis`: recurso organizacional; Owners `aljogaba` + `episuis-admin`.
 - Cloudflare EPISUIS: acceso directo con `aljogaba@gmail.com`.
-- Supabase EPISUIS: `aljogaba@gmail.com` → GitHub `aljogaba` → Supabase.
+- Supabase EPISUIS: `aljogaba@gmail.com` → GitHub `aljogaba` → MFA propio de Supabase → organización EPISUIS → `vigilancia-episuis`. La cuenta técnica `episuis-admin` **no es la ruta operativa**; el 2026-11-19 su sesión no mostró organizaciones ni proyectos. Consultar `docs/IDENTITY_AUTHENTICATION_MODEL.md` para el registro auditado y las limitaciones de la observación.
 - Resend: Team `EPISUIS`; login por Google o GitHub `aljogaba`; MFA activo; dominio de envío `episuis.com.mx`.
 
 ## ORCID — Trusted organizations
