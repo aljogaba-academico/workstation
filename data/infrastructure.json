@@ -1,5 +1,5 @@
 {
-  "version": "2026-11-19-supabase-accounts-reviewed",
+  "version": "2026-11-24-swineepidatamx-foundation",
   "accessRegistry": [
     {
       "provider": "GitHub",
@@ -12,7 +12,7 @@
         {
           "identity": "ALJOGABA ACADEMIC",
           "handle": "aljogaba-academico · aljogaba.academico@gmail.com",
-          "resources": "proyectos académicos · DiseasesMapMx · workstation"
+          "resources": "proyectos académicos · DiseasesMapMx · workstation · Owner de Organization SwineEpiDataMx"
         },
         {
           "identity": "EPISUIS ADMIN",
@@ -23,6 +23,11 @@
           "identity": "EPISUIS ORGANIZATION",
           "handle": "GitHub Organization / episuis",
           "resources": "contenedor de repositorios y GitHub Apps; no es una identidad de login y no tiene recovery codes propios"
+        },
+        {
+          "identity": "SWINEEPIDATAMX ORGANIZATION",
+          "handle": "GitHub Organization / SwineEpiDataMx",
+          "resources": "web y backend privados · ChatGPT Codex Connector limitado a ambos · organización sin identidad de login"
         }
       ]
     },
@@ -98,11 +103,36 @@
       "module": "Web profesional",
       "summary": "Sitio público curado del perfil profesional.",
       "nodes": [
-        {"id":"m","label":"Web profesional","type":"module"},
-        {"id":"src","label":"GitHub repo: aljogaba.github.io","type":"source","account":"ALJOGABA · aljogaba@gmail.com · GitHub / aljogaba"},
-        {"id":"dep","label":"GitHub Pages","type":"deploy","account":"ALJOGABA · aljogaba@gmail.com · GitHub / aljogaba"}
+        {
+          "id": "m",
+          "label": "Web profesional",
+          "type": "module"
+        },
+        {
+          "id": "src",
+          "label": "GitHub repo: aljogaba.github.io",
+          "type": "source",
+          "account": "ALJOGABA · aljogaba@gmail.com · GitHub / aljogaba"
+        },
+        {
+          "id": "dep",
+          "label": "GitHub Pages",
+          "type": "deploy",
+          "account": "ALJOGABA · aljogaba@gmail.com · GitHub / aljogaba"
+        }
       ],
-      "edges": [["m","src","vive en"],["src","dep","se publica con"]],
+      "edges": [
+        [
+          "m",
+          "src",
+          "vive en"
+        ],
+        [
+          "src",
+          "dep",
+          "se publica con"
+        ]
+      ],
       "note": "Sitio público curado; no usa Cloudflare, Supabase, Hostinger ni backend propio."
     },
     {
@@ -110,14 +140,84 @@
       "module": "Herramientas",
       "summary": "Aplicaciones propias publicadas directamente con GitHub Pages.",
       "nodes": [
-        {"id":"m","label":"Herramientas","type":"module"},
-        {"id":"sipro","label":"GitHub repo: sipro-porcino","type":"source","account":"ALJOGABA · aljogaba@gmail.com · GitHub / aljogaba"},
-        {"id":"epi","label":"GitHub repo: epi-2x2","type":"source","account":"ALJOGABA · aljogaba@gmail.com · GitHub / aljogaba"},
-        {"id":"dimu","label":"GitHub repo: dimu-porcino","type":"source","account":"ALJOGABA · aljogaba@gmail.com · GitHub / aljogaba"},
-        {"id":"fastaudit","label":"GitHub repo: fastaudit","type":"source","account":"ALJOGABA · aljogaba@gmail.com · GitHub / aljogaba"},
-        {"id":"pages","label":"GitHub Pages","type":"deploy","account":"ALJOGABA · aljogaba@gmail.com"}
+        {
+          "id": "m",
+          "label": "Herramientas",
+          "type": "module"
+        },
+        {
+          "id": "sipro",
+          "label": "GitHub repo: sipro-porcino",
+          "type": "source",
+          "account": "ALJOGABA · aljogaba@gmail.com · GitHub / aljogaba"
+        },
+        {
+          "id": "epi",
+          "label": "GitHub repo: epi-2x2",
+          "type": "source",
+          "account": "ALJOGABA · aljogaba@gmail.com · GitHub / aljogaba"
+        },
+        {
+          "id": "dimu",
+          "label": "GitHub repo: dimu-porcino",
+          "type": "source",
+          "account": "ALJOGABA · aljogaba@gmail.com · GitHub / aljogaba"
+        },
+        {
+          "id": "fastaudit",
+          "label": "GitHub repo: fastaudit",
+          "type": "source",
+          "account": "ALJOGABA · aljogaba@gmail.com · GitHub / aljogaba"
+        },
+        {
+          "id": "pages",
+          "label": "GitHub Pages",
+          "type": "deploy",
+          "account": "ALJOGABA · aljogaba@gmail.com"
+        }
       ],
-      "edges": [["m","sipro","incluye"],["m","epi","incluye"],["m","dimu","incluye"],["m","fastaudit","incluye"],["sipro","pages","publicación"],["epi","pages","publicación"],["dimu","pages","publicación"],["fastaudit","pages","publicación"]],
+      "edges": [
+        [
+          "m",
+          "sipro",
+          "incluye"
+        ],
+        [
+          "m",
+          "epi",
+          "incluye"
+        ],
+        [
+          "m",
+          "dimu",
+          "incluye"
+        ],
+        [
+          "m",
+          "fastaudit",
+          "incluye"
+        ],
+        [
+          "sipro",
+          "pages",
+          "publicación"
+        ],
+        [
+          "epi",
+          "pages",
+          "publicación"
+        ],
+        [
+          "dimu",
+          "pages",
+          "publicación"
+        ],
+        [
+          "fastaudit",
+          "pages",
+          "publicación"
+        ]
+      ],
       "note": "SIPRO-Porcino, Epi 2×2, DIMUPorcino y FASTAudit trabajan únicamente desde GitHub Pages; no tienen backend externo. FASTAudit procesa los archivos localmente en el navegador."
     },
     {
@@ -125,11 +225,36 @@
       "module": "CV canónico",
       "summary": "Fuente maestra privada de información profesional; genera derivados que consume el sitio público.",
       "nodes": [
-        {"id":"m","label":"CV canónico","type":"module"},
-        {"id":"src","label":"GitHub repo: perfil-profesional-source [PRIVATE]","type":"source","account":"ALJOGABA · aljogaba@gmail.com · GitHub / aljogaba"},
-        {"id":"derived","label":"Derivados públicos: canonical-data.js · profile-data.js","type":"data","account":"ALJOGABA · aljogaba@gmail.com · repo aljogaba.github.io"}
+        {
+          "id": "m",
+          "label": "CV canónico",
+          "type": "module"
+        },
+        {
+          "id": "src",
+          "label": "GitHub repo: perfil-profesional-source [PRIVATE]",
+          "type": "source",
+          "account": "ALJOGABA · aljogaba@gmail.com · GitHub / aljogaba"
+        },
+        {
+          "id": "derived",
+          "label": "Derivados públicos: canonical-data.js · profile-data.js",
+          "type": "data",
+          "account": "ALJOGABA · aljogaba@gmail.com · repo aljogaba.github.io"
+        }
       ],
-      "edges": [["m","src","fuente canónica"],["src","derived","sync_public_site()"]],
+      "edges": [
+        [
+          "m",
+          "src",
+          "fuente canónica"
+        ],
+        [
+          "src",
+          "derived",
+          "sync_public_site()"
+        ]
+      ],
       "note": "El repositorio privado no se despliega como aplicación; sincroniza derivados hacia el sitio público."
     },
     {
@@ -137,11 +262,36 @@
       "module": "Notas técnicas",
       "summary": "Cartera editorial versionada y publicada como sitio Jekyll.",
       "nodes": [
-        {"id":"m","label":"Notas técnicas","type":"module"},
-        {"id":"src","label":"GitHub repo: notas-tecnicas","type":"source","account":"ALJOGABA · aljogaba@gmail.com · GitHub / aljogaba"},
-        {"id":"dep","label":"GitHub Pages / Jekyll","type":"deploy","account":"ALJOGABA · aljogaba@gmail.com"}
+        {
+          "id": "m",
+          "label": "Notas técnicas",
+          "type": "module"
+        },
+        {
+          "id": "src",
+          "label": "GitHub repo: notas-tecnicas",
+          "type": "source",
+          "account": "ALJOGABA · aljogaba@gmail.com · GitHub / aljogaba"
+        },
+        {
+          "id": "dep",
+          "label": "GitHub Pages / Jekyll",
+          "type": "deploy",
+          "account": "ALJOGABA · aljogaba@gmail.com"
+        }
       ],
-      "edges": [["m","src","vive en"],["src","dep","publicación"]],
+      "edges": [
+        [
+          "m",
+          "src",
+          "vive en"
+        ],
+        [
+          "src",
+          "dep",
+          "publicación"
+        ]
+      ],
       "note": "Publicación propia en aljogaba.github.io/notas-tecnicas."
     },
     {
@@ -149,13 +299,63 @@
       "module": "Entre libros y letras",
       "summary": "Proyecto personal y cultural con administración canónica privada y presentación pública derivada.",
       "nodes": [
-        {"id":"m","label":"Entre libros y letras","type":"module"},
-        {"id":"admin","label":"GitHub repo: entre-libros-y-letras-admin [PRIVATE]","type":"source","account":"ALJOGABA · aljogaba@gmail.com · GitHub / aljogaba"},
-        {"id":"derived","label":"exports/biblioteca-jorge.json","type":"data","account":"ALJOGABA · repo entre-libros-y-letras-admin"},
-        {"id":"public","label":"GitHub repo: entre-libros-y-letras [PUBLIC]","type":"source","account":"ALJOGABA · aljogaba@gmail.com · GitHub / aljogaba"},
-        {"id":"pages","label":"GitHub Pages","type":"deploy","account":"ALJOGABA · aljogaba@gmail.com"}
+        {
+          "id": "m",
+          "label": "Entre libros y letras",
+          "type": "module"
+        },
+        {
+          "id": "admin",
+          "label": "GitHub repo: entre-libros-y-letras-admin [PRIVATE]",
+          "type": "source",
+          "account": "ALJOGABA · aljogaba@gmail.com · GitHub / aljogaba"
+        },
+        {
+          "id": "derived",
+          "label": "exports/biblioteca-jorge.json",
+          "type": "data",
+          "account": "ALJOGABA · repo entre-libros-y-letras-admin"
+        },
+        {
+          "id": "public",
+          "label": "GitHub repo: entre-libros-y-letras [PUBLIC]",
+          "type": "source",
+          "account": "ALJOGABA · aljogaba@gmail.com · GitHub / aljogaba"
+        },
+        {
+          "id": "pages",
+          "label": "GitHub Pages",
+          "type": "deploy",
+          "account": "ALJOGABA · aljogaba@gmail.com"
+        }
       ],
-      "edges": [["m","admin","administración canónica"],["admin","derived","genera salida pública"],["derived","public","publicar_biblioteca.cmd"],["m","public","presentación pública"],["public","pages","publicación"]],
+      "edges": [
+        [
+          "m",
+          "admin",
+          "administración canónica"
+        ],
+        [
+          "admin",
+          "derived",
+          "genera salida pública"
+        ],
+        [
+          "derived",
+          "public",
+          "publicar_biblioteca.cmd"
+        ],
+        [
+          "m",
+          "public",
+          "presentación pública"
+        ],
+        [
+          "public",
+          "pages",
+          "publicación"
+        ]
+      ],
       "note": "El repositorio privado administra acervos, asignaciones, sesiones y participación. Sólo la salida pública autorizada de la Biblioteca de Jorge se deriva hacia el sitio; no usa backend externo."
     },
     {
@@ -163,14 +363,69 @@
       "module": "GitHub governance & integrations",
       "summary": "Gobierno de la organización GitHub y separación entre Owners, organización e instalaciones de GitHub Apps.",
       "nodes": [
-        {"id":"m","label":"EPISUIS · GitHub governance","type":"module"},
-        {"id":"org","label":"GitHub Organization: episuis","type":"source","account":"Organization resource container · no login identity"},
-        {"id":"owner1","label":"Owner: episuis-admin","type":"service","account":"EPISUIS ADMIN · cuenta GitHub técnica · 2FA"},
-        {"id":"owner2","label":"Owner: aljogaba","type":"service","account":"ALJOGABA · aljogaba@gmail.com · 2FA"},
-        {"id":"cfapp","label":"GitHub App: Cloudflare Workers and Pages","type":"service","account":"Installed on Organization episuis · selected repos only"},
-        {"id":"codex","label":"GitHub App: ChatGPT Codex Connector","type":"service","account":"Installed on Organization episuis"}
+        {
+          "id": "m",
+          "label": "EPISUIS · GitHub governance",
+          "type": "module"
+        },
+        {
+          "id": "org",
+          "label": "GitHub Organization: episuis",
+          "type": "source",
+          "account": "Organization resource container · no login identity"
+        },
+        {
+          "id": "owner1",
+          "label": "Owner: episuis-admin",
+          "type": "service",
+          "account": "EPISUIS ADMIN · cuenta GitHub técnica · 2FA"
+        },
+        {
+          "id": "owner2",
+          "label": "Owner: aljogaba",
+          "type": "service",
+          "account": "ALJOGABA · aljogaba@gmail.com · 2FA"
+        },
+        {
+          "id": "cfapp",
+          "label": "GitHub App: Cloudflare Workers and Pages",
+          "type": "service",
+          "account": "Installed on Organization episuis · selected repos only"
+        },
+        {
+          "id": "codex",
+          "label": "GitHub App: ChatGPT Codex Connector",
+          "type": "service",
+          "account": "Installed on Organization episuis"
+        }
       ],
-      "edges": [["m","org","organización"],["org","owner1","administrada por"],["org","owner2","administrada por"],["org","cfapp","GitHub App instalada"],["org","codex","GitHub App instalada"]],
+      "edges": [
+        [
+          "m",
+          "org",
+          "organización"
+        ],
+        [
+          "org",
+          "owner1",
+          "administrada por"
+        ],
+        [
+          "org",
+          "owner2",
+          "administrada por"
+        ],
+        [
+          "org",
+          "cfapp",
+          "GitHub App instalada"
+        ],
+        [
+          "org",
+          "codex",
+          "GitHub App instalada"
+        ]
+      ],
       "note": "La organización no inicia sesión y no tiene recovery codes propios. Los códigos de recuperación pertenecen a cada cuenta Owner. episuis-admin conserva gobierno/respaldo GitHub, pero no autentica activamente Cloudflare, Supabase ni Resend por OAuth."
     },
     {
@@ -178,15 +433,80 @@
       "module": "Cloudflare account governance",
       "summary": "Cuenta operativa de Cloudflare que sostiene los despliegues de Vigilancia y Producción, con acceso y superficie administrativa auditados.",
       "nodes": [
-        {"id":"m","label":"EPISUIS · Cloudflare governance","type":"module"},
-        {"id":"acct","label":"Cloudflare account · EPISUIS","type":"service","account":"ALJOGABA · aljogaba@gmail.com · acceso directo por correo + contraseña"},
-        {"id":"member","label":"Member: aljogaba@gmail.com · Super Administrator","type":"service","account":"ALJOGABA · único miembro confirmado"},
-        {"id":"mfa","label":"2FA: TOTP + email · recovery codes","type":"service","account":"ALJOGABA · seguridad de cuenta"},
-        {"id":"clean","label":"API tokens: 0 · OAuth clients: 0 · connected apps: 0","type":"service","account":"Cloudflare · audit 2026-10-28"},
-        {"id":"pages","label":"Pages: vigilancia-episuis","type":"deploy","account":"ALJOGABA · Cloudflare"},
-        {"id":"worker","label":"Worker: episuis-produccion","type":"deploy","account":"ALJOGABA · Cloudflare"}
+        {
+          "id": "m",
+          "label": "EPISUIS · Cloudflare governance",
+          "type": "module"
+        },
+        {
+          "id": "acct",
+          "label": "Cloudflare account · EPISUIS",
+          "type": "service",
+          "account": "ALJOGABA · aljogaba@gmail.com · acceso directo por correo + contraseña"
+        },
+        {
+          "id": "member",
+          "label": "Member: aljogaba@gmail.com · Super Administrator",
+          "type": "service",
+          "account": "ALJOGABA · único miembro confirmado"
+        },
+        {
+          "id": "mfa",
+          "label": "2FA: TOTP + email · recovery codes",
+          "type": "service",
+          "account": "ALJOGABA · seguridad de cuenta"
+        },
+        {
+          "id": "clean",
+          "label": "API tokens: 0 · OAuth clients: 0 · connected apps: 0",
+          "type": "service",
+          "account": "Cloudflare · audit 2026-10-28"
+        },
+        {
+          "id": "pages",
+          "label": "Pages: vigilancia-episuis",
+          "type": "deploy",
+          "account": "ALJOGABA · Cloudflare"
+        },
+        {
+          "id": "worker",
+          "label": "Worker: episuis-produccion",
+          "type": "deploy",
+          "account": "ALJOGABA · Cloudflare"
+        }
       ],
-      "edges": [["m","acct","cuenta operativa"],["acct","member","administrada por"],["acct","mfa","protegida con"],["acct","clean","superficie de acceso"],["acct","pages","aloja"],["acct","worker","aloja"]],
+      "edges": [
+        [
+          "m",
+          "acct",
+          "cuenta operativa"
+        ],
+        [
+          "acct",
+          "member",
+          "administrada por"
+        ],
+        [
+          "acct",
+          "mfa",
+          "protegida con"
+        ],
+        [
+          "acct",
+          "clean",
+          "superficie de acceso"
+        ],
+        [
+          "acct",
+          "pages",
+          "aloja"
+        ],
+        [
+          "acct",
+          "worker",
+          "aloja"
+        ]
+      ],
       "note": "La auditoría de cuenta confirmó una sola sesión activa al momento de la revisión. No se documentan contraseñas, códigos de recuperación ni valores de variables/secretos."
     },
     {
@@ -194,12 +514,47 @@
       "module": "Web EPISUIS",
       "summary": "Sitio institucional público de EPISUIS.",
       "nodes": [
-        {"id":"m","label":"Web EPISUIS","type":"module"},
-        {"id":"src","label":"GitHub repo: episuis/web","type":"source","account":"GitHub Organization / episuis · Owners: episuis-admin + aljogaba"},
-        {"id":"dep","label":"GitHub Pages","type":"deploy","account":"GitHub Organization / episuis"},
-        {"id":"dom","label":"episuis.com.mx","type":"domain","account":"EPISUIS · episuis@gmail.com · Hostinger"}
+        {
+          "id": "m",
+          "label": "Web EPISUIS",
+          "type": "module"
+        },
+        {
+          "id": "src",
+          "label": "GitHub repo: episuis/web",
+          "type": "source",
+          "account": "GitHub Organization / episuis · Owners: episuis-admin + aljogaba"
+        },
+        {
+          "id": "dep",
+          "label": "GitHub Pages",
+          "type": "deploy",
+          "account": "GitHub Organization / episuis"
+        },
+        {
+          "id": "dom",
+          "label": "episuis.com.mx",
+          "type": "domain",
+          "account": "EPISUIS · episuis@gmail.com · Hostinger"
+        }
       ],
-      "edges": [["m","src","vive en"],["src","dep","se publica con"],["dep","dom","CNAME / dominio público"]],
+      "edges": [
+        [
+          "m",
+          "src",
+          "vive en"
+        ],
+        [
+          "src",
+          "dep",
+          "se publica con"
+        ],
+        [
+          "dep",
+          "dom",
+          "CNAME / dominio público"
+        ]
+      ],
       "note": "Hostinger sostiene el dominio; la web se publica desde GitHub Pages. La organización posee el repo; los Owners administran el recurso mediante sus cuentas individuales."
     },
     {
@@ -207,17 +562,102 @@
       "module": "Vigilancia EPISUIS",
       "summary": "Aplicación de vigilancia epidemiológica con frontend desplegado en Cloudflare Pages, backend Supabase y correo transaccional Resend.",
       "nodes": [
-        {"id":"m","label":"Vigilancia EPISUIS","type":"module"},
-        {"id":"src","label":"GitHub repo: episuis/vigilancia-episuis · main","type":"source","account":"GitHub Organization / episuis · Owners: episuis-admin + aljogaba"},
-        {"id":"ghapp","label":"GitHub App: Cloudflare Workers and Pages","type":"service","account":"Organization episuis · access to vigilancia-episuis"},
-        {"id":"dep","label":"Cloudflare Pages: vigilancia-episuis · auto deploy","type":"deploy","account":"ALJOGABA · aljogaba@gmail.com · acceso directo Cloudflare"},
-        {"id":"dom","label":"vigilancia-episuis.pages.dev","type":"domain","account":"Cloudflare Pages · production URL"},
-        {"id":"env","label":"Build env: VITE_SUPABASE_URL + VITE_SUPABASE_PUBLISHABLE_KEY","type":"service","account":"Cloudflare Pages · valores no documentados"},
-        {"id":"db","label":"Supabase: Organization EPISUIS / vigilancia-episuis","type":"backend","account":"ALJOGABA · aljogaba@gmail.com → GitHub aljogaba → Supabase"},
-        {"id":"mail","label":"Resend: correo transaccional","type":"service","account":"ALJOGABA · aljogaba@gmail.com → GitHub aljogaba → Resend"},
-        {"id":"maildom","label":"Sending domain: episuis.com.mx","type":"domain","account":"ALJOGABA · Resend / workspace aljogaba"}
+        {
+          "id": "m",
+          "label": "Vigilancia EPISUIS",
+          "type": "module"
+        },
+        {
+          "id": "src",
+          "label": "GitHub repo: episuis/vigilancia-episuis · main",
+          "type": "source",
+          "account": "GitHub Organization / episuis · Owners: episuis-admin + aljogaba"
+        },
+        {
+          "id": "ghapp",
+          "label": "GitHub App: Cloudflare Workers and Pages",
+          "type": "service",
+          "account": "Organization episuis · access to vigilancia-episuis"
+        },
+        {
+          "id": "dep",
+          "label": "Cloudflare Pages: vigilancia-episuis · auto deploy",
+          "type": "deploy",
+          "account": "ALJOGABA · aljogaba@gmail.com · acceso directo Cloudflare"
+        },
+        {
+          "id": "dom",
+          "label": "vigilancia-episuis.pages.dev",
+          "type": "domain",
+          "account": "Cloudflare Pages · production URL"
+        },
+        {
+          "id": "env",
+          "label": "Build env: VITE_SUPABASE_URL + VITE_SUPABASE_PUBLISHABLE_KEY",
+          "type": "service",
+          "account": "Cloudflare Pages · valores no documentados"
+        },
+        {
+          "id": "db",
+          "label": "Supabase: Organization EPISUIS / vigilancia-episuis",
+          "type": "backend",
+          "account": "ALJOGABA · aljogaba@gmail.com → GitHub aljogaba → Supabase"
+        },
+        {
+          "id": "mail",
+          "label": "Resend: correo transaccional",
+          "type": "service",
+          "account": "ALJOGABA · aljogaba@gmail.com → GitHub aljogaba → Resend"
+        },
+        {
+          "id": "maildom",
+          "label": "Sending domain: episuis.com.mx",
+          "type": "domain",
+          "account": "ALJOGABA · Resend / workspace aljogaba"
+        }
       ],
-      "edges": [["m","src","código"],["src","ghapp","repo autorizado"],["ghapp","dep","deploy conectado"],["env","dep","build env"],["dep","dom","publica"],["m","db","backend / datos"],["m","mail","invitaciones y activación"],["mail","maildom","identidad de envío"]],
+      "edges": [
+        [
+          "m",
+          "src",
+          "código"
+        ],
+        [
+          "src",
+          "ghapp",
+          "repo autorizado"
+        ],
+        [
+          "ghapp",
+          "dep",
+          "deploy conectado"
+        ],
+        [
+          "env",
+          "dep",
+          "build env"
+        ],
+        [
+          "dep",
+          "dom",
+          "publica"
+        ],
+        [
+          "m",
+          "db",
+          "backend / datos"
+        ],
+        [
+          "m",
+          "mail",
+          "invitaciones y activación"
+        ],
+        [
+          "mail",
+          "maildom",
+          "identidad de envío"
+        ]
+      ],
       "note": "Cloudflare Pages usa main y despliegue automático. No se observaron bindings adicionales. Runtime: ubicación predeterminada, compatibility date 2026-08-20, sin compatibility flags y fail-open."
     },
     {
@@ -225,15 +665,80 @@
       "module": "EPISUIS Producción",
       "summary": "Plataforma de gestión productiva con frontend Worker conectado a GitHub y backend Supabase; no usa actualmente Resend.",
       "nodes": [
-        {"id":"m","label":"EPISUIS Producción","type":"module"},
-        {"id":"src","label":"GitHub repo: episuis/produccion · main","type":"source","account":"GitHub Organization / episuis · Owners: episuis-admin + aljogaba"},
-        {"id":"ghapp","label":"GitHub App: Cloudflare Workers and Pages","type":"service","account":"Organization episuis · access to produccion"},
-        {"id":"dep","label":"Cloudflare Worker: episuis-produccion","type":"deploy","account":"ALJOGABA · aljogaba@gmail.com · acceso directo Cloudflare"},
-        {"id":"dom","label":"episuis-produccion.aljogaba.workers.dev","type":"domain","account":"Cloudflare Worker · production URL"},
-        {"id":"env","label":"Build env: VITE_SUPABASE_URL + VITE_SUPABASE_PUBLISHABLE_KEY","type":"service","account":"Cloudflare Worker · valores no documentados"},
-        {"id":"db","label":"Supabase: Organization EPISUIS / produccion-episuis","type":"backend","account":"ALJOGABA · aljogaba@gmail.com → GitHub aljogaba → Supabase"}
+        {
+          "id": "m",
+          "label": "EPISUIS Producción",
+          "type": "module"
+        },
+        {
+          "id": "src",
+          "label": "GitHub repo: episuis/produccion · main",
+          "type": "source",
+          "account": "GitHub Organization / episuis · Owners: episuis-admin + aljogaba"
+        },
+        {
+          "id": "ghapp",
+          "label": "GitHub App: Cloudflare Workers and Pages",
+          "type": "service",
+          "account": "Organization episuis · access to produccion"
+        },
+        {
+          "id": "dep",
+          "label": "Cloudflare Worker: episuis-produccion",
+          "type": "deploy",
+          "account": "ALJOGABA · aljogaba@gmail.com · acceso directo Cloudflare"
+        },
+        {
+          "id": "dom",
+          "label": "episuis-produccion.aljogaba.workers.dev",
+          "type": "domain",
+          "account": "Cloudflare Worker · production URL"
+        },
+        {
+          "id": "env",
+          "label": "Build env: VITE_SUPABASE_URL + VITE_SUPABASE_PUBLISHABLE_KEY",
+          "type": "service",
+          "account": "Cloudflare Worker · valores no documentados"
+        },
+        {
+          "id": "db",
+          "label": "Supabase: Organization EPISUIS / produccion-episuis",
+          "type": "backend",
+          "account": "ALJOGABA · aljogaba@gmail.com → GitHub aljogaba → Supabase"
+        }
       ],
-      "edges": [["m","src","código"],["src","ghapp","repo autorizado"],["ghapp","dep","deploy conectado"],["env","dep","build env"],["dep","dom","publica"],["m","db","backend / Auth / datos"]],
+      "edges": [
+        [
+          "m",
+          "src",
+          "código"
+        ],
+        [
+          "src",
+          "ghapp",
+          "repo autorizado"
+        ],
+        [
+          "ghapp",
+          "dep",
+          "deploy conectado"
+        ],
+        [
+          "env",
+          "dep",
+          "build env"
+        ],
+        [
+          "dep",
+          "dom",
+          "publica"
+        ],
+        [
+          "m",
+          "db",
+          "backend / Auth / datos"
+        ]
+      ],
       "note": "Worker desplegado desde main mediante el flujo de build/implementación con Wrangler. No se observaron service bindings, Queues ni dominios personalizados adicionales. Worker Previews no forma parte del flujo operativo actual."
     },
     {
@@ -241,11 +746,36 @@
       "module": "Portal público",
       "summary": "Frontend público canónico de DiseasesMapMx.",
       "nodes": [
-        {"id":"m","label":"Portal público","type":"module"},
-        {"id":"src","label":"GitHub repo: DiseasesMapMx/web [PRIVATE]","type":"source","account":"ALJOGABA ACADEMIC · aljogaba.academico@gmail.com · GitHub / aljogaba-academico"},
-        {"id":"dep","label":"Cloudflare Worker: diseasesmapmx-web","type":"deploy","account":"ALJOGABA ACADEMIC · aljogaba.academico@gmail.com · acceso directo Cloudflare / Account DiseasesMapMx"}
+        {
+          "id": "m",
+          "label": "Portal público",
+          "type": "module"
+        },
+        {
+          "id": "src",
+          "label": "GitHub repo: DiseasesMapMx/web [PRIVATE]",
+          "type": "source",
+          "account": "ALJOGABA ACADEMIC · aljogaba.academico@gmail.com · GitHub / aljogaba-academico"
+        },
+        {
+          "id": "dep",
+          "label": "Cloudflare Worker: diseasesmapmx-web",
+          "type": "deploy",
+          "account": "ALJOGABA ACADEMIC · aljogaba.academico@gmail.com · acceso directo Cloudflare / Account DiseasesMapMx"
+        }
       ],
-      "edges": [["m","src","frontend canónico"],["src","dep","production deploy"]],
+      "edges": [
+        [
+          "m",
+          "src",
+          "frontend canónico"
+        ],
+        [
+          "src",
+          "dep",
+          "production deploy"
+        ]
+      ],
       "note": "El antiguo repositorio público aljogaba/DiseasesMapMx fue retirado; su evolución histórica se conserva en la documentación canónica de DiseasesMapMx/web."
     },
     {
@@ -253,14 +783,70 @@
       "module": "Dashboard",
       "summary": "Dashboard público actualmente alimentado por archivos aislados del repo; la migración a datasets de Production está planeada.",
       "nodes": [
-        {"id":"m","label":"Dashboard","type":"module"},
-        {"id":"src","label":"DiseasesMapMx/web · dashboard.html · dashboard-es.html","type":"source","account":"ALJOGABA ACADEMIC · aljogaba.academico@gmail.com · GitHub / aljogaba-academico"},
-        {"id":"dep","label":"Cloudflare Worker: diseasesmapmx-web","type":"deploy","account":"ALJOGABA ACADEMIC · aljogaba.academico@gmail.com · acceso directo Cloudflare"},
-        {"id":"csv","label":"assets/data/sequences.csv","type":"data","account":"DiseasesMapMx/web"},
-        {"id":"geo","label":"maps/jalisco_municipios.geojson","type":"data","account":"DiseasesMapMx/web"},
-        {"id":"datasets","label":"Production datasets curados/reproducibles [PLANNED]","type":"planned","account":"ALJOGABA ACADEMIC · DiseasesMapMx Production"}
+        {
+          "id": "m",
+          "label": "Dashboard",
+          "type": "module"
+        },
+        {
+          "id": "src",
+          "label": "DiseasesMapMx/web · dashboard.html · dashboard-es.html",
+          "type": "source",
+          "account": "ALJOGABA ACADEMIC · aljogaba.academico@gmail.com · GitHub / aljogaba-academico"
+        },
+        {
+          "id": "dep",
+          "label": "Cloudflare Worker: diseasesmapmx-web",
+          "type": "deploy",
+          "account": "ALJOGABA ACADEMIC · aljogaba.academico@gmail.com · acceso directo Cloudflare"
+        },
+        {
+          "id": "csv",
+          "label": "assets/data/sequences.csv",
+          "type": "data",
+          "account": "DiseasesMapMx/web"
+        },
+        {
+          "id": "geo",
+          "label": "maps/jalisco_municipios.geojson",
+          "type": "data",
+          "account": "DiseasesMapMx/web"
+        },
+        {
+          "id": "datasets",
+          "label": "Production datasets curados/reproducibles [PLANNED]",
+          "type": "planned",
+          "account": "ALJOGABA ACADEMIC · DiseasesMapMx Production"
+        }
       ],
-      "edges": [["m","src","frontend"],["src","dep","deploy"],["m","csv","datos actuales"],["m","geo","geografía actual"],["datasets","m","actualización futura","planned"]],
+      "edges": [
+        [
+          "m",
+          "src",
+          "frontend"
+        ],
+        [
+          "src",
+          "dep",
+          "deploy"
+        ],
+        [
+          "m",
+          "csv",
+          "datos actuales"
+        ],
+        [
+          "m",
+          "geo",
+          "geografía actual"
+        ],
+        [
+          "datasets",
+          "m",
+          "actualización futura",
+          "planned"
+        ]
+      ],
       "note": "Hoy el Dashboard NO consulta directamente Supabase. La arquitectura objetivo es generar datasets desde DiseasesMapMx Production y actualizar el Dashboard con esos derivados."
     },
     {
@@ -268,14 +854,69 @@
       "module": "Sequence Analysis",
       "summary": "Servicio web de análisis de secuencias con frontend Cloudflare y backend científico privado en Render.",
       "nodes": [
-        {"id":"m","label":"Sequence Analysis","type":"module"},
-        {"id":"front","label":"DiseasesMapMx/web · phylogeny.html · phylogeny-es.html","type":"source","account":"ALJOGABA ACADEMIC · aljogaba.academico@gmail.com · GitHub / aljogaba-academico"},
-        {"id":"dep","label":"Cloudflare Worker: diseasesmapmx-web","type":"deploy","account":"ALJOGABA ACADEMIC · aljogaba.academico@gmail.com · acceso directo Cloudflare"},
-        {"id":"engine","label":"GitHub repo: DiseasesMapMx/analysis-engine [PRIVATE]","type":"source","account":"ALJOGABA ACADEMIC · aljogaba.academico@gmail.com · GitHub / aljogaba-academico"},
-        {"id":"render","label":"Render: diseasesmapmx-analysis-engine · Docker · Virginia","type":"deploy","account":"ALJOGABA ACADEMIC · aljogaba.academico@gmail.com → GitHub aljogaba-academico → Render"},
-        {"id":"db","label":"Supabase: DiseasesMapMx Production","type":"backend","account":"ALJOGABA ACADEMIC · aljogaba.academico@gmail.com → GitHub aljogaba-academico → Supabase"}
+        {
+          "id": "m",
+          "label": "Sequence Analysis",
+          "type": "module"
+        },
+        {
+          "id": "front",
+          "label": "DiseasesMapMx/web · phylogeny.html · phylogeny-es.html",
+          "type": "source",
+          "account": "ALJOGABA ACADEMIC · aljogaba.academico@gmail.com · GitHub / aljogaba-academico"
+        },
+        {
+          "id": "dep",
+          "label": "Cloudflare Worker: diseasesmapmx-web",
+          "type": "deploy",
+          "account": "ALJOGABA ACADEMIC · aljogaba.academico@gmail.com · acceso directo Cloudflare"
+        },
+        {
+          "id": "engine",
+          "label": "GitHub repo: DiseasesMapMx/analysis-engine [PRIVATE]",
+          "type": "source",
+          "account": "ALJOGABA ACADEMIC · aljogaba.academico@gmail.com · GitHub / aljogaba-academico"
+        },
+        {
+          "id": "render",
+          "label": "Render: diseasesmapmx-analysis-engine · Docker · Virginia",
+          "type": "deploy",
+          "account": "ALJOGABA ACADEMIC · aljogaba.academico@gmail.com → GitHub aljogaba-academico → Render"
+        },
+        {
+          "id": "db",
+          "label": "Supabase: DiseasesMapMx Production",
+          "type": "backend",
+          "account": "ALJOGABA ACADEMIC · aljogaba.academico@gmail.com → GitHub aljogaba-academico → Supabase"
+        }
       ],
-      "edges": [["m","front","frontend"],["front","dep","publicación"],["front","render","POST /analyze"],["engine","render","backend canónico / deploy"],["render","db","telemetría y persistencia privada"]],
+      "edges": [
+        [
+          "m",
+          "front",
+          "frontend"
+        ],
+        [
+          "front",
+          "dep",
+          "publicación"
+        ],
+        [
+          "front",
+          "render",
+          "POST /analyze"
+        ],
+        [
+          "engine",
+          "render",
+          "backend canónico / deploy"
+        ],
+        [
+          "render",
+          "db",
+          "telemetría y persistencia privada"
+        ]
+      ],
       "note": "Cloudflare aloja el frontend; Render ejecuta el analysis-engine; Supabase Production sostiene telemetría y almacenamiento privado autorizado."
     },
     {
@@ -283,15 +924,79 @@
       "module": "Catálogo molecular y curación",
       "summary": "Administración científica, staging y catálogo molecular canónico; el motor se usa como herramienta auxiliar de curación, no como paso obligatorio de toda importación administrativa.",
       "nodes": [
-        {"id":"m","label":"Catálogo molecular y curación","type":"module"},
-        {"id":"admin","label":"DiseasesMapMx/web · /admin/","type":"source","account":"ALJOGABA ACADEMIC · aljogaba.academico@gmail.com · GitHub / aljogaba-academico"},
-        {"id":"dep","label":"Cloudflare Worker: diseasesmapmx-web","type":"deploy","account":"ALJOGABA ACADEMIC · aljogaba.academico@gmail.com · acceso directo Cloudflare"},
-        {"id":"db","label":"Supabase: DiseasesMapMx Production","type":"backend","account":"ALJOGABA ACADEMIC · aljogaba.academico@gmail.com → GitHub aljogaba-academico → Supabase"},
-        {"id":"mol","label":"staging → curación humana → molecular canónico","type":"data","account":"DiseasesMapMx Production"},
-        {"id":"engine","label":"analysis-engine / Render · herramienta auxiliar","type":"service","account":"ALJOGABA ACADEMIC · Render"},
-        {"id":"genbank","label":"GenBank · consulta científica","type":"service"}
+        {
+          "id": "m",
+          "label": "Catálogo molecular y curación",
+          "type": "module"
+        },
+        {
+          "id": "admin",
+          "label": "DiseasesMapMx/web · /admin/",
+          "type": "source",
+          "account": "ALJOGABA ACADEMIC · aljogaba.academico@gmail.com · GitHub / aljogaba-academico"
+        },
+        {
+          "id": "dep",
+          "label": "Cloudflare Worker: diseasesmapmx-web",
+          "type": "deploy",
+          "account": "ALJOGABA ACADEMIC · aljogaba.academico@gmail.com · acceso directo Cloudflare"
+        },
+        {
+          "id": "db",
+          "label": "Supabase: DiseasesMapMx Production",
+          "type": "backend",
+          "account": "ALJOGABA ACADEMIC · aljogaba.academico@gmail.com → GitHub aljogaba-academico → Supabase"
+        },
+        {
+          "id": "mol",
+          "label": "staging → curación humana → molecular canónico",
+          "type": "data",
+          "account": "DiseasesMapMx Production"
+        },
+        {
+          "id": "engine",
+          "label": "analysis-engine / Render · herramienta auxiliar",
+          "type": "service",
+          "account": "ALJOGABA ACADEMIC · Render"
+        },
+        {
+          "id": "genbank",
+          "label": "GenBank · consulta científica",
+          "type": "service"
+        }
       ],
-      "edges": [["m","admin","interfaz administrativa"],["admin","dep","se sirve desde"],["admin","db","importación / staging / curación"],["db","mol","flujo canónico"],["admin","engine","consulta auxiliar"],["engine","genbank","consulta"]],
+      "edges": [
+        [
+          "m",
+          "admin",
+          "interfaz administrativa"
+        ],
+        [
+          "admin",
+          "dep",
+          "se sirve desde"
+        ],
+        [
+          "admin",
+          "db",
+          "importación / staging / curación"
+        ],
+        [
+          "db",
+          "mol",
+          "flujo canónico"
+        ],
+        [
+          "admin",
+          "engine",
+          "consulta auxiliar"
+        ],
+        [
+          "engine",
+          "genbank",
+          "consulta"
+        ]
+      ],
       "note": "Las importaciones administrativas directas se curan aparte y no pasan obligatoriamente por analysis-engine. Desde Admin / motor de curación sí pueden realizarse consultas a GenBank."
     },
     {
@@ -299,16 +1004,91 @@
       "module": "Portal de colaboradores",
       "summary": "Recepción autenticada de lotes, autorización administrativa, AUTO-QC, análisis, informes privados y apertura posterior de curación.",
       "nodes": [
-        {"id":"m","label":"Portal de colaboradores","type":"module"},
-        {"id":"front","label":"DiseasesMapMx/web · /partner/ · /results/ · /admin/ Colaboradores","type":"source","account":"ALJOGABA ACADEMIC · aljogaba.academico@gmail.com · GitHub / aljogaba-academico"},
-        {"id":"dep","label":"Cloudflare Worker: diseasesmapmx-web","type":"deploy","account":"ALJOGABA ACADEMIC · aljogaba.academico@gmail.com · acceso directo Cloudflare"},
-        {"id":"auth","label":"Supabase Auth · organization / membership","type":"backend","account":"ALJOGABA ACADEMIC · DiseasesMapMx Production"},
-        {"id":"func","label":"Edge Functions: partner-intake · partner-admin · partner-qc · partner-reports · partner-results","type":"service","account":"DiseasesMapMx Production"},
-        {"id":"render","label":"analysis-engine / Render","type":"service","account":"ALJOGABA ACADEMIC · aljogaba.academico@gmail.com → GitHub aljogaba-academico → Render"},
-        {"id":"curation","label":"staging.curation_cases → Admin / Curación","type":"data","account":"DiseasesMapMx Production"},
-        {"id":"reports","label":"reports-private + caso/token → /results/","type":"data","account":"DiseasesMapMx Production"}
+        {
+          "id": "m",
+          "label": "Portal de colaboradores",
+          "type": "module"
+        },
+        {
+          "id": "front",
+          "label": "DiseasesMapMx/web · /partner/ · /results/ · /admin/ Colaboradores",
+          "type": "source",
+          "account": "ALJOGABA ACADEMIC · aljogaba.academico@gmail.com · GitHub / aljogaba-academico"
+        },
+        {
+          "id": "dep",
+          "label": "Cloudflare Worker: diseasesmapmx-web",
+          "type": "deploy",
+          "account": "ALJOGABA ACADEMIC · aljogaba.academico@gmail.com · acceso directo Cloudflare"
+        },
+        {
+          "id": "auth",
+          "label": "Supabase Auth · organization / membership",
+          "type": "backend",
+          "account": "ALJOGABA ACADEMIC · DiseasesMapMx Production"
+        },
+        {
+          "id": "func",
+          "label": "Edge Functions: partner-intake · partner-admin · partner-qc · partner-reports · partner-results",
+          "type": "service",
+          "account": "DiseasesMapMx Production"
+        },
+        {
+          "id": "render",
+          "label": "analysis-engine / Render",
+          "type": "service",
+          "account": "ALJOGABA ACADEMIC · aljogaba.academico@gmail.com → GitHub aljogaba-academico → Render"
+        },
+        {
+          "id": "curation",
+          "label": "staging.curation_cases → Admin / Curación",
+          "type": "data",
+          "account": "DiseasesMapMx Production"
+        },
+        {
+          "id": "reports",
+          "label": "reports-private + caso/token → /results/",
+          "type": "data",
+          "account": "DiseasesMapMx Production"
+        }
       ],
-      "edges": [["m","front","frontend"],["front","dep","deploy"],["front","auth","autenticación colaborador"],["auth","func","flujos controlados"],["func","render","AUTO-QC aprobado → análisis"],["render","curation","resultado → expediente"],["func","reports","informe / liberación"]],
+      "edges": [
+        [
+          "m",
+          "front",
+          "frontend"
+        ],
+        [
+          "front",
+          "dep",
+          "deploy"
+        ],
+        [
+          "front",
+          "auth",
+          "autenticación colaborador"
+        ],
+        [
+          "auth",
+          "func",
+          "flujos controlados"
+        ],
+        [
+          "func",
+          "render",
+          "AUTO-QC aprobado → análisis"
+        ],
+        [
+          "render",
+          "curation",
+          "resultado → expediente"
+        ],
+        [
+          "func",
+          "reports",
+          "informe / liberación"
+        ]
+      ],
       "note": "La incorporación al catálogo molecular NO es automática. Resend/notificaciones por correo siguen fuera de la infraestructura activa de este módulo."
     },
     {
@@ -316,10 +1096,25 @@
       "module": "Proyectos territoriales",
       "summary": "Arquitectura docs-as-code para programas y proyectos territoriales.",
       "nodes": [
-        {"id":"m","label":"Proyectos territoriales","type":"module"},
-        {"id":"src","label":"GitHub repo: sanidad-porcina-investigacion [PRIVATE]","type":"source","account":"ALJOGABA ACADEMIC · aljogaba.academico@gmail.com · GitHub / aljogaba-academico"}
+        {
+          "id": "m",
+          "label": "Proyectos territoriales",
+          "type": "module"
+        },
+        {
+          "id": "src",
+          "label": "GitHub repo: sanidad-porcina-investigacion [PRIVATE]",
+          "type": "source",
+          "account": "ALJOGABA ACADEMIC · aljogaba.academico@gmail.com · GitHub / aljogaba-academico"
+        }
       ],
-      "edges": [["m","src","fuente canónica / código"]],
+      "edges": [
+        [
+          "m",
+          "src",
+          "fuente canónica / código"
+        ]
+      ],
       "note": "Vive únicamente en GitHub; no usa Pages, Cloudflare, Supabase ni otro servicio externo."
     },
     {
@@ -327,11 +1122,122 @@
       "module": "Investigación académica",
       "summary": "Arquitectura docs-as-code para entidades, conocimiento, referencias, propuestas y productos académicos.",
       "nodes": [
-        {"id":"m","label":"Investigación académica","type":"module"},
-        {"id":"src","label":"GitHub repo: investigacion-academica [PRIVATE]","type":"source","account":"ALJOGABA ACADEMIC · aljogaba.academico@gmail.com · GitHub / aljogaba-academico"}
+        {
+          "id": "m",
+          "label": "Investigación académica",
+          "type": "module"
+        },
+        {
+          "id": "src",
+          "label": "GitHub repo: investigacion-academica [PRIVATE]",
+          "type": "source",
+          "account": "ALJOGABA ACADEMIC · aljogaba.academico@gmail.com · GitHub / aljogaba-academico"
+        }
       ],
-      "edges": [["m","src","fuente canónica / código"]],
+      "edges": [
+        [
+          "m",
+          "src",
+          "fuente canónica / código"
+        ]
+      ],
       "note": "Vive únicamente en GitHub; no usa Pages, Cloudflare, Supabase ni otro servicio externo."
+    },
+    {
+      "system": "swineepidatamx",
+      "module": "Administración y documentación",
+      "summary": "Repositorio web privado y documentación fundacional confirmados; interfaz y hosting aún planeados.",
+      "nodes": [
+        {
+          "id": "m",
+          "label": "Administración y documentación",
+          "type": "module"
+        },
+        {
+          "id": "src",
+          "label": "SwineEpiDataMx/web [PRIVATE]",
+          "type": "source",
+          "account": "ALJOGABA ACADEMIC · aljogaba.academico@gmail.com · GitHub / aljogaba-academico"
+        },
+        {
+          "id": "api",
+          "label": "Servicios privados del backend [PLANNED]",
+          "type": "planned"
+        },
+        {
+          "id": "host",
+          "label": "Hosting frontend por definir [PLANNED]",
+          "type": "planned"
+        }
+      ],
+      "edges": [
+        [
+          "m",
+          "src",
+          "fuente canónica"
+        ],
+        [
+          "src",
+          "host",
+          "despliegue futuro",
+          "planned"
+        ],
+        [
+          "m",
+          "api",
+          "integración futura",
+          "planned"
+        ]
+      ],
+      "note": "Fase documental 0.1.0. Sin frontend desplegado. Cloudflare es preferencia preliminar, no proveedor confirmado."
+    },
+    {
+      "system": "swineepidatamx",
+      "module": "Infraestructura de datos",
+      "summary": "Repositorio backend privado confirmado; sin base ni servicios provisionados.",
+      "nodes": [
+        {
+          "id": "m",
+          "label": "Infraestructura de datos",
+          "type": "module"
+        },
+        {
+          "id": "src",
+          "label": "SwineEpiDataMx/backend [PRIVATE]",
+          "type": "source",
+          "account": "ALJOGABA ACADEMIC · aljogaba.academico@gmail.com · GitHub / aljogaba-academico"
+        },
+        {
+          "id": "db",
+          "label": "Supabase independiente / PostgreSQL + PostGIS [PLANNED]",
+          "type": "planned"
+        },
+        {
+          "id": "out",
+          "label": "Exportación privada [PLANNED]",
+          "type": "planned"
+        }
+      ],
+      "edges": [
+        [
+          "m",
+          "src",
+          "fuente técnica canónica"
+        ],
+        [
+          "src",
+          "db",
+          "implementación futura",
+          "planned"
+        ],
+        [
+          "db",
+          "out",
+          "servicio futuro",
+          "planned"
+        ]
+      ],
+      "note": "No existe proyecto Supabase ni ruta específica de autenticación confirmada. Independiente de DiseasesMapMx. Workstation no contiene datos ni exportaciones reales."
     }
   ],
   "rules": [

@@ -48,7 +48,8 @@ function systemIcon(id) {
     episuis: "▥",
     perfil: "◉",
     diseasesmapmx: "⌬",
-    proyectos: "▣"
+    proyectos: "▣",
+    swineepidatamx: "▤"
   })[id] || "□";
 }
 
@@ -382,7 +383,9 @@ function openMissionControl() {
 }
 
 function radarHtml() {
-  const positions = ["north", "east", "south", "west"];
+  const positions = state.systems.length === 5
+    ? ["north", "east-upper", "east-lower", "west-lower", "west-upper"]
+    : ["north", "east", "south", "west"];
   return `
     <div class="radar-field">
       <div class="radar-sweep" aria-hidden="true"></div>

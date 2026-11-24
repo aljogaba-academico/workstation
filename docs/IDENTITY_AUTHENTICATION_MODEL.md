@@ -1,6 +1,6 @@
 # ALJOGABA OS — Identity, authentication and ownership model
 
-Última revisión: 2026-11-19
+Última revisión: 2026-11-24
 
 ## Propósito
 
@@ -34,6 +34,7 @@ Ejemplos:
 
 - `episuis`
 - `DiseasesMapMx`
+- `SwineEpiDataMx`
 
 Una organización:
 
@@ -302,7 +303,17 @@ Regla:
 
 ---
 
-## 5. Regla para crear nuevas cuentas o integraciones
+## 5. Modelo confirmado para SwineEpiDataMx — 2026-11-24
+
+La cuenta `aljogaba-academico` (**ALJOGABA ACADEMIC**, correo de referencia `aljogaba.academico@gmail.com`) creó y administra la organización `SwineEpiDataMx`. No se invitaron colaboradores durante la fundación. La organización no inicia sesión ni tiene contraseña o recovery codes propios.
+
+Ruta confirmada: `aljogaba.academico@gmail.com → GitHub aljogaba-academico → Organization SwineEpiDataMx → web / backend`. Ambos repositorios son privados. ChatGPT Codex Connector instalado con selección explícita de los dos; acceso de lectura y escritura verificado.
+
+No hay proyecto Supabase, deployment Cloudflare ni otra infraestructura externa confirmada para este sistema. No inferir rutas OAuth o cuentas por analogía con DiseasesMapMx. Antes de aprovisionar, confirmar propietario y mecanismo de acceso, mantener aislamiento y actualizar el inventario canónico. Ver [auditoría de infraestructura](INFRASTRUCTURE_RELATIONSHIP_AUDIT.md#5-swineepidatamx).
+
+---
+
+## 6. Regla para crear nuevas cuentas o integraciones
 
 Antes de registrarse en un proveedor nuevo o pulsar "Continue with GitHub", responder primero estas preguntas:
 
@@ -321,7 +332,7 @@ Regla operativa:
 
 ---
 
-## 6. Qué NO debe almacenarse en Workstation
+## 7. Qué NO debe almacenarse en Workstation
 
 Workstation puede documentar identidades, correos de referencia, organizaciones, proveedores, repositorios, relaciones y mecanismos de autenticación a nivel conceptual.
 

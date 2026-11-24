@@ -87,7 +87,7 @@
 
   function radioLink(systemId = "core") {
     if (!prefs.audio) return;
-    const signatures = { episuis: 520, diseasesmapmx: 680, perfil: 590, proyectos: 460, core: 620 };
+    const signatures = { episuis: 520, diseasesmapmx: 680, perfil: 590, proyectos: 460, swineepidatamx: 760, core: 620 };
     const base = signatures[systemId] || signatures.core;
     noise(.10, .012);
     tone(base, .055, "sine", .022, .08);
@@ -252,7 +252,8 @@
       dmx: "diseasesmapmx", diseases: "diseasesmapmx", diseasesmapmx: "diseasesmapmx",
       episuis: "episuis", vigilancia: "episuis", produccion: "episuis",
       perfil: "perfil", cv: "perfil", notas: "perfil",
-      proyectos: "proyectos", investigacion: "proyectos", territoriales: "proyectos"
+      proyectos: "proyectos", investigacion: "proyectos", territoriales: "proyectos",
+      sedmx: "swineepidatamx", swineepidatamx: "swineepidatamx"
     };
     const id = aliases[q];
     if (id) return state.systems.find(s => s.id === id);

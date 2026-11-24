@@ -13,14 +13,14 @@ ALJOGABA OS responde cuatro preguntas operativas:
 3. ¿Cómo se relacionan los sistemas y su infraestructura?
 4. ¿Con qué identidad/cuenta se accede a cada proveedor?
 
-La workstation **no sustituye las fuentes canónicas** de EPISUIS, DiseasesMapMx, Perfil profesional o Gestión de proyectos científicos. Es una capa pública de orientación, navegación y memoria operativa.
+La workstation **no sustituye las fuentes canónicas** de EPISUIS, DiseasesMapMx, Perfil profesional o Gestión de proyectos científicos. Es una capa pública de orientación, navegación y memoria operativa. Registra infraestructura y rutas de uso, no los proyectos científicos concretos, sus hipótesis, metodologías, datos ni resultados.
 
 ## Inventario canónico
 
-- **4 Systems**
-- **14 Modules**
+- **5 Systems**
+- **16 Modules**
 - **4 Tools**
-- **31 Mission Routes**
+- **33 Mission Routes**
 
 Los contadores se derivan de los archivos de datos; no se mantienen manualmente en la interfaz.
 
@@ -30,6 +30,7 @@ Los contadores se derivan de los archivos de datos; no se mantienen manualmente 
 2. **EPISUIS** — Web EPISUIS, Vigilancia EPISUIS, EPISUIS Producción.
 3. **DiseasesMapMx** — Portal público, Dashboard, Sequence Analysis, Catálogo molecular y curación, Portal de colaboradores.
 4. **Gestión de proyectos científicos** — Proyectos territoriales, Investigación académica.
+5. **SwineEpiDataMx** — Administración y documentación, Infraestructura de datos. Sistema privado en fase fundacional; repositorios confirmados, servicios externos pendientes.
 
 ### Tools
 

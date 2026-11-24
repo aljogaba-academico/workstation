@@ -87,7 +87,7 @@
   }
 
   function commsSound(kind = "core") {
-    const bases = { diseasesmapmx: 700, episuis: 540, perfil: 610, proyectos: 470, core: 630 };
+    const bases = { diseasesmapmx: 700, episuis: 540, perfil: 610, proyectos: 470, swineepidatamx: 760, core: 630 };
     const base = bases[kind] || bases.core;
     noise(.11, .035);
     tone(base, .07, .055, "sine", .08);

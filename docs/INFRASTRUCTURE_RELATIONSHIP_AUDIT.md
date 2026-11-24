@@ -1,6 +1,6 @@
 # ALJOGABA OS — Infrastructure Relationship Audit
 
-Última revisión: 2026-11-17
+Última revisión: 2026-11-24
 
 ## Fuente canónica
 
@@ -340,6 +340,32 @@ Resend/notificaciones automáticas todavía no forman parte de la infraestructur
 - Repositorio privado: `aljogaba-academico/investigacion-academica`.
 - Cuenta: **ALJOGABA ACADEMIC** / `aljogaba.academico@gmail.com` / GitHub `aljogaba-academico`.
 - Servicios externos: ninguno.
+
+---
+
+# 5. SwineEpiDataMx
+
+Registro fundacional del 2026-11-24. *Longitudinal Swine Epidemiological Data Infrastructure for Mexico*. Sistema privado independiente.
+
+- Identidad administrativa: **ALJOGABA ACADEMIC** / `aljogaba.academico@gmail.com` / `aljogaba-academico`.
+- Organización GitHub: `SwineEpiDataMx`; cuenta académica propietaria, sin login propio de la organización.
+- Repositorios privados, rama main: [web](https://github.com/SwineEpiDataMx/web) y [backend](https://github.com/SwineEpiDataMx/backend).
+- ChatGPT Codex Connector instalado con acceso selectivo a ambos repositorios; lectura y escritura verificadas mediante commits fundacionales.
+- Ruta documental: `web/AGENTS.md`, `web/docs/MASTER_INDEX.md`, `web/docs/PROJECT_STATUS.md`; `backend/AGENTS.md`, `backend/docs/MASTER_INDEX.md`. La documentación detallada vive allí, no en Workstation.
+
+## Administración y documentación
+
+- Fuente confirmada: `SwineEpiDataMx/web` (fundación documental 0.1.0).
+- Frontend administrativo y hosting: **PLANNED**. Cloudflare es preferencia preliminar; no existe deployment confirmado.
+
+## Infraestructura de datos
+
+- Fuente confirmada: `SwineEpiDataMx/backend` (fundación documental 0.1.0).
+- Supabase independiente con PostgreSQL/PostGIS: **PLANNED**. Sin proyecto, ruta específica de autenticación confirmada, migraciones ejecutadas ni servicios activos.
+- Exportación privada: **PLANNED**. Sin datos reales, credenciales ni exportaciones en GitHub o Workstation.
+- Sin dependencia operativa de DiseasesMapMx.
+
+Antes de activar proveedores, confirmar identidad, propietario y mecanismo de acceso y actualizar el inventario canónico. Workstation registra infraestructura y rutas de operación; no proyectos científicos ni metodologías de investigación.
 
 ---
 
