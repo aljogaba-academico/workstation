@@ -444,7 +444,7 @@
     "id": "sedmx-resume",
     "category": "Epidemiología y vigilancia",
     "name": "Retomar SwineEpiDataMx",
-    "description": "Ruta operativa para localizar las fuentes canónicas y continuar el desarrollo de la infraestructura; no implica una aplicación desplegada.",
+    "description": "Ruta operativa para localizar fuentes canónicas y continuar el desarrollo de la infraestructura privada. Portada pública desplegada; administración autenticada aún pendiente.",
     "primarySystem": "swineepidatamx",
     "route": [
       "GitHub académico",

@@ -30,7 +30,7 @@ Los contadores se derivan de los archivos de datos; no se mantienen manualmente 
 2. **EPISUIS** — Web EPISUIS, Vigilancia EPISUIS, EPISUIS Producción.
 3. **DiseasesMapMx** — Portal público, Dashboard, Sequence Analysis, Catálogo molecular y curación, Portal de colaboradores.
 4. **Gestión de proyectos científicos** — Proyectos territoriales, Investigación académica.
-5. **SwineEpiDataMx** — Administración y documentación, Infraestructura de datos. Sistema privado en fase fundacional; repositorios confirmados, servicios externos pendientes.
+5. **SwineEpiDataMx** — Administración y documentación, Infraestructura de datos. Sistema científico privado con portada pública en Cloudflare Pages y base privada independiente en Supabase; administración autenticada pendiente.
 
 ### Tools
 

@@ -1,6 +1,6 @@
 # ALJOGABA OS — Identity, authentication and ownership model
 
-Última revisión: 2026-11-24
+Última revisión: 2026-11-26
 
 ## Propósito
 
@@ -303,13 +303,13 @@ Regla:
 
 ---
 
-## 5. Modelo confirmado para SwineEpiDataMx — 2026-11-24
+## 5. Modelo confirmado para SwineEpiDataMx — 2026-11-24/26
 
 La cuenta `aljogaba-academico` (**ALJOGABA ACADEMIC**, correo de referencia `aljogaba.academico@gmail.com`) creó y administra la organización `SwineEpiDataMx`. No se invitaron colaboradores durante la fundación. La organización no inicia sesión ni tiene contraseña o recovery codes propios.
 
 Ruta confirmada: `aljogaba.academico@gmail.com → GitHub aljogaba-academico → Organization SwineEpiDataMx → web / backend`. Ambos repositorios son privados. ChatGPT Codex Connector instalado con selección explícita de los dos; acceso de lectura y escritura verificado.
 
-No hay proyecto Supabase, deployment Cloudflare ni otra infraestructura externa confirmada para este sistema. No inferir rutas OAuth o cuentas por analogía con DiseasesMapMx. Antes de aprovisionar, confirmar propietario y mecanismo de acceso, mantener aislamiento y actualizar el inventario canónico. Ver [auditoría de infraestructura](INFRASTRUCTURE_RELATIONSHIP_AUDIT.md#5-swineepidatamx).
+Actualización 2026-11-26: Cloudflare → acceso directo con correo ALJOGABA ACADEMIC → Account independiente SwineEpiDataMx → Pages swineepidatamx. GitHub App Cloudflare Workers and Pages instalada en la organización SwineEpiDataMx, solo web autorizado; backend excluido. Supabase independiente Free: organización SwineEpiDataMx, proyecto swineepidatamx confirmado en documentación privada. La ruta específica de login administrativo de Supabase queda pendiente de confirmación; no inferir OAuth por analogía. Mantener aislamiento y no registrar credenciales. Ver [auditoría de infraestructura](INFRASTRUCTURE_RELATIONSHIP_AUDIT.md#5-swineepidatamx).
 
 ---
 

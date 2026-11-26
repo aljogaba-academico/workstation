@@ -1,5 +1,5 @@
 {
-  "version": "2026-11-24-swineepidatamx-foundation",
+  "version": "2026-11-26-swineepidatamx-deployment",
   "accessRegistry": [
     {
       "provider": "GitHub",
@@ -27,7 +27,7 @@
         {
           "identity": "SWINEEPIDATAMX ORGANIZATION",
           "handle": "GitHub Organization / SwineEpiDataMx",
-          "resources": "web y backend privados · ChatGPT Codex Connector limitado a ambos · organización sin identidad de login"
+          "resources": "web y backend privados · ChatGPT Codex Connector limitado a ambos · organización sin identidad de login · Cloudflare Workers and Pages limitado a web"
         }
       ]
     },
@@ -42,7 +42,7 @@
         {
           "identity": "ALJOGABA ACADEMIC",
           "handle": "aljogaba.academico@gmail.com · acceso directo por correo",
-          "resources": "Account DiseasesMapMx · Worker diseasesmapmx-web"
+          "resources": "Account DiseasesMapMx · Worker diseasesmapmx-web · Account independiente SwineEpiDataMx · Pages swineepidatamx"
         }
       ]
     },
@@ -63,6 +63,11 @@
           "identity": "EPISUIS ADMIN",
           "handle": "episuis-admin · GitHub / episuis@gmail.com",
           "resources": "No es la ruta operativa para Supabase EPISUIS. En la sesión revisada el 2026-11-19 no se mostraron organizaciones ni proyectos; no implica inexistencia permanente ni sustituye una auditoría de permisos."
+        },
+        {
+          "identity": "SWINEEPIDATAMX",
+          "handle": "Ruta específica de login administrativo pendiente de registrar",
+          "resources": "Organization SwineEpiDataMx · proyecto swineepidatamx · Free · PostgreSQL/PostGIS privado confirmado"
         }
       ]
     },
@@ -1146,7 +1151,7 @@
     {
       "system": "swineepidatamx",
       "module": "Administración y documentación",
-      "summary": "Repositorio web privado y documentación fundacional confirmados; interfaz y hosting aún planeados.",
+      "summary": "Portada pública desplegada desde repositorio privado; administración autenticada aún planeada.",
       "nodes": [
         {
           "id": "m",
@@ -1165,9 +1170,22 @@
           "type": "planned"
         },
         {
+          "id": "ghapp",
+          "label": "GitHub App: Cloudflare Workers and Pages",
+          "type": "service",
+          "account": "Organization SwineEpiDataMx · solo web"
+        },
+        {
           "id": "host",
-          "label": "Hosting frontend por definir [PLANNED]",
-          "type": "planned"
+          "label": "Cloudflare Pages: swineepidatamx",
+          "type": "deploy",
+          "account": "ALJOGABA ACADEMIC · acceso directo Cloudflare / Account SwineEpiDataMx"
+        },
+        {
+          "id": "dom",
+          "label": "swineepidatamx.pages.dev",
+          "type": "domain",
+          "account": "Cloudflare Pages · production URL"
         }
       ],
       "edges": [
@@ -1178,9 +1196,18 @@
         ],
         [
           "src",
+          "ghapp",
+          "repo autorizado"
+        ],
+        [
+          "ghapp",
           "host",
-          "despliegue futuro",
-          "planned"
+          "deploy main / site"
+        ],
+        [
+          "host",
+          "dom",
+          "publica portada"
         ],
         [
           "m",
@@ -1189,12 +1216,12 @@
           "planned"
         ]
       ],
-      "note": "Fase documental 0.1.0. Sin frontend desplegado. Cloudflare es preferencia preliminar, no proveedor confirmado."
+      "note": "Portada estática publicada 2026-11-26; acceso privado informativo, sin conexión del frontend con Supabase. Documentación de despliegue: ADR-003 en web."
     },
     {
       "system": "swineepidatamx",
       "module": "Infraestructura de datos",
-      "summary": "Repositorio backend privado confirmado; sin base ni servicios provisionados.",
+      "summary": "Infraestructura de datos privada PostgreSQL/PostGIS provisionada y operativa; exportación privada planeada.",
       "nodes": [
         {
           "id": "m",
@@ -1209,8 +1236,9 @@
         },
         {
           "id": "db",
-          "label": "Supabase independiente / PostgreSQL + PostGIS [PLANNED]",
-          "type": "planned"
+          "label": "Supabase: SwineEpiDataMx / swineepidatamx",
+          "type": "backend",
+          "account": "Proyecto independiente Free · ruta específica de login administrativo pendiente de registrar"
         },
         {
           "id": "out",
@@ -1227,8 +1255,7 @@
         [
           "src",
           "db",
-          "implementación futura",
-          "planned"
+          "implementación y migraciones"
         ],
         [
           "db",
@@ -1237,7 +1264,7 @@
           "planned"
         ]
       ],
-      "note": "No existe proyecto Supabase ni ruta específica de autenticación confirmada. Independiente de DiseasesMapMx. Workstation no contiene datos ni exportaciones reales."
+      "note": "Base privada operativa; no conectada a la portada pública. Detalles y evidencia en backend privado. Independiente de DiseasesMapMx y EPISUIS. Workstation no contiene datos ni exportaciones reales."
     }
   ],
   "rules": [

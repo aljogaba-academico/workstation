@@ -116,18 +116,22 @@
     "code": "SEDMX",
     "name": "SwineEpiDataMx",
     "status": "private",
-    "description": "Longitudinal Swine Epidemiological Data Infrastructure for Mexico. Infraestructura científica privada e independiente; fase fundacional documental, sin despliegue operativo.",
+    "description": "Longitudinal Swine Epidemiological Data Infrastructure for Mexico. Infraestructura científica privada e independiente; base de datos privada operativa y portada pública.",
     "modules": [
       {
         "name": "Administración y documentación",
-        "description": "Frontend administrativo privado previsto y documentación integral canónica."
+        "description": "Portada pública, documentación integral canónica y frontend administrativo privado previsto."
       },
       {
         "name": "Infraestructura de datos",
-        "description": "Especificaciones técnicas, seguridad, ingestión y exportación; PostgreSQL/PostGIS en Supabase previsto, todavía no provisionado."
+        "description": "PostgreSQL/PostGIS privado en Supabase, especificaciones técnicas, seguridad e ingestión; exportación privada prevista."
       }
     ],
     "links": [
+      {
+        "label": "PORTAL PÚBLICO",
+        "url": "https://swineepidatamx.pages.dev/"
+      },
       {
         "label": "WEB / DOCS [PRIVATE]",
         "url": "https://github.com/SwineEpiDataMx/web"

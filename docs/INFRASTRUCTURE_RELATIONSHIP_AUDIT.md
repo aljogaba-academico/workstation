@@ -355,14 +355,16 @@ Registro fundacional del 2026-11-24. *Longitudinal Swine Epidemiological Data In
 
 ## Administración y documentación
 
-- Fuente confirmada: `SwineEpiDataMx/web` (fundación documental 0.1.0).
-- Frontend administrativo y hosting: **PLANNED**. Cloudflare es preferencia preliminar; no existe deployment confirmado.
+- Fuente confirmada: `SwineEpiDataMx/web`.
+- Cloudflare Pages `swineepidatamx`, cuenta independiente SwineEpiDataMx bajo ALJOGABA ACADEMIC, acceso directo por correo. GitHub App limitada a web; producción main, salida site/, despliegue automático confirmado el 2026-11-26.
+- Portada pública: https://swineepidatamx.pages.dev/.
+- Administración autenticada: **PLANNED**, sin conexión del frontend a la base. Configuración detallada en ADR-003 del repo privado web.
 
 ## Infraestructura de datos
 
-- Fuente confirmada: `SwineEpiDataMx/backend` (fundación documental 0.1.0).
-- Supabase independiente con PostgreSQL/PostGIS: **PLANNED**. Sin proyecto, ruta específica de autenticación confirmada, migraciones ejecutadas ni servicios activos.
-- Exportación privada: **PLANNED**. Sin datos reales, credenciales ni exportaciones en GitHub o Workstation.
+- Fuente confirmada: `SwineEpiDataMx/backend`.
+- Supabase independiente Free con PostgreSQL/PostGIS: organización SwineEpiDataMx, proyecto swineepidatamx, provisionado y operativo según documentación privada verificada. Ruta específica de login administrativo pendiente de confirmación.
+- Exportación privada: **PLANNED**. Sin datos reales, credenciales ni exportaciones en GitHub o Workstation. No publicar evidencia privada, conteos, identificadores técnicos de proyecto ni detalles censales.
 - Sin dependencia operativa de DiseasesMapMx.
 
 Antes de activar proveedores, confirmar identidad, propietario y mecanismo de acceso y actualizar el inventario canónico. Workstation registra infraestructura y rutas de operación; no proyectos científicos ni metodologías de investigación.
